@@ -1,0 +1,7 @@
+[package]
+name = "ruvy"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+bindgen = "0.63.0"
