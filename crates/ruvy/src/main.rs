@@ -14,3 +14,11 @@ fn main() {
 	println!("{}", ret);
     }
 }
+
+
+#[export_name = "wizer.initialize"]
+pub extern "C" fn init() {
+    unsafe {
+	ruby_init();
+    }
+}
