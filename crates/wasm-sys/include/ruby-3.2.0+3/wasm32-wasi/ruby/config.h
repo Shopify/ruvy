@@ -69,7 +69,7 @@
 #define PACKED_STRUCT(x) x __attribute__((packed))
 #define USE_UNALIGNED_MEMBER_ACCESS 1
 #define PRI_LL_PREFIX "ll"
-#define HAVE_PID_T 1
+/* #define HAVE_PID_T 1 */
 #define rb_pid_t pid_t
 #define SIGNEDNESS_OF_PID_T -1
 #define PIDT2NUM(v) INT2NUM(v)
@@ -87,7 +87,7 @@
 #define GIDT2NUM(v) UINT2NUM(v)
 #define NUM2GIDT(v) NUM2UINT(v)
 #define PRI_GIDT_PREFIX PRI_INT_PREFIX
-#define HAVE_TIME_T 1
+/* #define HAVE_TIME_T 1 */
 #define rb_time_t time_t
 #define SIGNEDNESS_OF_TIME_T -1
 #define TIMET2NUM(v) LL2NUM(v)
@@ -251,7 +251,7 @@
 #define HAVE_MEMRCHR 1
 #define HAVE_MEMMEM 1
 #define HAVE_MKTIME 1
-#define HAVE_MMAP 1
+/* #define HAVE_MMAP 1 */
 #define HAVE_OPENAT 1
 #define HAVE_POLL 1
 #define HAVE_POSIX_FADVISE 1
