@@ -1,7 +1,14 @@
 use std::{env, path::PathBuf};
 
 fn main() {
-    let wasi_sdk_path = "/opt/wasi-sdk/wasi-sdk-12.0";
+    let this_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+    let wasi_sdk_path = format!("{}/wasi-sdk", this_dir);
+    if !std::path::Path::exists(std::path::Path::new(&wasi_sdk_path)) {
+        panic!(
+            "wasi-sdk not installed in specified path of {}",
+            &wasi_sdk_path
+        );
+    }
     let sysroot = format!("--sysroot={}/share/wasi-sysroot", &wasi_sdk_path);
     let sysroot_lib = format!("{}/share/wasi-sysroot/lib/wasm32-wasi", &wasi_sdk_path);
     let lib_dir = env::current_dir().unwrap().join("lib");
@@ -9,9 +16,9 @@ fn main() {
     let include_dir = PathBuf::from("include/ruby-3.2.0+3");
     let include_config_dir = PathBuf::from("include/ruby-3.2.0+3/wasm32-wasi");
 
-    env::set_var("CC", "/opt/wasi-sdk/wasi-sdk-12.0/bin/clang");
-    env::set_var("LD", "/opt/wasi-sdk/wasi-sdk-12.0/bin/clang");
-    env::set_var("AR", "/opt/wasi-sdk/wasi-sdk-12.0/bin/ar");
+    env::set_var("CC", format!("{}/bin/clang", &wasi_sdk_path));
+    env::set_var("LD", format!("{}/bin/clang", &wasi_sdk_path));
+    env::set_var("AR", format!("{}/bin/ar", &wasi_sdk_path));
     env::set_var("CFLAGS", format!("{} -D_WASI_EMULATED_SIGNAL", &sysroot));
 
     // Ruby lib directory
