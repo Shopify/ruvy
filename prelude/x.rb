@@ -1,7 +1,7 @@
 module Input
   class << self
-    def x
-      1 + 1
+    def i(input)
+      input.inspect
     end
   end
 end

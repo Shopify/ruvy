@@ -35,16 +35,17 @@ fn main() {
         .compile("ruvy");
 
     let bindings = bindgen::Builder::default()
-	.header("wrapper.h")
-	.parse_callbacks(Box::new(bindgen::CargoCallbacks))
-	.clang_args(&[
-	    "-fvisibility=default",
-	    "--target=wasm32-wasi",
-	    &sysroot, &format!("-I{}", include_dir.display()),
-	    &format!("-I{}", include_config_dir.display()),
-	])
-	.generate()
-	.unwrap();
+        .header("wrapper.h")
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .clang_args(&[
+            "-fvisibility=default",
+            "--target=wasm32-wasi",
+            &sysroot,
+            &format!("-I{}", include_dir.display()),
+            &format!("-I{}", include_config_dir.display()),
+        ])
+        .generate()
+        .unwrap();
 
     println!("cargo:rustc-link-lib=static=ruby-static");
     println!("cargo:rustc-link-lib=static=m");
