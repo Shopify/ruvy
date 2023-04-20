@@ -1,9 +1,10 @@
 use ruvy::runtime;
-use std::fs;
+use std::{fs, io::{self, Read} };
 
 fn main() {
-    let code = include_str!("../call_inspect.rb");
-    runtime::eval(code).unwrap();
+    let mut contents = String::new();
+    io::stdin().read_to_string(&mut contents).unwrap();
+    runtime::eval(&contents).unwrap();
 }
 
 #[export_name = "wizer.initialize"]

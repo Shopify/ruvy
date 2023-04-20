@@ -1,1 +1,0 @@
-custom_print(Inspector.inspect(42))
