@@ -9,6 +9,13 @@ ruvy:
 				&& cd - \
 				&& wizer --allow-wasi target/wasm32-wasi/release/ruvy.wasm --dir . -o ruvy.wizened.wasm
 
+test-ruvy:
+		cargo wasi test --package=ruvy -- --nocapture
+
 clean: clean-wasi-sdk clean-cargo
 
-clean-cargo: cargo clean
+clean-cargo:
+	cargo clean
+
+clean-wasi-sdk:
+	rm -r crates/quickjs-wasm-sys/wasi-sdk 2> /dev/null || true
