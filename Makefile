@@ -7,8 +7,8 @@ ruvy:
 		cd crates/ruvy \
 				&& cargo build --release --target=wasm32-wasi\
 				&& cd - \
-				&& wizer --allow-wasi target/wasm32-wasi/release/ruvy.wasm --dir . -o ruvy.wizened.wasm
-
+				&& wizer --allow-wasi target/wasm32-wasi/release/ruvy.wasm --dir . -o crates/cli/engine.wasm
+		
 test-ruvy:
 		cargo wasi test --package=ruvy -- --nocapture
 
