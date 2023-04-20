@@ -1,1 +1,1 @@
-puts Input.i(42)
+custom_print(Inspector.inspect(42))

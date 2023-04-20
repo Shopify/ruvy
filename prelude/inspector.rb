@@ -1,6 +1,6 @@
-module Input
+module Inspector
   class << self
-    def i(input)
+    def inspect(input)
       input.inspect
     end
   end
