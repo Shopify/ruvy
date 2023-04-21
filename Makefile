@@ -4,13 +4,13 @@ download-wasi-sdk:
 	./install-wasi-sdk.sh
 
 ruvy:
-		cd crates/ruvy \
+		cd crates/core \
 				&& cargo build --release --target=wasm32-wasi\
 				&& cd - \
-				&& wizer --allow-wasi target/wasm32-wasi/release/ruvy.wasm --dir . -o crates/cli/engine.wasm
+				&& wizer --allow-wasi target/wasm32-wasi/release/core.wasm --dir . -o crates/cli/engine.wasm
 		
 test-ruvy:
-		cargo wasi test --package=ruvy -- --nocapture
+		cargo wasi test --package=core -- --nocapture
 
 clean: clean-wasi-sdk clean-cargo
 

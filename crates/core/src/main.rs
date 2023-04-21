@@ -1,4 +1,5 @@
-use ruvy::runtime;
+mod runtime;
+
 use once_cell::sync::OnceCell;
 use std::{fs, io::{self, Read} };
 
