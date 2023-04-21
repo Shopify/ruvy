@@ -31,7 +31,7 @@ should now have access to the executable in `target/release/ruvy`
 
 ```
 $ make
-$ cat example.rb | wizer crates/cli/engine.wasm --allow-wasi -f load_user_code -o index.wasm
-$ echo "this is a discount input" | wasmtime index.wasm
-{:discount_input=>"this is a discount input", :value=>100.0}
+$ cargo run --package=cli ruby/use_preludes_and_stdin.rb
+$ echo "this is my input" | wasmtime index.wasm
+{:discount_input=>"this is my input", :value=>100.0}
 ```

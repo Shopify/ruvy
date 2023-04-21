@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 structopt = "0.3.26"
+wizer = "1.6.0"
+anyhow = "1.0"
