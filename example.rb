@@ -1,21 +1,13 @@
-
-# TODO: Should the user program read from STDIN? 
-# or should we have a SHOPIFY_INPUT global defined and ready to use by user program?
-puts "start of example ruby script"
-
+input = STDIN.gets.strip
 class Discount
-  attr_reader :discount
-  def initialize(discount)
-    @discount = discount
-  end
-
-  def puts_discount
-    puts @discount
+  attr_reader :input
+  def initialize(input)
+    @input = input
   end
 end
 
 output = {
-  discount: Discount.new("a discount").discount,
+  discount_input: Discount.new(input).input,
   value: 100.0
 }
 

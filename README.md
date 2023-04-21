@@ -26,3 +26,12 @@ Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed int
 
 After all the dependencies are installed, run `make`. You
 should now have access to the executable in `target/release/ruvy`
+
+## Example
+
+```
+$ make
+$ cat example.rb | wizer crates/cli/engine.wasm --allow-wasi -f load_user_code -o index.wasm
+$ echo "this is a discount input" | wasmtime index.wasm
+{:discount_input=>"this is a discount input", :value=>100.0}
+```
