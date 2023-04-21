@@ -32,7 +32,7 @@ fn main() -> Result<()> {
             .init_func("load_user_code")
             .run(engine)?;
         fs::write(opt.output, user_wasm)?;
-        env::remove_var("JAVY_WIZEN");
+        env::remove_var("RUVY_WIZEN");
     } else {
         let self_cmd = env::args().next().unwrap();
         {
