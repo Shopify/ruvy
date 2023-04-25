@@ -1,9 +1,9 @@
-.DEFAULT_GOAL := ruvy
+.DEFAULT_GOAL := core
 
 download-wasi-sdk:
 	./install-wasi-sdk.sh
 
-ruvy:
+core:
 		cd crates/core \
 				&& cargo build --release --target=wasm32-wasi\
 				&& cd - \
