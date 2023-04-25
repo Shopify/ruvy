@@ -1,15 +1,15 @@
 use anyhow::{bail, Result};
+use clap::Parser;
 use std::{env, fs, io::Write, path::PathBuf, process};
-use structopt::StructOpt;
 use wizer::Wizer;
 
-#[derive(Debug, StructOpt)]
-#[structopt(name = "ruvy_cli", about = "Compile ruby code into a Wasm module.")]
+#[derive(Debug, Parser)]
+#[clap(name = "ruvy_cli", about = "Compile ruby code into a Wasm module.")]
 struct Opt {
     /// Path of the Ruby input file.
     input: PathBuf,
 
-    #[structopt(short = "o", parse(from_os_str), default_value = "index.wasm")]
+    #[clap(short, parse(from_os_str), default_value = "index.wasm")]
     /// Desired path of the WebAssembly output file.
     output: PathBuf,
 }
