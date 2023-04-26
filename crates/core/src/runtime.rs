@@ -1,3 +1,5 @@
+use std::fs;
+
 use anyhow::{anyhow, Result};
 use ruvy_wasm_sys::{rb_eval_string_protect, ruby_init, ruby_init_loadpath, VALUE};
 use std::{ffi::CString, os::raw::c_char};
@@ -18,8 +20,20 @@ pub fn eval(code: &str) -> Result<VALUE> {
     if state == 0 {
         Ok(result)
     } else {
-       Err(anyhow!("Error evaluating Ruby code. State: {}", state))
+        Err(anyhow!("Error evaluating Ruby code. State: {}", state))
     }
+}
+
+pub fn preload_files(path: String) {
+    let entries = fs::read_dir(path).unwrap();
+
+    entries
+        .map(|r| r.map(|d| d.path()))
+        .filter(|r| r.is_ok() && r.as_deref().unwrap().is_file())
+        .for_each(|e| {
+            let prelude_contents = fs::read_to_string(e.unwrap()).unwrap();
+            eval(&prelude_contents).unwrap();
+        });
 }
 
 #[cfg(test)]

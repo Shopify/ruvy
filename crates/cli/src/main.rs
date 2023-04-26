@@ -1,6 +1,6 @@
-use anyhow::{bail, Result};
+use anyhow::Result;
 use clap::Parser;
-use std::{env, fs, io::Write, path::PathBuf, process};
+use std::{env, fs, path::PathBuf, process};
 use wizer::Wizer;
 
 #[derive(Debug, Parser)]
@@ -8,6 +8,10 @@ use wizer::Wizer;
 struct Opt {
     /// Path of the Ruby input file.
     input: PathBuf,
+
+    /// Path of a directory containing Ruby files to preload to be used by the input file.
+    #[clap(long, parse(from_os_str))]
+    preload: Option<PathBuf>,
 
     #[clap(short, parse(from_os_str), default_value = "index.wasm")]
     /// Desired path of the WebAssembly output file.
@@ -23,36 +27,21 @@ fn main() -> Result<()> {
             process::exit(1);
         }
     };
-    let wizen = env::var("RUVY_WIZEN");
 
-    if wizen.eq(&Ok("1".into())) {
-        let engine = include_bytes!("../engine.wasm");
-        let user_wasm = Wizer::new()
-            .allow_wasi(true)?
-            .init_func("load_user_code")
-            .run(engine)?;
-        fs::write(opt.output, user_wasm)?;
-        env::remove_var("RUVY_WIZEN");
-    } else {
-        let self_cmd = env::args().next().unwrap();
-        {
-            env::set_var("RUVY_WIZEN", "1");
-            let mut command = process::Command::new(self_cmd)
-                .arg(&opt.input)
-                .arg("-o")
-                .arg(&opt.output)
-                .stdin(process::Stdio::piped())
-                .spawn()?;
-            command
-                .stdin
-                .take()
-                .unwrap()
-                .write_all(&ruby_code.as_bytes())?;
-            let status = command.wait()?;
-            if !status.success() {
-                bail!("Couldn't create wasm from input");
-            }
-        }
+    env::set_var("USER_CODE", ruby_code);
+
+    let engine = include_bytes!("../engine.wasm");
+    let mut wize = Wizer::new();
+    wize.allow_wasi(true)?
+        .inherit_env(true)
+        .init_func("load_user_code");
+
+    if let Some(preload_path) = opt.preload {
+        env::set_var("PRELOAD_PATH", &preload_path);
+        wize.dir(preload_path);
     }
+
+    let user_wasm = wize.run(engine)?;
+    fs::write(opt.output, user_wasm)?;
     Ok(())
 }

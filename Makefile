@@ -7,7 +7,7 @@ core:
 		cd crates/core \
 				&& cargo build --release --target=wasm32-wasi\
 				&& cd - \
-				&& wizer --allow-wasi target/wasm32-wasi/release/core.wasm --dir . -o crates/cli/engine.wasm
+				&& wizer --allow-wasi target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
 		
 test-ruvy:
 		cargo wasi test --package=core -- --nocapture
