@@ -31,7 +31,6 @@ After all the dependencies are installed, run `make`
 
 The size of your main ruby program is limited by the max allowable limit for environment variables on your operating system. This is because we use a temporary env var to pass in the contents of the ruby program to the Wasm.
 
-## 
 ## Usage
 A simple ruby program that prints "Hello world" to stdout
 ```
