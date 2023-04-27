@@ -32,6 +32,7 @@ fn main() {
         .cargo_metadata(true)
         .include(&include_dir)
         .include(&include_config_dir)
+        .target("wasm32-wasi")
         .compile("ruvy");
 
     let bindings = bindgen::Builder::default()

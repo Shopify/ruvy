@@ -3,3 +3,5 @@
 Cargo.lock
 *.wasm
 wasi-sdk
+*~
+.vscode/

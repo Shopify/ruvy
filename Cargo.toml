@@ -1,6 +1,6 @@
 [workspace]
 members = [
   "crates/wasm-sys",
-  "crates/ruvy",
-  "crates/benches"
+  "crates/core",
+  "crates/cli"
 ]
