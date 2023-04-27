@@ -28,7 +28,7 @@ fn main() -> Result<()> {
         }
     };
 
-    env::set_var("USER_CODE", ruby_code);
+    env::set_var("RUVY_USER_CODE", ruby_code);
 
     let engine = include_bytes!("../engine.wasm");
     let mut wize = Wizer::new();
@@ -37,11 +37,15 @@ fn main() -> Result<()> {
         .init_func("load_user_code");
 
     if let Some(preload_path) = opt.preload {
-        env::set_var("PRELOAD_PATH", &preload_path);
+        env::set_var("RUVY_PRELOAD_PATH", &preload_path);
         wize.dir(preload_path);
     }
 
     let user_wasm = wize.run(engine)?;
     fs::write(opt.output, user_wasm)?;
+
+    env::remove_var("RUVY_USER_CODE");
+    env::remove_var("RUVY_PRELOAD_PATH");
+
     Ok(())
 }

@@ -12,11 +12,11 @@ fn main() {
 
 #[export_name = "load_user_code"]
 pub extern "C" fn load_user_code() {
-    if let Ok(preload_path) = env::var("PRELOAD_PATH") {
+    if let Ok(preload_path) = env::var("RUVY_PRELOAD_PATH") {
         runtime::preload_files(preload_path);
     }
 
-    let contents = env::var("USER_CODE").unwrap();
+    let contents = env::var("RUVY_USER_CODE").unwrap();
     USER_CODE.set(contents).unwrap();
 }
 
