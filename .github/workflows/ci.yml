@@ -31,10 +31,13 @@ jobs:
       - name: Compile core
         run: cargo build --package=core --release --target=wasm32-wasi && wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
       
+      # TODO add running tests for core
+      # Right now the tests fail because of unexpected Wasm function imports.
+      
       - name: Compile CLI
         run: cargo build --package=cli --release
       
       # TODO replace this with an integration test that compiles and executes the module.
-      # The generated module currently does not execute.
+      # The generated module currently does not correctly due to unexpected Wasm function imports.
       - name: Run CLI 
         run: cargo run --package=cli ruby_examples/hello_world.rb
