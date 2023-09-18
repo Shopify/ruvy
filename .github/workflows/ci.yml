@@ -45,7 +45,7 @@ jobs:
       # Right now the tests fail because of unexpected Wasm function imports.
       
       - name: Compile CLI
-        run: cargo build --package=cli --release
+        run: cargo build --package=cli
       
       # TODO replace this with an integration test that compiles and executes the module.
       # The generated module currently does not correctly due to unexpected Wasm function imports.
