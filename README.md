@@ -15,7 +15,7 @@ install cmake`
 - Rosetta 2 if running MacOS on Apple Silicon, can be installed via
   `softwareupdate --install-rosetta`
 - Install the `wasi-sdk` by running `make download-wasi-sdk`
-- Wizer v1.6 (`cargo install wizer --all-features --version 1.6.0`)
+- Wizer v3.0.0 (`cargo install wizer --all-features --version 3.0.0`)
 
 ## Development
 
