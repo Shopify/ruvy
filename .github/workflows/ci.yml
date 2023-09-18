@@ -24,6 +24,9 @@ jobs:
           mkdir /tmp/wizer
           tar xvf /tmp/wizer.tar.xz --strip-components=1 -C /tmp/wizer
           echo "/tmp/wizer" >> $GITHUB_PATH
+      
+      - name: Download WASI SDK
+        run: make download-wasi-sdk
 
       - name: Compile core
         run: cargo build --package=core --release --target=wasm32-wasi && wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
