@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install cargo-wasi
+        run: cargo install cargo-wasi
+
+      - name: Install Wizer
+        run: cargo install wizer --all-features --version 3.0.0
+
+      - name: Compile core
+        run: cargo build --package=core --release --target=wasm32-wasi && wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
+      
+      - name: Compile CLI
+        run: cargo build --package=cli --release
+      
+      # TODO replace this with an integration test that compiles and executes the module.
+      # The generated module currently does not execute.
+      - name: Run CLI 
+        run: cargo run --package=cli ruby_examples/hello_world.rb
