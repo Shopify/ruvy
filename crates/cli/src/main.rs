@@ -31,17 +31,19 @@ fn main() -> Result<()> {
     env::set_var("RUVY_USER_CODE", ruby_code);
 
     let engine = include_bytes!("../engine.wasm");
-    let mut wize = Wizer::new();
-    wize.allow_wasi(true)?
+    let mut wizer = Wizer::new();
+    wizer
+        .allow_wasi(true)?
+        .wasm_bulk_memory(true)
         .inherit_env(true)
         .init_func("load_user_code");
 
     if let Some(preload_path) = opt.preload {
         env::set_var("RUVY_PRELOAD_PATH", &preload_path);
-        wize.dir(preload_path);
+        wizer.dir(preload_path);
     }
 
-    let user_wasm = wize.run(engine)?;
+    let user_wasm = wizer.run(engine)?;
     fs::write(opt.output, user_wasm)?;
 
     env::remove_var("RUVY_USER_CODE");
