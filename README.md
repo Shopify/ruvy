@@ -7,7 +7,7 @@ Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed int
 ## Build
 
 - [rustup](https://rustup.rs/)
-- Rust v1.60 (`rustup install 1.60 && rustup override set 1.66`)
+- Rust v1.66 (`rustup install 1.60 && rustup override set 1.66`)
 - wasm32-wasi, can be installed via `rustup target add wasm32-wasi`
 - cmake, depending on your operating system and architecture, it might not be
   installed by default. On Mac it can be installed with `homebrew` via `brew
