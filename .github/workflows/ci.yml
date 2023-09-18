@@ -8,7 +8,7 @@ on:
 
 jobs:
   ci:
-    runs-on: shopify-ubuntu-latest 
+    runs-on: shopify-ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -23,7 +23,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install cargo-wasi
-        run: cargo install cargo-wasi
+        run: cargo install --force cargo-wasi
 
       - name: Install Wizer
         env:
