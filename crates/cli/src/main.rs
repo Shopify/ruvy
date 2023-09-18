@@ -33,6 +33,7 @@ fn main() -> Result<()> {
     let engine = include_bytes!("../engine.wasm");
     let mut wize = Wizer::new();
     wize.allow_wasi(true)?
+        .wasm_bulk_memory(true)
         .inherit_env(true)
         .init_func("load_user_code");
 
