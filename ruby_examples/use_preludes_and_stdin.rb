@@ -12,3 +12,4 @@ output = {
 }
 
 custom_print(Inspector.inspect(output))
+$stdout.flush
