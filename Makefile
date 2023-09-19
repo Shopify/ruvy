@@ -1,16 +1,22 @@
-.DEFAULT_GOAL := core
+.DEFAULT_GOAL := cli
 
 download-wasi-sdk:
 	./install-wasi-sdk.sh
 
+cli: core
+	cargo build --package=cli
+
 core:
-		cd crates/core \
-				&& cargo build --release --target=wasm32-wasi\
-				&& cd - \
-				&& wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
+	cargo build --package=core --release --target=wasm32-wasi
+	wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
+
+tests: test-cli test-core
 		
-test-ruvy:
-		cargo wasi test --package=core -- --nocapture
+test-cli: cli
+	cargo test --package=cli -- --nocapture
+
+test-core:
+	cargo wasi test --package=core -- --nocapture
 
 clean: clean-wasi-sdk clean-cargo
 
