@@ -44,7 +44,7 @@ Hello world
 You can preload files by pointing to a directory of ruby files. At the moment, it just naively loads each file 1 by 1.
 
 ```
-$ cargo run --package=cli --preload=prelude/ ruby_examples/use_preludes_and_stdin.rb
+$ cargo run --package=cli -- --preload=prelude/ ruby_examples/use_preludes_and_stdin.rb
 $ echo "this is my input" | wasmtime index.wasm
 {:discount_input=>"this is my input", :value=>100.0}
 ```
