@@ -52,6 +52,7 @@ fn main() {
     println!("cargo:rustc-link-lib=static=m");
     println!("cargo:rustc-link-lib=static=wasi-emulated-signal");
     println!("cargo:rustc-link-lib=static=wasi-emulated-mman");
+    println!("cargo:rustc-link-lib=static=wasi-emulated-process-clocks");
     println!("cargo:rustc-link-lib=static=c");
     println!("cargo:rustc-link-lib=static=crypt");
     println!("cargo:rustc-link-lib=static=pthread");
