@@ -1,17 +1,13 @@
 mod runtime;
 
 use once_cell::sync::OnceCell;
-use std::{
-    env,
-    io::{self, Write},
-};
+use std::env;
 
 static USER_CODE: OnceCell<String> = OnceCell::new();
 
 fn main() {
     let code = USER_CODE.get().unwrap();
     runtime::eval(&code).unwrap();
-    io::stdout().flush().unwrap();
 }
 
 #[export_name = "load_user_code"]
