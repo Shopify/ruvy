@@ -1,6 +1,6 @@
 use std::fs;
 
-use anyhow::{anyhow, Result};
+use anyhow::{bail, Result};
 use ruvy_wasm_sys::{rb_eval_string_protect, ruby_init, ruby_init_loadpath, VALUE};
 use std::{ffi::CString, os::raw::c_char};
 
@@ -17,11 +17,15 @@ pub fn eval(code: &str) -> Result<VALUE> {
     let result =
         unsafe { rb_eval_string_protect(c_code.as_ptr() as *const c_char, &mut state as *mut i32) };
 
-    if state == 0 {
-        Ok(result)
-    } else {
-        Err(anyhow!("Error evaluating Ruby code. State: {}", state))
+    if state != 0 {
+        bail!("Error evaluating Ruby code. State: {}", state);
     }
+
+    let flush_status = unsafe { ruvy_wasm_sys::fflush(ruvy_wasm_sys::stdout) };
+    if flush_status != 0 {
+        bail!("Could not flush stdout");
+    }
+    Ok(result)
 }
 
 pub fn preload_files(path: String) {
