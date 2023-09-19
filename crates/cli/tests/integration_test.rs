@@ -78,10 +78,9 @@ fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
     let mut store = Store::new(&engine, Context::new(input.as_bytes()));
 
     let module = Module::from_file(&engine, wasm_path)?;
-    linker.module(&mut store, "", &module)?;
     linker
-        .get_default(&mut store, "")?
-        .typed::<(), ()>(&store)?
+        .instantiate(&mut store, &module)?
+        .get_typed_func::<(), ()>(&mut store, "_start")?
         .call(&mut store, ())?;
 
     let context = store.into_data();
