@@ -50,7 +50,7 @@ jobs:
         run: cargo build --package=core --release --target=wasm32-wasi && wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
       
       - name: Test core
-        run: cargo wasi test --package=core -- --nocapture
+        run: cargo wasi test --package=core --release -- --nocapture
       
       - name: Compile CLI
         run: cargo build --package=cli
