@@ -8,6 +8,11 @@ static USER_CODE: OnceCell<String> = OnceCell::new();
 fn main() {
     let code = USER_CODE.get().unwrap();
     runtime::eval(&code).unwrap();
+
+    let cleanup_status = unsafe { ruvy_wasm_sys::ruby_cleanup(0) };
+    if cleanup_status != 0 {
+        panic!("ruby_cleanup did not run successfully. Return value: {cleanup_status}");
+    }
 }
 
 #[export_name = "load_user_code"]

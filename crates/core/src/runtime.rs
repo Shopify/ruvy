@@ -18,12 +18,7 @@ pub fn eval(code: &str) -> Result<VALUE> {
         unsafe { rb_eval_string_protect(c_code.as_ptr() as *const c_char, &mut state as *mut i32) };
 
     if state != 0 {
-        bail!("Error evaluating Ruby code. State: {}", state);
-    }
-
-    let flush_status = unsafe { ruvy_wasm_sys::fflush(ruvy_wasm_sys::stdout) };
-    if flush_status != 0 {
-        bail!("Could not flush stdout");
+        bail!("Error evaluating Ruby code. State: {state}");
     }
     Ok(result)
 }
