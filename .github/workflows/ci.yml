@@ -52,13 +52,5 @@ jobs:
       - name: Test core
         run: cargo wasi test --package=core --release -- --nocapture
       
-      - name: Compile CLI
-        run: cargo build --package=cli
-      
-      # TODO replace this and the run module step with an integration test that compiles and executes the module.
-
-      - name: Run CLI 
-        run: cargo run --package=cli ruby_examples/hello_world.rb
-      
-      - name: Run module
-        run: wasmtime index.wasm
+      - name: Test CLI
+        run: cargo test --package=cli -- --nocapture

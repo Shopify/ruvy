@@ -1,6 +1,7 @@
 mod runtime;
 
 use once_cell::sync::OnceCell;
+use runtime::cleanup_ruby;
 use std::env;
 
 static USER_CODE: OnceCell<String> = OnceCell::new();
@@ -8,6 +9,7 @@ static USER_CODE: OnceCell<String> = OnceCell::new();
 fn main() {
     let code = USER_CODE.get().unwrap();
     runtime::eval(&code).unwrap();
+    cleanup_ruby().unwrap();
 }
 
 #[export_name = "load_user_code"]

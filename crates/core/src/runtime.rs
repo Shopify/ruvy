@@ -1,6 +1,6 @@
 use std::fs;
 
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, bail, Result};
 use ruvy_wasm_sys::{rb_eval_string_protect, ruby_init, ruby_init_loadpath, VALUE};
 use std::{ffi::CString, os::raw::c_char};
 
@@ -34,6 +34,16 @@ pub fn preload_files(path: String) {
             let prelude_contents = fs::read_to_string(e.unwrap()).unwrap();
             eval(&prelude_contents).unwrap();
         });
+}
+
+pub fn cleanup_ruby() -> Result<()> {
+    const EXPECTED_SUCCESS_RET_VAL: i32 = 0;
+    // ruby_cleanup expects an integer as an argument that will be returned if it ran successfully.
+    let cleanup_status = unsafe { ruvy_wasm_sys::ruby_cleanup(EXPECTED_SUCCESS_RET_VAL) };
+    if cleanup_status != EXPECTED_SUCCESS_RET_VAL {
+        bail!("ruby_cleanup did not run successfully. Return value: {cleanup_status}");
+    }
+    Ok(())
 }
 
 #[cfg(test)]

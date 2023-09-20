@@ -12,3 +12,8 @@ path = "src/main.rs"
 clap = { version = "3.2.23", features = ["derive"] }
 wizer = "3.0.0"
 anyhow = "1.0"
+
+[dev-dependencies]
+wasmtime = "9.0.0"
+wasmtime-wasi = "9.0.0"
+wasi-common = "9.0.0"
