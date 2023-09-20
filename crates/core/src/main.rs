@@ -2,7 +2,7 @@ mod runtime;
 
 use once_cell::sync::OnceCell;
 use runtime::cleanup_ruby;
-use std::env;
+use std::{env, io};
 
 static USER_CODE: OnceCell<String> = OnceCell::new();
 
@@ -18,7 +18,7 @@ pub extern "C" fn load_user_code() {
         runtime::preload_files(preload_path);
     }
 
-    let contents = env::var("RUVY_USER_CODE").unwrap();
+    let contents = io::read_to_string(io::stdin()).unwrap();
     USER_CODE.set(contents).unwrap();
 }
 
