@@ -1,7 +1,13 @@
 use anyhow::Result;
 use clap::Parser;
-use std::{env, fs, path::PathBuf, process};
+use once_cell::sync::OnceCell;
+use std::{fs, path::PathBuf, process, rc::Rc};
+use wasi_common::{pipe::ReadPipe, WasiCtx};
+use wasmtime::Linker;
+use wasmtime_wasi::{sync, Dir, WasiCtxBuilder};
 use wizer::Wizer;
+
+static mut WASI: OnceCell<WasiCtx> = OnceCell::new();
 
 #[derive(Debug, Parser)]
 #[clap(name = "ruvy_cli", about = "Compile ruby code into a Wasm module.")]
@@ -28,26 +34,48 @@ fn main() -> Result<()> {
         }
     };
 
-    env::set_var("RUVY_USER_CODE", ruby_code);
-
     let engine = include_bytes!("../engine.wasm");
-    let mut wizer = Wizer::new();
-    wizer
-        .allow_wasi(true)?
-        .wasm_bulk_memory(true)
-        .inherit_env(true)
-        .init_func("load_user_code");
-
-    if let Some(preload_path) = opt.preload {
-        env::set_var("RUVY_PRELOAD_PATH", &preload_path);
-        wizer.dir(preload_path);
-    }
-
+    let wizer = setup_wizer(&ruby_code, opt.preload)?;
     let user_wasm = wizer.run(engine)?;
     fs::write(opt.output, user_wasm)?;
 
-    env::remove_var("RUVY_USER_CODE");
-    env::remove_var("RUVY_PRELOAD_PATH");
-
     Ok(())
+}
+
+fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> {
+    let mut wasi_builder = WasiCtxBuilder::new()
+        .stdin(Box::new(ReadPipe::from(ruby_code.as_bytes())))
+        .inherit_stdout()
+        .inherit_stderr();
+
+    if let Some(preload_path) = preload_path {
+        wasi_builder = wasi_builder
+            .env("RUVY_PRELOAD_PATH", &preload_path.to_string_lossy())?
+            .preopened_dir(
+                Dir::open_ambient_dir(&preload_path, sync::ambient_authority())?,
+                &preload_path,
+            )?;
+    }
+
+    // We can't move the WasiCtx into `make_linker` since WasiCtx doesn't implement the `Copy` trait.
+    // So we move the WasiCtx into a mutable static OnceCell instead.
+    // Setting the value in the OnceCell and getting the reference back from it should be safe given
+    // we're never executing this code concurrently or more than once.
+    if unsafe { WASI.set(wasi_builder.build()) }.is_err() {
+        panic!("Failed to set WASI static variable");
+    };
+
+    let mut wizer = Wizer::new();
+    wizer
+        .wasm_bulk_memory(true)
+        .init_func("load_user_code")
+        .make_linker(Some(Rc::new(|engine| {
+            let mut linker = Linker::new(engine);
+            wasmtime_wasi::add_to_linker(&mut linker, |_ctx: &mut Option<WasiCtx>| {
+                unsafe { WASI.get_mut() }.unwrap()
+            })?;
+            Ok(linker)
+        })))?;
+
+    Ok(wizer)
 }
