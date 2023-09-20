@@ -19,7 +19,7 @@ fn main() {
     env::set_var("CC", format!("{}/bin/clang", &wasi_sdk_path));
     env::set_var("LD", format!("{}/bin/clang", &wasi_sdk_path));
     env::set_var("AR", format!("{}/bin/ar", &wasi_sdk_path));
-    env::set_var("CFLAGS", format!("{} -D_WASI_EMULATED_SIGNAL", &sysroot));
+    env::set_var("CFLAGS", &sysroot);
 
     // Ruby lib directory
     println!("cargo:rustc-link-search={}", lib_dir.display());
