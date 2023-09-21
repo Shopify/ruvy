@@ -8,7 +8,7 @@ static USER_CODE: OnceCell<String> = OnceCell::new();
 
 fn main() {
     let code = USER_CODE.get().unwrap();
-    runtime::eval(&code).unwrap();
+    runtime::eval(code).unwrap();
     cleanup_ruby().unwrap();
 }
 

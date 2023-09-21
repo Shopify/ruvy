@@ -18,6 +18,20 @@ test-cli: cli
 test-core:
 	cargo wasi test --package=core -- --nocapture
 
+fmt: fmt-wasm-sys fmt-core fmt-cli
+
+fmt-wasm-sys:
+	cargo fmt --package=ruvy-wasm-sys -- --check
+	cargo clippy --package=ruvy-wasm-sys --target=wasm32-wasi
+
+fmt-core:
+	cargo fmt --package=core -- --check
+	cargo clippy --package=core --target=wasm32-wasi --all-targets -- -D warnings
+
+fmt-cli:
+	cargo fmt --package=cli -- --check
+	cargo clippy --package=cli --all-targets -- -D warnings
+
 clean: clean-wasi-sdk clean-cargo
 
 clean-cargo:
