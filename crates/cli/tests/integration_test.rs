@@ -56,9 +56,9 @@ fn wasm_path(test_name: &str) -> String {
 }
 
 fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<()> {
-    let mut args = vec![format!("-o{}", wasm_path)];
+    let mut args = vec![format!("-o{wasm_path}")];
     if let Some(preload) = preload {
-        args.push(format!("--preload={}", preload).into());
+        args.push(format!("--preload={preload}"));
     }
     args.push(input_path.to_string());
 
