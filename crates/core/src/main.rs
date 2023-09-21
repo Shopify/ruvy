@@ -38,5 +38,8 @@ extern "C" {
     // available.
     // This should only be invoked at the start of exported Wasm functions that are not the `main`
     // function.
+    // References:
+    // - [Rust 1.67.0 stopped initializing the WASI environment for exported functions](https://github.com/rust-lang/rust/issues/107635)
+    // - [Wizer header in Fastly's JS compute runtime](https://github.com/fastly/js-compute-runtime/blob/main/runtime/js-compute-runtime/third_party/wizer.h#L92)
     fn __wasm_call_ctors();
 }
