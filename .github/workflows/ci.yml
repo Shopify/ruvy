@@ -43,9 +43,6 @@ jobs:
           tar xvf /tmp/wasmtime.tar.xz --strip-components=1 -C /tmp/wasmtime
           echo "/tmp/wasmtime" >> $GITHUB_PATH
       
-      - name: Download WASI SDK
-        run: make download-wasi-sdk
-
       - name: Compile core
         run: cargo build --package=core --release --target=wasm32-wasi && wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
       

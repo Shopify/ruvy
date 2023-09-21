@@ -1,8 +1,5 @@
 .DEFAULT_GOAL := cli
 
-download-wasi-sdk:
-	./install-wasi-sdk.sh
-
 cli: core
 	cargo build --package=cli
 
@@ -31,11 +28,3 @@ fmt-core:
 fmt-cli:
 	cargo fmt --package=cli -- --check
 	cargo clippy --package=cli --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
-
-clean: clean-wasi-sdk clean-cargo
-
-clean-cargo:
-	cargo clean
-
-clean-wasi-sdk:
-	rm -r crates/wasm-sys/wasi-sdk 2> /dev/null || true

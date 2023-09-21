@@ -14,7 +14,6 @@ Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed int
 install cmake`
 - Rosetta 2 if running MacOS on Apple Silicon, can be installed via
   `softwareupdate --install-rosetta`
-- Install the `wasi-sdk` by running `make download-wasi-sdk`
 - Wizer v3.0.0 (`cargo install wizer --all-features --version 3.0.0`)
 
 ## Development
@@ -22,6 +21,14 @@ install cmake`
 - wasmtime-cli, can be installed via `cargo install wasmtime-cli` (required for
   `cargo-wasi`)
 - cargo-wasi, can be installed via `cargo install cargo-wasi`
+
+### Using a different WASI SDK
+
+The following environment variables allow you to experiment with different WASI SDKs:
+
+- `RUVY_WASM_SYS_WASI_SDK_MAJOR_VERSION` sets the major version of the WASI SDK to use
+- `RUVY_WASM_SYS_WASI_SDK_MINOR_VERSION` sets the minor version of the WASI SDK to use
+- `RUVY_WASM_SYS_WASI_SDK_PATH` allows you to specify a path to WASI SDK to use
 
 ## Building
 
