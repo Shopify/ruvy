@@ -1,13 +1,12 @@
 use anyhow::Result;
 use clap::Parser;
-use once_cell::sync::OnceCell;
-use std::{fs, path::PathBuf, process, rc::Rc};
+use std::{fs, path::PathBuf, process, rc::Rc, sync::OnceLock};
 use wasi_common::{pipe::ReadPipe, WasiCtx};
 use wasmtime::Linker;
 use wasmtime_wasi::{sync, Dir, WasiCtxBuilder};
 use wizer::Wizer;
 
-static mut WASI: OnceCell<WasiCtx> = OnceCell::new();
+static mut WASI: OnceLock<WasiCtx> = OnceLock::new();
 
 #[derive(Debug, Parser)]
 #[clap(name = "ruvy_cli", about = "Compile ruby code into a Wasm module.")]
@@ -58,8 +57,8 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
     }
 
     // We can't move the WasiCtx into `make_linker` since WasiCtx doesn't implement the `Copy` trait.
-    // So we move the WasiCtx into a mutable static OnceCell instead.
-    // Setting the value in the OnceCell and getting the reference back from it should be safe given
+    // So we move the WasiCtx into a mutable static OnceLock instead.
+    // Setting the value in the OnceLock and getting the reference back from it should be safe given
     // we're never executing this code concurrently or more than once.
     if unsafe { WASI.set(wasi_builder.build()) }.is_err() {
         panic!("Failed to set WASI static variable");
