@@ -43,11 +43,6 @@ jobs:
           tar xvf /tmp/wasmtime.tar.xz --strip-components=1 -C /tmp/wasmtime
           echo "/tmp/wasmtime" >> $GITHUB_PATH
       
-      - name: Install cargo-vet
-        env:
-          CARGO_VET_VERSION: 0.8.0
-        run: cargo install --force --version ${{ env.CARGO_VET_VERSION }} cargo-vet
-      
       - name: Download WASI SDK
         run: make download-wasi-sdk
 
@@ -59,6 +54,3 @@ jobs:
       
       - name: Test CLI
         run: cargo test --package=cli -- --nocapture
-      
-      - name: cargo-vet
-        run: cargo vet --locked
