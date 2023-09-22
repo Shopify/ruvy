@@ -18,10 +18,11 @@ async fn main() -> Result<()> {
     let wasi_sdk_path = wasi_sdk_path.to_string_lossy();
     let sysroot = format!("--sysroot={}/share/wasi-sysroot", &wasi_sdk_path);
     let sysroot_lib = format!("{}/share/wasi-sysroot/lib/wasm32-wasi", &wasi_sdk_path);
-    let lib_dir = env::current_dir().unwrap().join("ruby-wasm/lib");
 
-    let include_dir = PathBuf::from("ruby-wasm/include/ruby-3.2.0+3");
-    let include_config_dir = PathBuf::from("ruby-wasm/include/ruby-3.2.0+3/wasm32-wasi");
+    let ruby_wasm_dir = env::current_dir().unwrap().join("ruby-wasm");
+    let lib_dir = ruby_wasm_dir.join("lib");
+    let include_dir = ruby_wasm_dir.join("include/ruby-3.2.0+3");
+    let include_config_dir = ruby_wasm_dir.join("include/ruby-3.2.0+3/wasm32-wasi");
 
     env::set_var("CC", format!("{}/bin/clang", &wasi_sdk_path));
     env::set_var("LD", format!("{}/bin/clang", &wasi_sdk_path));
