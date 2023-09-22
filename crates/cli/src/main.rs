@@ -33,7 +33,7 @@ fn main() -> Result<()> {
         }
     };
 
-    let engine = include_bytes!("../engine.wasm");
+    let engine = include_bytes!(concat!(env!("OUT_DIR"), "/engine.wasm"));
     let wizer = setup_wizer(&ruby_code, opt.preload)?;
     let user_wasm = wizer.run(engine)?;
     fs::write(opt.output, user_wasm)?;
@@ -67,7 +67,6 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
     let mut wizer = Wizer::new();
     wizer
         .wasm_bulk_memory(true)
-        .init_func("load_user_code")
         .make_linker(Some(Rc::new(|engine| {
             let mut linker = Linker::new(engine);
             wasmtime_wasi::add_to_linker(&mut linker, |_ctx: &mut Option<WasiCtx>| {

@@ -5,7 +5,6 @@ cli: core
 
 core:
 	cargo build --package=core --release --target=wasm32-wasi
-	wizer --allow-wasi --wasm-bulk-memory true target/wasm32-wasi/release/core.wasm -o crates/cli/engine.wasm
 
 tests: test-cli test-core
 		

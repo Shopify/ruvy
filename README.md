@@ -32,7 +32,12 @@ The following environment variables allow you to experiment with different WASI 
 
 ## Building
 
-After all the dependencies are installed, run `make`
+After all the dependencies are installed, run:
+
+```
+cargo build --package=core --release --target=wasm32-wasi
+cargo build --package=cli --release
+```
 
 ## Usage
 
