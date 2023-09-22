@@ -4,3 +4,5 @@ members = [
   "crates/core",
   "crates/cli"
 ]
+
+resolver = "2"
