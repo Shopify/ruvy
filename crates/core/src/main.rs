@@ -12,9 +12,11 @@ fn main() {
     cleanup_ruby().unwrap();
 }
 
-#[export_name = "load_user_code"]
+#[export_name = "wizer.initialize"]
 pub extern "C" fn load_user_code() {
     let _wasm_ctx = WasmCtx::new();
+
+    runtime::init_ruby();
 
     if let Ok(preload_path) = env::var("RUVY_PRELOAD_PATH") {
         runtime::preload_files(preload_path);
@@ -22,13 +24,6 @@ pub extern "C" fn load_user_code() {
 
     let contents = io::read_to_string(io::stdin()).unwrap();
     USER_CODE.set(contents).unwrap();
-}
-
-#[export_name = "wizer.initialize"]
-pub extern "C" fn init() {
-    let _wasm_ctx = WasmCtx::new();
-
-    runtime::init_ruby();
 }
 
 // RAII abstraction for calling Wasm ctors and dtors for exported non-main functions.

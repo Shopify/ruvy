@@ -17,3 +17,6 @@ wasmtime = "9.0.0"
 wasmtime-wasi = "9.0.0"
 
 [dev-dependencies]
+
+[build-dependencies]
+anyhow = "1.0"
