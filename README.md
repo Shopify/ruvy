@@ -14,7 +14,6 @@ Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed int
 install cmake`
 - Rosetta 2 if running MacOS on Apple Silicon, can be installed via
   `softwareupdate --install-rosetta`
-- Wizer v3.0.0 (`cargo install wizer --all-features --version 3.0.0`)
 
 ## Development
 
