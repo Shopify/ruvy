@@ -10,7 +10,7 @@ fn main() -> Result<()> {
         println!("cargo:warning=using stubbed engine.wasm for static analysis");
     } else {
         println!("cargo:rerun-if-changed=build.rs");
-        let engine_path = Path::new(&env::var("CARGO_MANIFEST_DIR")?)
+        let engine_path = Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../../target/wasm32-wasi/release/core.wasm");
         println!("cargo:rerun-if-changed={}", engine_path.to_str().unwrap());
         fs::copy(&engine_path, &destination)?;
