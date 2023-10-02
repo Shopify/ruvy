@@ -22,22 +22,22 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     let engine = Engine::default();
     let cases = vec![
         WasmCase::new(
-            CompilationStrategy::WasiVFSRubyWasm,
+            BuildStrategy::WasiVFSRubyWasm,
             "benches/scripts/hello_world/hello_world.rb".into(),
         )
         .unwrap(),
         WasmCase::new(
-            CompilationStrategy::Ruvy(None),
+            BuildStrategy::Ruvy(None),
             "benches/scripts/hello_world/hello_world.rb".into(),
         )
         .unwrap(),
         WasmCase::new(
-            CompilationStrategy::WasiVFSRubyWasm,
+            BuildStrategy::WasiVFSRubyWasm,
             "benches/scripts/transformer/ruby_wasm_entry.rb".into(),
         )
         .unwrap(),
         WasmCase::new(
-            CompilationStrategy::Ruvy(Some("benches/scripts/transformer/preload".into())),
+            BuildStrategy::Ruvy(Some("benches/scripts/transformer/preload".into())),
             "benches/scripts/transformer/ruvy_entry.rb".into(),
         )
         .unwrap(),
@@ -73,12 +73,12 @@ impl Display for WasmCase {
 }
 
 impl WasmCase {
-    fn new(strategy: CompilationStrategy, entrypoint: Entrypoint) -> Result<WasmCase> {
+    fn new(strategy: BuildStrategy, entrypoint: Entrypoint) -> Result<WasmCase> {
         let name = format!("{}-{}", strategy, entrypoint.parent_dirname);
         let output_path = helpers::cargo_target_tmpdir()
             .join(&name)
             .with_extension("wasm");
-        let exit_status = strategy.compile_wasm(&output_path, &entrypoint)?;
+        let exit_status = strategy.build_wasm(&output_path, &entrypoint)?;
         if !exit_status.success() {
             bail!("Failed to build Wasm module");
         }
@@ -115,15 +115,15 @@ impl WasmCase {
     }
 }
 
-enum CompilationStrategy {
+enum BuildStrategy {
     WasiVFSRubyWasm,
     Ruvy(Option<PathBuf>),
 }
 
-impl CompilationStrategy {
-    fn compile_wasm(&self, output_path: &Path, entrypoint: &Entrypoint) -> Result<ExitStatus> {
+impl BuildStrategy {
+    fn build_wasm(&self, output_path: &Path, entrypoint: &Entrypoint) -> Result<ExitStatus> {
         match self {
-            CompilationStrategy::WasiVFSRubyWasm => {
+            Self::WasiVFSRubyWasm => {
                 let ruby_wasm = helpers::ruby_wasm()?;
                 let wasi_vfs = helpers::wasi_vfs()?;
                 Ok(Command::new(wasi_vfs)
@@ -138,7 +138,7 @@ impl CompilationStrategy {
                     .arg(output_path.as_os_str())
                     .status()?)
             }
-            CompilationStrategy::Ruvy(preload) => {
+            Self::Ruvy(preload) => {
                 let ruvy = env!("CARGO_BIN_EXE_ruvy");
                 let mut args = vec![entrypoint.path, OsStr::new("-o"), output_path.as_os_str()];
                 if let Some(preload) = &preload {
@@ -152,7 +152,7 @@ impl CompilationStrategy {
 
     fn wasi_args(&self, entrypoint: &Entrypoint) -> Vec<String> {
         match self {
-            CompilationStrategy::WasiVFSRubyWasm => vec![
+            Self::WasiVFSRubyWasm => vec![
                 // Not passing `--disable-gems` results in output about `RubyGems`,
                 // `error_highlight`, `did_you_mean`, and `syntax_suggest` not
                 // being loaded. We don't want that and we don't use the gems
@@ -165,19 +165,19 @@ impl CompilationStrategy {
                     .to_string_lossy()
                     .to_string(),
             ],
-            CompilationStrategy::Ruvy(_) => vec![],
+            Self::Ruvy(_) => vec![],
         }
     }
 }
 
-impl Display for CompilationStrategy {
+impl Display for BuildStrategy {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
             f,
             "{}",
             match self {
-                CompilationStrategy::WasiVFSRubyWasm => "rubywasm",
-                CompilationStrategy::Ruvy(_) => "ruvy",
+                Self::WasiVFSRubyWasm => "rubywasm",
+                Self::Ruvy(_) => "ruvy",
             }
         )
     }
