@@ -19,6 +19,7 @@ use wasmtime_wasi::WasiCtxBuilder;
 mod helpers;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
+    let engine = Engine::default();
     let cases = vec![
         WasmCase::new(
             CompilationStrategy::WasiVFSRubyWasm,
@@ -43,12 +44,12 @@ pub fn criterion_benchmark(c: &mut Criterion) {
     ];
     for case in cases {
         c.bench_with_input(BenchmarkId::new("compile", &case), &case, |b, script| {
-            b.iter(|| Module::new(&script.engine, &script.wasm).unwrap())
+            b.iter(|| Module::new(&engine, &script.wasm).unwrap())
         });
 
         c.bench_with_input(BenchmarkId::new("run", &case), &case, |b, script| {
             b.iter_with_setup(
-                || script.setup_for_run().unwrap(),
+                || script.setup_for_run(&engine).unwrap(),
                 |(start_func, mut store)| start_func.call(&mut store, ()).unwrap(),
             )
         });
@@ -60,7 +61,6 @@ criterion_main!(benches);
 
 struct WasmCase {
     name: String,
-    engine: Engine,
     wasm: Vec<u8>,
     wasi_args: Vec<String>,
     input: Vec<u8>,
@@ -116,7 +116,6 @@ impl WasmCase {
 
         Ok(Self {
             name,
-            engine: Engine::default(),
             wasm: fs::read(output_path)?,
             wasi_args: match &strategy {
                 &CompilationStrategy::WasiVFSRubyWasm => vec![
@@ -138,8 +137,8 @@ impl WasmCase {
         })
     }
 
-    fn setup_for_run(&self) -> Result<(TypedFunc<(), ()>, Store<WasiCtx>)> {
-        let mut linker = Linker::new(&self.engine);
+    fn setup_for_run(&self, engine: &Engine) -> Result<(TypedFunc<(), ()>, Store<WasiCtx>)> {
+        let mut linker = Linker::new(engine);
         let wasi = WasiCtxBuilder::new()
             .stdin(Box::new(ReadPipe::from(&self.input[..])))
             .stdout(Box::new(WritePipe::new_in_memory()))
@@ -147,8 +146,8 @@ impl WasmCase {
             .args(&self.wasi_args)?
             .build();
         wasmtime_wasi::add_to_linker(&mut linker, |s| s).unwrap();
-        let mut store = Store::new(&self.engine, wasi);
-        let module = Module::new(&self.engine, &self.wasm)?;
+        let mut store = Store::new(engine, wasi);
+        let module = Module::new(engine, &self.wasm)?;
         let instance = linker.instantiate(&mut store, &module)?;
         let func = instance.get_typed_func(&mut store, "_start")?;
         Ok((func, store))
