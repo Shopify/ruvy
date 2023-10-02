@@ -61,7 +61,7 @@ Here are some ideas for welcome contributions!
 
 ### Improving compatibility with Shopify Functions
 
-- Investigate and improve performance of simple Ruvy modules. At the present time, `puts "Hello world"` modules can take 45 milliseconds to execute. It should be substantially faster, ideally under a millisecond.
+- Investigate and improve performance of simple Ruvy modules. At the present time, `puts "Hello world"` modules can take 45 milliseconds to execute. It should be substantially faster, ideally under a millisecond. One approach to consider is using YJIT to output WebAssembly.
 - Shrinking the size of modules by separating the interpreter into an engine Wasm module which exports memory and functions that can be imported by a Wasm module containing Ruby source code. To see an example of implementing this approach, take a look at https://github.com/bytecodealliance/javy, specifically the [core lib.rs](https://github.com/bytecodealliance/javy/blob/3b02858c4a68c830e8e82a1b15b4c3817ad1a64a/crates/core/src/lib.rs) and [the dynamic wasm generator](https://github.com/bytecodealliance/javy/blob/3b02858c4a68c830e8e82a1b15b4c3817ad1a64a/crates/cli/src/wasm_generator/dynamic.rs).
 - Enable exports of named functions from Wasm that call into named functions in Ruby code so multiple functions can be exported.
 
