@@ -14,7 +14,11 @@ test-cli: cli
 test-core:
 	cargo wasi test --package=core -- --nocapture
 
-fmt: fmt-wasm-sys fmt-core fmt-cli
+fmt: fmt-github-asset-download fmt-wasm-sys fmt-core fmt-cli
+
+fmt-github-asset-download:
+	cargo fmt --package=github-asset-download -- --check
+	cargo clippy --package=github-asset-download -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
 
 fmt-wasm-sys:
 	cargo fmt --package=ruvy-wasm-sys -- --check
