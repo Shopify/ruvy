@@ -1,13 +1,5 @@
-use anyhow::{anyhow, bail, Result};
-use hyper::{body::HttpBody, Body, Client, Response};
-use hyper_tls::HttpsConnector;
-use std::{
-    env,
-    fs::{self, File},
-    io::Write,
-    path::{Path, PathBuf},
-    process::Command,
-};
+use anyhow::{bail, Result};
+use std::{env, fs, path::PathBuf};
 
 const WASI_SDK_VERSION_MAJOR: usize = 20;
 const WASI_SDK_VERSION_MINOR: usize = 0;
@@ -121,11 +113,8 @@ async fn download_wasi_sdk() -> Result<PathBuf> {
         other => bail!("Unsupported platform tuple {:?}", other),
     };
     let uri = format!("https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-{major_version}/wasi-sdk-{major_version}.{minor_version}-{file_suffix}.tar.gz");
-    download_from_github(uri, &archive_path).await?;
-
-    let mut test_binary = wasi_sdk_dir.clone();
-    test_binary.extend(["bin", "wasm-ld"]);
-    extract_archive(&archive_path, &test_binary, &wasi_sdk_dir, 1)?;
+    github_asset_download::download(uri, &archive_path).await?;
+    github_asset_download::extract_tar(&archive_path, &wasi_sdk_dir, 1)?;
 
     Ok(wasi_sdk_dir)
 }
@@ -144,72 +133,17 @@ async fn download_ruby_wasm() -> Result<PathBuf> {
     ruby_wasm_dir.push("ruby-wasm");
     fs::create_dir_all(&ruby_wasm_dir)?;
     let mut archive_path = ruby_wasm_dir.clone();
-
-    const VERSION: &str = "2.1.0";
-    const RUBY_VERSION: &str = "3_2";
-    const TARGET: &str = "wasm32-unknown-wasi";
-    const PROFILE: &str = "minimal";
     archive_path.push(format!(
-        "{VERSION}-ruby-{RUBY_VERSION}-{TARGET}-{PROFILE}.tar.gz"
+        "{}-ruby-{}-{}-{}.tar.gz",
+        github_asset_download::RUBY_WASM_VERSION,
+        github_asset_download::RUBY_WASM_RUBY_VERSION,
+        github_asset_download::RUBY_WASM_TARGET,
+        github_asset_download::RUBY_WASM_PROFILE
     ));
 
-    download_from_github(format!("https://github.com/ruby/ruby.wasm/releases/download/{VERSION}/ruby-{RUBY_VERSION}-{TARGET}-{PROFILE}.tar.gz"), &archive_path).await?;
-    let mut test_archive = ruby_wasm_dir.clone();
-    test_archive.extend(["lib", "libruby-static.a"]);
+    github_asset_download::download_ruby_wasm(&archive_path).await?;
     // Need to strip archive name, `usr`, and `local`.
-    extract_archive(&archive_path, &test_archive, &ruby_wasm_dir, 3)?;
+    github_asset_download::extract_tar(&archive_path, &ruby_wasm_dir, 3)?;
 
     Ok(ruby_wasm_dir)
-}
-
-async fn download_from_github(mut uri: String, path: &Path) -> Result<()> {
-    let file_being_downloaded = path.file_name().unwrap().to_str().unwrap();
-    if !path.try_exists()? {
-        let client = Client::builder().build::<_, hyper::Body>(HttpsConnector::new());
-        let mut response: Response<Body> = loop {
-            let response = client.get(uri.try_into()?).await?;
-            let status = response.status();
-            if status.is_redirection() {
-                uri = response.headers().get("Location").ok_or_else(|| anyhow!("Received redirect without location header when downloading {file_being_downloaded} from GitHub"))?.to_str()?.to_string();
-            } else if !status.is_success() {
-                bail!("Received {status} when downloading from {file_being_downloaded}");
-            } else {
-                break response;
-            }
-        };
-        let mut file = File::create(path)?;
-        while let Some(chunk) = response.body_mut().data().await {
-            file.write_all(&chunk.map_err(|err| {
-                anyhow!("Something went wrong when downloading {file_being_downloaded}: {err}",)
-            })?)?;
-        }
-    }
-    Ok(())
-}
-
-fn extract_archive(
-    archive_path: &Path,
-    test_path: &Path,
-    out_path: &Path,
-    components_to_strip: i32,
-) -> Result<()> {
-    if !test_path.try_exists()? {
-        let output = Command::new("tar")
-            .args([
-                "-xf",
-                archive_path.to_string_lossy().as_ref(),
-                "--strip-components",
-                &components_to_strip.to_string(),
-            ])
-            .current_dir(out_path)
-            .output()?;
-        if !output.status.success() {
-            bail!(
-                "Unpacking {} failed: {}",
-                archive_path.to_str().unwrap(),
-                String::from_utf8_lossy(&output.stderr)
-            );
-        }
-    }
-    Ok(())
 }

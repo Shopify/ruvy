@@ -1,0 +1,9 @@
+[package]
+name = "github-asset-download"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+hyper = { version = "0.14.27", features = ["client", "http1"] }
+hyper-tls = "0.5.0"
