@@ -27,3 +27,6 @@ fmt-core:
 fmt-cli:
 	cargo fmt --package=cli -- --check
 	cargo clippy --package=cli --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
+
+bench: core
+	cargo bench --package=cli
