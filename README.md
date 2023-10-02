@@ -29,6 +29,10 @@ The following environment variables allow you to experiment with different WASI 
 - `RUVY_WASM_SYS_WASI_SDK_MINOR_VERSION` sets the minor version of the WASI SDK to use
 - `RUVY_WASM_SYS_WASI_SDK_PATH` allows you to specify a path to WASI SDK to use
 
+### Using a different ruby.wasm
+
+Set the `RUVY_WASM_SYS_RUBY_PATH` environment variable to a path containing an extracted release asset from https://github.com/ruby/ruby.wasm. The directory the environment variable is set to must contain an `include` and `lib` directory.
+
 ## Building
 
 After all the dependencies are installed, run `make`
