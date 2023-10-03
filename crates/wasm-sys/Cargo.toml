@@ -7,6 +7,4 @@ edition = "2021"
 anyhow = { workspace = true }
 bindgen = "0.63.0"
 cc = "1.0"
-hyper = { version = "0.14.27", features = ["client", "http1"] }
-hyper-tls = "0.5.0"
-tokio = { version = "1.32.0", features = ["macros"] }
+ruby-wasm-assets = { path = "../ruby-wasm-assets" }

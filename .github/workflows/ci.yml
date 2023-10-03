@@ -46,5 +46,5 @@ jobs:
       - name: Format checks
         run: |
           cargo fmt -- --check
-          cargo clippy --workspace --exclude=cli --target=wasm32-wasi --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
-          cargo clippy --package=cli --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
+          cargo clippy --workspace --exclude=cli --exclude=ruby-wasm-assets --target=wasm32-wasi --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
+          cargo clippy --package=cli --package=ruby-wasm-assets --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious

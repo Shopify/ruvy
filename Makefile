@@ -14,7 +14,11 @@ test-cli: cli
 test-core:
 	cargo wasi test --package=core -- --nocapture
 
-fmt: fmt-wasm-sys fmt-core fmt-cli
+fmt: fmt-ruby-wasm-assets fmt-wasm-sys fmt-core fmt-cli
+
+fmt-ruby-wasm-assets:
+	cargo fmt --package=ruby-wasm-assets -- --check
+	cargo clippy --package=ruby-wasm-assets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
 
 fmt-wasm-sys:
 	cargo fmt --package=ruvy-wasm-sys -- --check
@@ -27,3 +31,6 @@ fmt-core:
 fmt-cli:
 	cargo fmt --package=cli -- --check
 	cargo clippy --package=cli --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
+
+bench: core
+	cargo bench --package=cli
