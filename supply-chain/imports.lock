@@ -16,8 +16,8 @@ user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
 [[publisher.anstyle]]
-version = "1.0.3"
-when = "2023-09-11"
+version = "1.0.4"
+when = "2023-09-28"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -114,8 +114,8 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap_builder]]
-version = "4.4.5"
-when = "2023-09-25"
+version = "4.4.6"
+when = "2023-09-28"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -1394,12 +1394,6 @@ This crate, while it implements collections, does so without `std::*` APIs and
 without `unsafe`. Skimming the crate everything looks reasonable and what one
 would expect from idiomatic safe collections in Rust.
 """
-
-[[audits.bytecode-alliance.audits.tokio-macros]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-delta = "1.7.0 -> 2.1.0"
-notes = "A number of updates to parsed syntax and such but nothing unexpected and entirely what one would expect a Rust procedural macro to do."
 
 [[audits.bytecode-alliance.audits.tokio-native-tls]]
 who = "Pat Hickey <phickey@fastly.com>"

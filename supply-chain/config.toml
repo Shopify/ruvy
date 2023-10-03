@@ -83,7 +83,7 @@ version = "3.2.25"
 criteria = "safe-to-deploy"
 
 [[exemptions.clap]]
-version = "4.4.5"
+version = "4.4.6"
 criteria = "safe-to-run"
 
 [[exemptions.clap_derive]]
@@ -420,10 +420,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.tokio]]
 version = "1.32.0"
-criteria = "safe-to-deploy"
-
-[[exemptions.tokio-macros]]
-version = "1.7.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.toml]]
