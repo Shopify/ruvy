@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 ruvy-wasm-sys = { path = "../wasm-sys" }
-anyhow = "1.0"
+anyhow = { workspace = true }

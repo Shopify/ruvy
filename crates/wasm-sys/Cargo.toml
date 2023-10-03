@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [build-dependencies]
-anyhow = "1.0.75"
+anyhow = { workspace = true }
 bindgen = "0.63.0"
 cc = "1.0"
 hyper = { version = "0.14.27", features = ["client", "http1"] }
