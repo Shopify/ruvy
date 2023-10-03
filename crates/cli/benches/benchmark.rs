@@ -14,7 +14,7 @@ use wasi_common::{
     pipe::{ReadPipe, WritePipe},
     WasiCtx,
 };
-use wasmtime::{Engine, Linker, Module, Store, TypedFunc};
+use wasmtime::{Engine, Linker, Module, Store};
 use wasmtime_wasi::WasiCtxBuilder;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
@@ -49,7 +49,13 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         c.bench_with_input(BenchmarkId::new("run", &case), &case, |b, script| {
             b.iter_with_setup(
                 || script.setup_for_run(&engine).unwrap(),
-                |(start_func, mut store)| start_func.call(&mut store, ()).unwrap(),
+                |(linker, module, mut store)| {
+                    let instance = linker.instantiate(&mut store, &module).unwrap();
+                    let start_func = instance
+                        .get_typed_func::<(), ()>(&mut store, "_start")
+                        .unwrap();
+                    start_func.call(&mut store, ()).unwrap()
+                },
             )
         });
     }
@@ -95,7 +101,7 @@ impl WasmCase {
         })
     }
 
-    fn setup_for_run(&self, engine: &Engine) -> Result<(TypedFunc<(), ()>, Store<WasiCtx>)> {
+    fn setup_for_run(&self, engine: &Engine) -> Result<(Linker<WasiCtx>, Module, Store<WasiCtx>)> {
         let mut linker = Linker::new(engine);
         let wasi = WasiCtxBuilder::new()
             .stdin(Box::new(ReadPipe::from(&self.input[..])))
@@ -104,11 +110,9 @@ impl WasmCase {
             .args(&self.wasi_args)?
             .build();
         wasmtime_wasi::add_to_linker(&mut linker, |s| s).unwrap();
-        let mut store = Store::new(engine, wasi);
+        let store = Store::new(engine, wasi);
         let module = Module::new(engine, &self.wasm)?;
-        let instance = linker.instantiate(&mut store, &module)?;
-        let func = instance.get_typed_func(&mut store, "_start")?;
-        Ok((func, store))
+        Ok((linker, module, store))
     }
 }
 
