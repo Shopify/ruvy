@@ -1,10 +1,9 @@
 mod runtime;
 
-use once_cell::sync::OnceCell;
 use runtime::cleanup_ruby;
-use std::{env, io};
+use std::{env, io, sync::OnceLock};
 
-static USER_CODE: OnceCell<String> = OnceCell::new();
+static USER_CODE: OnceLock<String> = OnceLock::new();
 
 fn main() {
     let code = USER_CODE.get().unwrap();

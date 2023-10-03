@@ -448,7 +448,6 @@ name = "core"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "once_cell",
  "ruvy-wasm-sys",
 ]
 

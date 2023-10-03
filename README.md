@@ -54,3 +54,18 @@ $ cargo run --package=cli -- --preload=prelude/ ruby_examples/use_preludes_and_s
 $ echo "this is my input" | wasmtime index.wasm
 {:discount_input=>"this is my input", :value=>100.0}
 ```
+
+## Ideas for contributions
+
+Here are some ideas for welcome contributions!
+
+### Improving compatibility with Shopify Functions
+
+- Investigate and improve performance of Ruvy modules. One approach to consider is using YJIT to output WebAssembly.
+- Shrinking the size of modules by separating the interpreter into an engine Wasm module which exports memory and functions that can be imported by a Wasm module containing Ruby source code. To see an example of implementing this approach, take a look at https://github.com/bytecodealliance/javy, specifically the [core lib.rs](https://github.com/bytecodealliance/javy/blob/3b02858c4a68c830e8e82a1b15b4c3817ad1a64a/crates/core/src/lib.rs) and [the dynamic wasm generator](https://github.com/bytecodealliance/javy/blob/3b02858c4a68c830e8e82a1b15b4c3817ad1a64a/crates/cli/src/wasm_generator/dynamic.rs).
+- Enable exports of named functions from Wasm that call into named functions in Ruby code so multiple functions can be exported.
+
+### Misc
+
+- Enable using `require` and Ruby gems. At the present time, using code in the preload directory is the only way to add dependencies and large parts of the standard library are not available. It should be possible to enable `require` to work and to load both code from the standard library and from third party gems that are not native gems. A good example of showing this is fixed would be adding a Ruby example that uses the standard library's `json` library to parse and dump JSON.
+- Output any error messages from the Ruby VM on the standard error stream.

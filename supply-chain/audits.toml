@@ -7,7 +7,7 @@
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-03-28"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.ambient-authority]]
 criteria = "safe-to-deploy"
@@ -19,7 +19,7 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2022-05-18"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.anyhow]]
 criteria = "safe-to-deploy"
@@ -37,7 +37,7 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-06-09"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.cap-fs-ext]]
 criteria = "safe-to-deploy"
@@ -73,13 +73,13 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2023-03-28"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.clap_lex]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2022-04-15"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.fs-set-times]]
 criteria = "safe-to-deploy"
@@ -151,7 +151,7 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-07-07"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.num_cpus]]
 criteria = "safe-to-deploy"
@@ -175,19 +175,19 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-02-27"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.regex-automata]]
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-02-25"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.regex-syntax]]
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-03-30"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.rustix]]
 criteria = "safe-to-deploy"
@@ -247,7 +247,7 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-06-04"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.thiserror]]
 criteria = "safe-to-deploy"
@@ -277,7 +277,7 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-06-09"
-end = "2024-09-29"
+end = "2024-10-03"
 
 [[trusted.want]]
 criteria = "safe-to-deploy"
@@ -289,4 +289,4 @@ end = "2024-09-21"
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2020-01-11"
-end = "2024-09-29"
+end = "2024-10-03"
