@@ -8,13 +8,26 @@ use std::{
 use anyhow::{anyhow, bail, Result};
 use hyper::{body::HttpBody, Body, Client, Response};
 use hyper_tls::HttpsConnector;
+use lazy_static::lazy_static;
+use tokio::runtime::Runtime;
 
-pub const RUBY_WASM_VERSION: &str = "2.1.0";
-pub const RUBY_WASM_RUBY_VERSION: &str = "3_2";
-pub const RUBY_WASM_TARGET: &str = "wasm32-unknown-wasi";
-pub const RUBY_WASM_PROFILE: &str = "minimal";
+const RUBY_WASM_VERSION: &str = "2.1.0";
+const RUBY_WASM_RUBY_VERSION: &str = "3_2";
+const RUBY_WASM_TARGET: &str = "wasm32-unknown-wasi";
+const RUBY_WASM_PROFILE: &str = "minimal";
 
-pub async fn download(mut uri: String, path: &Path) -> Result<()> {
+lazy_static! {
+    static ref RT: Runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .unwrap();
+}
+
+pub fn download(uri: String, path: &Path) -> Result<()> {
+    RT.block_on(download_async(uri, path))
+}
+
+async fn download_async(mut uri: String, path: &Path) -> Result<()> {
     let file_being_downloaded = path.file_name().unwrap().to_str().unwrap();
     if !path.try_exists()? {
         let client = Client::builder().build::<_, hyper::Body>(HttpsConnector::new());
@@ -39,8 +52,15 @@ pub async fn download(mut uri: String, path: &Path) -> Result<()> {
     Ok(())
 }
 
-pub async fn download_ruby_wasm(path: &Path) -> Result<()> {
-    download(format!("https://github.com/ruby/ruby.wasm/releases/download/{RUBY_WASM_VERSION}/ruby-{RUBY_WASM_RUBY_VERSION}-{RUBY_WASM_TARGET}-{RUBY_WASM_PROFILE}.tar.gz"), path).await
+pub fn ruby_wasm_base_name() -> String {
+    format!(
+        "{}-ruby-{}-{}-{}",
+        RUBY_WASM_VERSION, RUBY_WASM_RUBY_VERSION, RUBY_WASM_TARGET, RUBY_WASM_PROFILE
+    )
+}
+
+pub fn download_ruby_wasm(path: &Path) -> Result<()> {
+    download(format!("https://github.com/ruby/ruby.wasm/releases/download/{RUBY_WASM_VERSION}/ruby-{RUBY_WASM_RUBY_VERSION}-{RUBY_WASM_TARGET}-{RUBY_WASM_PROFILE}.tar.gz"), path)
 }
 
 pub fn extract_tar(archive: &Path, extract_to: &Path, components_to_strip: i32) -> Result<()> {

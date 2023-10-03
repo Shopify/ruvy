@@ -7,5 +7,4 @@ edition = "2021"
 anyhow = { workspace = true }
 bindgen = "0.63.0"
 cc = "1.0"
-tokio = { version = "1.32.0", features = ["macros"] }
-github-asset-download = { path = "../github-asset-download" }
+ruby-wasm-assets = { path = "../ruby-wasm-assets" }

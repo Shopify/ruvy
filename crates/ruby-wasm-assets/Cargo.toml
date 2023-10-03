@@ -1,5 +1,5 @@
 [package]
-name = "github-asset-download"
+name = "ruby-wasm-assets"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +7,5 @@ edition = "2021"
 anyhow = { workspace = true }
 hyper = { version = "0.14.27", features = ["client", "http1"] }
 hyper-tls = "0.5.0"
+lazy_static = "1.4.0"
+tokio = { version = "1.32.0", features = ["rt"] }

@@ -4,14 +4,13 @@ use std::{env, fs, path::PathBuf};
 const WASI_SDK_VERSION_MAJOR: usize = 20;
 const WASI_SDK_VERSION_MINOR: usize = 0;
 
-#[tokio::main(flavor = "current_thread")]
-async fn main() -> Result<()> {
-    let wasi_sdk_path = wasi_sdk_path().await?;
+fn main() -> Result<()> {
+    let wasi_sdk_path = wasi_sdk_path()?;
     let wasi_sdk_path = wasi_sdk_path.to_string_lossy();
     let sysroot = format!("--sysroot={}/share/wasi-sysroot", &wasi_sdk_path);
     let sysroot_lib = format!("{}/share/wasi-sysroot/lib/wasm32-wasi", &wasi_sdk_path);
 
-    let ruby_wasm_dir = ruby_wasm_path().await?;
+    let ruby_wasm_dir = ruby_wasm_path()?;
     let lib_dir = ruby_wasm_dir.join("lib");
     let include_dir = ruby_wasm_dir.join("include");
     let include_dir = fs::read_dir(include_dir)?
@@ -79,16 +78,16 @@ async fn main() -> Result<()> {
     Ok(())
 }
 
-async fn wasi_sdk_path() -> Result<PathBuf> {
+fn wasi_sdk_path() -> Result<PathBuf> {
     const WASI_SDK_PATH_ENV_VAR: &str = "RUVY_WASM_SYS_WASI_SDK_PATH";
     println!("cargo:rerun-if-env-changed={WASI_SDK_PATH_ENV_VAR}");
     if let Ok(path) = env::var(WASI_SDK_PATH_ENV_VAR) {
         return Ok(path.into());
     }
-    download_wasi_sdk().await
+    download_wasi_sdk()
 }
 
-async fn download_wasi_sdk() -> Result<PathBuf> {
+fn download_wasi_sdk() -> Result<PathBuf> {
     let mut wasi_sdk_dir: PathBuf = env::var("OUT_DIR")?.into();
     wasi_sdk_dir.push("wasi-sdk");
     fs::create_dir_all(&wasi_sdk_dir)?;
@@ -113,37 +112,32 @@ async fn download_wasi_sdk() -> Result<PathBuf> {
         other => bail!("Unsupported platform tuple {:?}", other),
     };
     let uri = format!("https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-{major_version}/wasi-sdk-{major_version}.{minor_version}-{file_suffix}.tar.gz");
-    github_asset_download::download(uri, &archive_path).await?;
-    github_asset_download::extract_tar(&archive_path, &wasi_sdk_dir, 1)?;
+    ruby_wasm_assets::download(uri, &archive_path)?;
+    ruby_wasm_assets::extract_tar(&archive_path, &wasi_sdk_dir, 1)?;
 
     Ok(wasi_sdk_dir)
 }
 
-async fn ruby_wasm_path() -> Result<PathBuf> {
+fn ruby_wasm_path() -> Result<PathBuf> {
     const RUBY_WASM_PATH_ENV_VAR: &str = "RUVY_WASM_SYS_RUBY_PATH";
     println!("cargo:rerun-if-env-changed={RUBY_WASM_PATH_ENV_VAR}");
     if let Ok(path) = env::var(RUBY_WASM_PATH_ENV_VAR) {
         return Ok(path.into());
     }
-    download_ruby_wasm().await
+    download_ruby_wasm()
 }
 
-async fn download_ruby_wasm() -> Result<PathBuf> {
+fn download_ruby_wasm() -> Result<PathBuf> {
     let mut ruby_wasm_dir: PathBuf = env::var("OUT_DIR")?.into();
     ruby_wasm_dir.push("ruby-wasm");
     fs::create_dir_all(&ruby_wasm_dir)?;
     let mut archive_path = ruby_wasm_dir.clone();
-    archive_path.push(format!(
-        "{}-ruby-{}-{}-{}.tar.gz",
-        github_asset_download::RUBY_WASM_VERSION,
-        github_asset_download::RUBY_WASM_RUBY_VERSION,
-        github_asset_download::RUBY_WASM_TARGET,
-        github_asset_download::RUBY_WASM_PROFILE
-    ));
+    archive_path.push(ruby_wasm_assets::ruby_wasm_base_name());
+    archive_path.set_extension("tar.gz");
 
-    github_asset_download::download_ruby_wasm(&archive_path).await?;
+    ruby_wasm_assets::download_ruby_wasm(&archive_path)?;
     // Need to strip archive name, `usr`, and `local`.
-    github_asset_download::extract_tar(&archive_path, &ruby_wasm_dir, 3)?;
+    ruby_wasm_assets::extract_tar(&archive_path, &ruby_wasm_dir, 3)?;
 
     Ok(ruby_wasm_dir)
 }
