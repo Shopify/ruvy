@@ -11,7 +11,7 @@ path = "src/main.rs"
 [dependencies]
 clap = { version = "3.2.23", features = ["derive"] }
 wizer = "3.0.0"
-anyhow = "1.0"
+anyhow = { workspace = true }
 wasi-common = "9.0.0"
 wasmtime = "9.0.0"
 wasmtime-wasi = "9.0.0"
@@ -19,4 +19,4 @@ wasmtime-wasi = "9.0.0"
 [dev-dependencies]
 
 [build-dependencies]
-anyhow = "1.0"
+anyhow = { workspace = true }
