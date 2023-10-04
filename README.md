@@ -4,6 +4,10 @@
 
 Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed into the wasm.
 
+## Runtime requirements
+
+When running Ruvy on Linux, `glibc` 2.31 or greater must be available. You may need to update the version of your operating system if you are using an older version of `glibc`.
+
 ## Build
 
 - [rustup](https://rustup.rs/)
@@ -69,3 +73,7 @@ Here are some ideas for welcome contributions!
 
 - Enable using `require` and Ruby gems. At the present time, using code in the preload directory is the only way to add dependencies and large parts of the standard library are not available. It should be possible to enable `require` to work and to load both code from the standard library and from third party gems that are not native gems. A good example of showing this is fixed would be adding a Ruby example that uses the standard library's `json` library to parse and dump JSON.
 - Output any error messages from the Ruby VM on the standard error stream.
+
+## Test
+
+Test
