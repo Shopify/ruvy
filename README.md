@@ -69,3 +69,7 @@ Here are some ideas for welcome contributions!
 
 - Enable using `require` and Ruby gems. At the present time, using code in the preload directory is the only way to add dependencies and large parts of the standard library are not available. It should be possible to enable `require` to work and to load both code from the standard library and from third party gems that are not native gems. A good example of showing this is fixed would be adding a Ruby example that uses the standard library's `json` library to parse and dump JSON.
 - Output any error messages from the Ruby VM on the standard error stream.
+
+## Test
+
+Test
