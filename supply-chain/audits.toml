@@ -165,6 +165,12 @@ user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-03-19"
 end = "2024-09-21"
 
+[[trusted.prettyplease]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2022-01-04"
+end = "2024-10-27"
+
 [[trusted.quote]]
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
