@@ -5,6 +5,6 @@ edition = "2021"
 
 [build-dependencies]
 anyhow = { workspace = true }
-bindgen = "0.63.0"
+bindgen = "0.68.1"
 cc = "1.0"
 ruby-wasm-assets = { path = "../ruby-wasm-assets" }
