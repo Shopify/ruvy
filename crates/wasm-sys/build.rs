@@ -124,6 +124,11 @@ fn ruby_wasm_path() -> Result<PathBuf> {
     if let Ok(path) = env::var(RUBY_WASM_PATH_ENV_VAR) {
         return Ok(path.into());
     }
+
+    println!(
+        "cargo:warning=RUVY_WASM_SYS_RUBY_PATH variable was not set. \
+        Attempting to download and install default ruby.wasm"
+    );
     download_ruby_wasm()
 }
 
@@ -132,12 +137,18 @@ fn download_ruby_wasm() -> Result<PathBuf> {
     ruby_wasm_dir.push("ruby-wasm");
     fs::create_dir_all(&ruby_wasm_dir)?;
     let mut archive_path = ruby_wasm_dir.clone();
-    archive_path.push(ruby_wasm_assets::ruby_wasm_base_name());
+    let ruby_wasm_version = ruby_wasm_assets::ruby_wasm_base_name();
+    archive_path.push(&ruby_wasm_version);
     archive_path.set_extension("tar.gz");
 
     ruby_wasm_assets::download_ruby_wasm(&archive_path)?;
     // Need to strip archive name, `usr`, and `local`.
     ruby_wasm_assets::extract_tar(&archive_path, &ruby_wasm_dir, 3)?;
+    println!(
+        "cargo:warning={} installed at {}",
+        ruby_wasm_version,
+        ruby_wasm_dir.display()
+    );
 
     Ok(ruby_wasm_dir)
 }
