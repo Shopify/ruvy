@@ -78,18 +78,6 @@ criteria = "safe-to-run"
 version = "1.6.1"
 criteria = "safe-to-deploy"
 
-[[exemptions.clap]]
-version = "3.2.25"
-criteria = "safe-to-deploy"
-
-[[exemptions.clap]]
-version = "4.4.6"
-criteria = "safe-to-run"
-
-[[exemptions.clap_derive]]
-version = "3.2.25"
-criteria = "safe-to-deploy"
-
 [[exemptions.cpp_demangle]]
 version = "0.3.5"
 criteria = "safe-to-deploy"
@@ -166,10 +154,6 @@ criteria = "safe-to-deploy"
 version = "4.0.0"
 criteria = "safe-to-deploy"
 
-[[exemptions.form_urlencoded]]
-version = "1.2.0"
-criteria = "safe-to-deploy"
-
 [[exemptions.futures-task]]
 version = "0.3.21"
 criteria = "safe-to-deploy"
@@ -188,10 +172,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.gimli]]
 version = "0.27.3"
-criteria = "safe-to-deploy"
-
-[[exemptions.hermit-abi]]
-version = "0.1.19"
 criteria = "safe-to-deploy"
 
 [[exemptions.hermit-abi]]
@@ -250,10 +230,6 @@ criteria = "safe-to-deploy"
 version = "0.3.4"
 criteria = "safe-to-deploy"
 
-[[exemptions.memfd]]
-version = "0.6.4"
-criteria = "safe-to-deploy"
-
 [[exemptions.memoffset]]
 version = "0.8.0"
 criteria = "safe-to-deploy"
@@ -294,14 +270,6 @@ criteria = "safe-to-deploy"
 version = "0.9.93"
 criteria = "safe-to-deploy"
 
-[[exemptions.os_str_bytes]]
-version = "6.5.1"
-criteria = "safe-to-deploy"
-
-[[exemptions.percent-encoding]]
-version = "2.3.0"
-criteria = "safe-to-deploy"
-
 [[exemptions.pin-project-lite]]
 version = "0.2.13"
 criteria = "safe-to-deploy"
@@ -326,10 +294,6 @@ criteria = "safe-to-run"
 version = "0.2.17"
 criteria = "safe-to-deploy"
 
-[[exemptions.proc-macro-error]]
-version = "1.0.4"
-criteria = "safe-to-deploy"
-
 [[exemptions.psm]]
 version = "0.1.21"
 criteria = "safe-to-deploy"
@@ -340,10 +304,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.redox_syscall]]
 version = "0.2.16"
-criteria = "safe-to-deploy"
-
-[[exemptions.redox_syscall]]
-version = "0.3.5"
 criteria = "safe-to-deploy"
 
 [[exemptions.redox_users]]
@@ -406,10 +366,6 @@ criteria = "safe-to-deploy"
 version = "3.8.0"
 criteria = "safe-to-deploy"
 
-[[exemptions.textwrap]]
-version = "0.16.0"
-criteria = "safe-to-deploy"
-
 [[exemptions.tinytemplate]]
 version = "1.2.1"
 criteria = "safe-to-run"
@@ -444,10 +400,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.typenum]]
 version = "1.16.0"
-criteria = "safe-to-deploy"
-
-[[exemptions.url]]
-version = "2.4.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.uuid]]
