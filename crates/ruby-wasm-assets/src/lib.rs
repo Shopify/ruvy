@@ -5,9 +5,14 @@ use std::{
     process::Command,
 };
 
-use anyhow::{anyhow, bail, Result};
-use hyper::{body::HttpBody, Body, Client, Response};
+use anyhow::{anyhow, bail, Error, Result};
+use http_body_util::{combinators::BoxBody, BodyExt};
+use hyper::{
+    body::{Bytes, Incoming},
+    Response,
+};
 use hyper_tls::HttpsConnector;
+use hyper_util::{client::legacy::Client, rt::TokioExecutor};
 use lazy_static::lazy_static;
 use tokio::runtime::Runtime;
 
@@ -30,8 +35,9 @@ pub fn download(uri: String, path: &Path) -> Result<()> {
 async fn download_async(mut uri: String, path: &Path) -> Result<()> {
     let file_being_downloaded = path.file_name().unwrap().to_str().unwrap();
     if !path.try_exists()? {
-        let client = Client::builder().build::<_, hyper::Body>(HttpsConnector::new());
-        let mut response: Response<Body> = loop {
+        let client = Client::builder(TokioExecutor::new())
+            .build::<_, BoxBody<Bytes, Error>>(HttpsConnector::new());
+        let mut response: Response<Incoming> = loop {
             let response = client.get(uri.try_into()?).await?;
             let status = response.status();
             if status.is_redirection() {
@@ -43,10 +49,11 @@ async fn download_async(mut uri: String, path: &Path) -> Result<()> {
             }
         };
         let mut file = File::create(path)?;
-        while let Some(chunk) = response.body_mut().data().await {
-            file.write_all(&chunk.map_err(|err| {
-                anyhow!("Something went wrong when downloading {file_being_downloaded}: {err}",)
-            })?)?;
+        while let Some(next) = response.frame().await {
+            let frame = next?;
+            if let Some(chunk) = frame.data_ref() {
+                file.write_all(chunk.as_ref())?;
+            }
         }
     }
     Ok(())
