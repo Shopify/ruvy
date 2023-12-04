@@ -5,7 +5,9 @@ edition = "2021"
 
 [dependencies]
 anyhow = { workspace = true }
-hyper = { version = "0.14.27", features = ["client", "http1"] }
-hyper-tls = "0.5.0"
+http-body-util = "0.1.0"
+hyper = "1.0"
+hyper-tls = "0.6.0"
+hyper-util = { version = "0.1.1", features = ["http1"] }
 lazy_static = "1.4.0"
 tokio = { version = "1.32.0", features = ["rt"] }
