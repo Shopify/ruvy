@@ -15,16 +15,16 @@ struct Opt {
     input: PathBuf,
 
     /// Path of a directory containing Ruby files to preload to be used by the input file.
-    #[clap(long, parse(from_os_str))]
+    #[arg(long)]
     preload: Option<PathBuf>,
 
-    #[clap(short, parse(from_os_str), default_value = "index.wasm")]
+    #[arg(short, default_value = "index.wasm")]
     /// Desired path of the WebAssembly output file.
     output: PathBuf,
 }
 
 fn main() -> Result<()> {
-    let opt = Opt::from_args();
+    let opt = Opt::parse();
     let ruby_code = match fs::read_to_string(&opt.input) {
         Ok(code) => code,
         Err(err) => {
