@@ -42,13 +42,14 @@ fn main() -> Result<()> {
 }
 
 fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> {
-    let mut wasi_builder = WasiCtxBuilder::new()
+    let mut wasi_builder = WasiCtxBuilder::new();
+    wasi_builder
         .stdin(Box::new(ReadPipe::from(ruby_code.as_bytes())))
         .inherit_stdout()
         .inherit_stderr();
 
     if let Some(preload_path) = preload_path {
-        wasi_builder = wasi_builder
+        wasi_builder
             .env("RUVY_PRELOAD_PATH", &preload_path.to_string_lossy())?
             .preopened_dir(
                 Dir::open_ambient_dir(&preload_path, sync::ambient_authority())?,

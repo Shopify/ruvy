@@ -10,11 +10,11 @@ path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4.4.10", features = ["derive"] }
-wizer = { git = "https://github.com/bytecodealliance/wizer.git", rev = "408b12e5712d0f2f405dc4eb240764cea4a7e87e" }
+wizer = "4.0.0"
 anyhow = { workspace = true }
-wasi-common = "11.0.1"
-wasmtime = "11.0.1"
-wasmtime-wasi = "11.0.1"
+wasi-common = "16"
+wasmtime = "16"
+wasmtime-wasi = "16"
 
 [dev-dependencies]
 criterion = "0.5.1"
