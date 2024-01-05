@@ -44,8 +44,8 @@ user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.anyhow]]
-version = "1.0.75"
-when = "2023-08-17"
+version = "1.0.79"
+when = "2024-01-02"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
@@ -128,15 +128,15 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.4.10"
-when = "2023-11-28"
+version = "4.4.13"
+when = "2024-01-04"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.4.9"
-when = "2023-11-27"
+version = "4.4.12"
+when = "2023-12-28"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -279,8 +279,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper]]
-version = "1.0.1"
-when = "2023-11-16"
+version = "1.1.0"
+when = "2023-12-18"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -293,8 +293,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper-util]]
-version = "0.1.1"
-when = "2023-11-17"
+version = "0.1.2"
+when = "2023-12-20"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -508,6 +508,13 @@ when = "2023-09-02"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
+
+[[publisher.tokio]]
+version = "1.35.1"
+when = "2023-12-19"
+user-id = 6741
+user-login = "Darksonn"
+user-name = "Alice Ryhl"
 
 [[publisher.unicode-ident]]
 version = "1.0.12"
@@ -1607,12 +1614,6 @@ its own longevity should be relatively hardened against some of the more common
 compression-related issues.
 """
 
-[[audits.bytecode-alliance.audits.mio]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-delta = "0.8.6 -> 0.8.8"
-notes = "Mostly OS portability updates along with some minor bugfixes."
-
 [[audits.bytecode-alliance.audits.native-tls]]
 who = "Pat Hickey <phickey@fastly.com>"
 criteria = "safe-to-deploy"
@@ -1926,6 +1927,12 @@ criteria = "safe-to-deploy"
 delta = "0.66.1 -> 0.68.1"
 aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
+[[audits.mozilla.audits.bindgen]]
+who = "Andreas Pehrson <apehrson@mozilla.com>"
+criteria = "safe-to-deploy"
+delta = "0.68.1 -> 0.69.1"
+aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
+
 [[audits.mozilla.audits.bitflags]]
 who = "Alex Franchuk <afranchuk@mozilla.com>"
 criteria = "safe-to-deploy"
@@ -2032,12 +2039,6 @@ criteria = "safe-to-deploy"
 version = "1.4.0"
 notes = "I have read over the macros, and audited the unsafe code."
 aggregated-from = "https://raw.githubusercontent.com/mozilla/cargo-vet/main/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.mio]]
-who = "Mike Hommey <mh+mozilla@glandium.org>"
-criteria = "safe-to-deploy"
-delta = "0.8.0 -> 0.8.6"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
 [[audits.mozilla.audits.peeking_take_while]]
 who = "Bobby Holley <bobbyholley@gmail.com>"
