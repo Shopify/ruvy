@@ -210,10 +210,6 @@ criteria = "safe-to-deploy"
 version = "0.7.4"
 criteria = "safe-to-deploy"
 
-[[exemptions.log]]
-version = "0.4.20"
-criteria = "safe-to-deploy"
-
 [[exemptions.mach]]
 version = "0.3.2"
 criteria = "safe-to-deploy"
@@ -331,7 +327,7 @@ version = "2.1.2"
 criteria = "safe-to-deploy"
 
 [[exemptions.shlex]]
-version = "1.2.0"
+version = "1.3.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.slice-group-by]]
