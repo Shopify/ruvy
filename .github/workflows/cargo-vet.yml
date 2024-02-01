@@ -13,7 +13,7 @@ jobs:
       CARGO_VET_VERSION: 0.8.0
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ${{ runner.tool_cache }}/cargo-vet
           key: cargo-vet-bin-${{ env.CARGO_VET_VERSION }}
