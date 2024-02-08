@@ -59,10 +59,14 @@ $ echo "this is my input" | wasmtime index.wasm
 
 Here are some ideas for welcome contributions!
 
-### Improving compatibility with Shopify Functions
+### Compatibility with Shopify Functions
 
-- Investigate and improve performance of Ruvy modules. One approach to consider is using YJIT to output WebAssembly.
+Ruvy is **not** currently compatible with Shopify Functions. This is due to the size of the Wasm modules produced by Ruvy exceeding the maximum size of Wasm modules supported by Shopify Functions.
+
+Here are some ideas for how to make Ruvy compatible with Shopify Functions:
+
 - Shrinking the size of modules by separating the interpreter into an engine Wasm module which exports memory and functions that can be imported by a Wasm module containing Ruby source code. To see an example of implementing this approach, take a look at https://github.com/bytecodealliance/javy, specifically the [core lib.rs](https://github.com/bytecodealliance/javy/blob/3b02858c4a68c830e8e82a1b15b4c3817ad1a64a/crates/core/src/lib.rs) and [the dynamic wasm generator](https://github.com/bytecodealliance/javy/blob/3b02858c4a68c830e8e82a1b15b4c3817ad1a64a/crates/cli/src/wasm_generator/dynamic.rs).
+- Investigate and improve performance of Ruvy modules. One approach to consider is using YJIT to output WebAssembly.
 - Enable exports of named functions from Wasm that call into named functions in Ruby code so multiple functions can be exported.
 
 ### Misc
