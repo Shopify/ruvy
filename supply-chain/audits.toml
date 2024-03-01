@@ -99,6 +99,12 @@ user-id = 6825 # Dan Gohman (sunfishcode)
 start = "2020-09-21"
 end = "2024-09-21"
 
+[[trusted.cc]]
+criteria = "safe-to-deploy"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2024-02-20"
+end = "2025-03-01"
+
 [[trusted.clap]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
@@ -248,6 +254,12 @@ criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2022-01-04"
 end = "2024-10-27"
+
+[[trusted.proc-macro2]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2019-04-23"
+end = "2025-03-01"
 
 [[trusted.quote]]
 criteria = "safe-to-deploy"
