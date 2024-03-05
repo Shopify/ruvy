@@ -47,7 +47,7 @@ fn main() -> Result<()> {
 
     let bindings = bindgen::Builder::default()
         .header("wrapper.h")
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .clang_args(&[
             "-fvisibility=default",
             "--target=wasm32-wasi",
