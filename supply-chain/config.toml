@@ -182,6 +182,10 @@ criteria = "safe-to-deploy"
 version = "0.27.3"
 criteria = "safe-to-deploy"
 
+[[exemptions.heck]]
+version = "0.5.0"
+criteria = "safe-to-deploy"
+
 [[exemptions.hermit-abi]]
 version = "0.3.2"
 criteria = "safe-to-deploy"
@@ -196,6 +200,10 @@ criteria = "safe-to-deploy"
 
 [[exemptions.itertools]]
 version = "0.10.5"
+criteria = "safe-to-deploy"
+
+[[exemptions.jobserver]]
+version = "0.1.28"
 criteria = "safe-to-deploy"
 
 [[exemptions.lazycell]]
