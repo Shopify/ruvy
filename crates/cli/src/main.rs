@@ -1,9 +1,12 @@
 use anyhow::Result;
 use clap::Parser;
 use std::{fs, path::PathBuf, process, rc::Rc, sync::OnceLock};
-use wasi_common::{pipe::ReadPipe, WasiCtx};
+use wasi_common::{
+    pipe::ReadPipe,
+    sync::{self, Dir, WasiCtxBuilder},
+    WasiCtx,
+};
 use wasmtime::Linker;
-use wasmtime_wasi::{sync, Dir, WasiCtxBuilder};
 use wizer::Wizer;
 
 static mut WASI: OnceLock<WasiCtx> = OnceLock::new();
@@ -70,7 +73,7 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
         .wasm_bulk_memory(true)
         .make_linker(Some(Rc::new(|engine| {
             let mut linker = Linker::new(engine);
-            wasmtime_wasi::add_to_linker(&mut linker, |_ctx: &mut Option<WasiCtx>| {
+            wasi_common::sync::add_to_linker(&mut linker, |_ctx: &mut Option<WasiCtx>| {
                 unsafe { WASI.get_mut() }.unwrap()
             })?;
             Ok(linker)

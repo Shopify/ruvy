@@ -3,10 +3,10 @@ use std::{env, io::Cursor, path::Path, process::Command, str};
 use anyhow::{bail, Result};
 use wasi_common::{
     pipe::{ReadPipe, WritePipe},
+    sync::WasiCtxBuilder,
     WasiCtx,
 };
 use wasmtime::{Engine, Linker, Module, Store};
-use wasmtime_wasi::WasiCtxBuilder;
 
 #[test]
 pub fn test_hello_world() -> Result<()> {
@@ -74,7 +74,7 @@ fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<
 fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
     let engine = Engine::default();
     let mut linker = Linker::new(&engine);
-    wasmtime_wasi::sync::add_to_linker(&mut linker, |s: &mut Context| &mut s.wasi)?;
+    wasi_common::sync::add_to_linker(&mut linker, |s: &mut Context| &mut s.wasi)?;
     let mut store = Store::new(&engine, Context::new(input.as_bytes()));
 
     let module = Module::from_file(&engine, wasm_path)?;
