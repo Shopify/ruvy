@@ -12,10 +12,10 @@ use anyhow::{bail, Result};
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use wasi_common::{
     pipe::{ReadPipe, WritePipe},
+    sync::WasiCtxBuilder,
     WasiCtx,
 };
 use wasmtime::{Engine, Linker, Module, Store};
-use wasmtime_wasi::WasiCtxBuilder;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let engine = Engine::default();
@@ -109,7 +109,7 @@ impl WasmCase {
             .stderr(Box::new(WritePipe::new_in_memory()))
             .args(&self.wasi_args)?
             .build();
-        wasmtime_wasi::add_to_linker(&mut linker, |s| s).unwrap();
+        wasi_common::sync::add_to_linker(&mut linker, |s| s).unwrap();
         let store = Store::new(engine, wasi);
         let module = Module::new(engine, &self.wasm)?;
         Ok((linker, module, store))
