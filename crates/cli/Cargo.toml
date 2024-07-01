@@ -9,7 +9,7 @@ name = "ruvy"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4.5.4", features = ["derive"] }
+clap = { version = "4.5.8", features = ["derive"] }
 wizer = "6.0.0"
 anyhow = { workspace = true }
 wasi-common = "19"
