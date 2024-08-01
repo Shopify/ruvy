@@ -389,13 +389,13 @@ end = "2024-09-21"
 
 [[trusted.tokio]]
 criteria = "safe-to-deploy"
-user-id = 6741
+user-id = 6741 # Alice Ryhl (Darksonn)
 start = "2020-12-25"
 end = "2025-01-05"
 
 [[trusted.tokio]]
 criteria = "safe-to-deploy"
-user-id = 10 # Carl Lerche (carllerche)
+user-id = 10
 start = "2019-03-02"
 end = "2025-06-03"
 
