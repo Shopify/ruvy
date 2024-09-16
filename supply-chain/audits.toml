@@ -129,6 +129,12 @@ user-id = 6743 # Ed Page (epage)
 start = "2022-04-15"
 end = "2024-10-03"
 
+[[trusted.cranelift-bitset]]
+criteria = "safe-to-deploy"
+user-id = 73222 # wasmtime-publish
+start = "2024-07-22"
+end = "2025-09-16"
+
 [[trusted.equivalent]]
 criteria = "safe-to-deploy"
 user-id = 539 # Josh Stone (cuviper)
@@ -242,6 +248,12 @@ criteria = "safe-to-deploy"
 user-id = 51017 # Yuki Okushi (JohnTitor)
 start = "2020-03-17"
 end = "2025-05-01"
+
+[[trusted.libm]]
+criteria = "safe-to-deploy"
+user-id = 2915 # Amanieu d'Antras (Amanieu)
+start = "2022-02-06"
+end = "2025-09-16"
 
 [[trusted.linux-raw-sys]]
 criteria = "safe-to-deploy"
