@@ -73,7 +73,7 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
         .wasm_bulk_memory(true)
         .make_linker(Some(Rc::new(|engine| {
             let mut linker = Linker::new(engine);
-            wasi_common::sync::add_to_linker(&mut linker, |_ctx: &mut Option<WasiCtx>| {
+            wasi_common::sync::add_to_linker(&mut linker, |_ctx| {
                 unsafe { WASI.get_mut() }.unwrap()
             })?;
             Ok(linker)
