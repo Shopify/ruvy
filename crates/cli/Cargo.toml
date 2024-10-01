@@ -12,7 +12,7 @@ path = "src/main.rs"
 clap = { version = "4.5.16", features = ["derive"] }
 wizer = "7.0.0"
 anyhow = { workspace = true }
-wasi-common = "23"
+wasi-common = "25"
 wasmtime = "23"
 wasmtime-wasi = "23"
 
