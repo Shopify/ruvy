@@ -14,7 +14,7 @@ wizer = "7.0.0"
 anyhow = { workspace = true }
 wasi-common = "23"
 wasmtime = "23"
-wasmtime-wasi = "23"
+wasmtime-wasi = "25"
 
 [dev-dependencies]
 criterion = "0.5.1"
