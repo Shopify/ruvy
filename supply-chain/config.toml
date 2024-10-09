@@ -386,6 +386,22 @@ criteria = "safe-to-deploy"
 version = "0.11.0+wasi-snapshot-preview1"
 criteria = "safe-to-deploy"
 
+[[exemptions.wasmtime-component-macro]]
+version = "23.0.3"
+criteria = "safe-to-deploy"
+
+[[exemptions.wasmtime-environ]]
+version = "23.0.3"
+criteria = "safe-to-deploy"
+
+[[exemptions.wasmtime-fiber]]
+version = "23.0.3"
+criteria = "safe-to-deploy"
+
+[[exemptions.wasmtime-jit-debug]]
+version = "23.0.3"
+criteria = "safe-to-deploy"
+
 [[exemptions.web-sys]]
 version = "0.3.64"
 criteria = "safe-to-run"
