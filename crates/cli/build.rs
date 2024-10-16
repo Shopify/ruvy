@@ -11,7 +11,7 @@ fn main() -> Result<()> {
     } else {
         println!("cargo:rerun-if-changed=build.rs");
         let engine_path = Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("../../target/wasm32-wasi/release/core.wasm");
+            .join("../../target/wasm32-wasip1/release/core.wasm");
         println!("cargo:rerun-if-changed={}", engine_path.to_str().unwrap());
         fs::copy(&engine_path, &destination)?;
     }

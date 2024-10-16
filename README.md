@@ -8,7 +8,7 @@ Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed int
 
 - [rustup](https://rustup.rs/)
 - Latest Rust stable version
-- wasm32-wasi, can be installed via `rustup target add wasm32-wasi`
+- wasm32-wasip1, can be installed via `rustup target add wasm32-wasip1`
 - cmake, depending on your operating system and architecture, it might not be
   installed by default. On Mac it can be installed with `homebrew` via `brew
 install cmake`
@@ -17,9 +17,7 @@ install cmake`
 
 ## Development
 
-- wasmtime-cli, can be installed via `cargo install wasmtime-cli` (required for
-  `cargo-wasi`)
-- cargo-wasi, can be installed via `cargo install cargo-wasi`
+- wasmtime-cli, can be installed via `cargo install wasmtime-cli`
 
 ### Using a different WASI SDK
 

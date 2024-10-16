@@ -42,7 +42,7 @@ fn main() -> Result<()> {
         .cargo_metadata(true)
         .include(&include_dir)
         .include(&include_config_dir)
-        .target("wasm32-wasi")
+        .target("wasm32-wasip1")
         .compile("ruvy");
 
     let bindings = bindgen::Builder::default()
@@ -50,7 +50,7 @@ fn main() -> Result<()> {
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .clang_args(&[
             "-fvisibility=default",
-            "--target=wasm32-wasi",
+            "--target=wasm32-wasip1",
             &sysroot,
             &format!("-I{}", include_dir.display()),
             &format!("-I{}", include_config_dir.display()),
