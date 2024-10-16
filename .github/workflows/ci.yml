@@ -22,9 +22,6 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Install cargo-wasi
-        run: cargo install --force cargo-wasi
-
       - name: Install Wasmtime
         env:
           WASMTIME_VERSION: 12.0.2
@@ -33,18 +30,18 @@ jobs:
           mkdir /tmp/wasmtime
           tar xvf /tmp/wasmtime.tar.xz --strip-components=1 -C /tmp/wasmtime
           echo "/tmp/wasmtime" >> $GITHUB_PATH
-      
+
       - name: Compile core
-        run: cargo build --package=core --release --target=wasm32-wasi
-      
+        run: cargo build --package=core --target=wasm32-wasip1 --release
+
       - name: Test core
-        run: cargo wasi test --package=core --release -- --nocapture
-      
+        run: cargo test --package=core --target=wasm32-wasip1 --release
+
       - name: Test CLI
         run: cargo test --package=cli -- --nocapture
-      
+
       - name: Format checks
         run: |
           cargo fmt -- --check
-          cargo clippy --workspace --exclude=cli --exclude=ruby-wasm-assets --target=wasm32-wasi --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
+          cargo clippy --workspace --exclude=cli --exclude=ruby-wasm-assets --target=wasm32-wasip1 --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
           cargo clippy --package=cli --package=ruby-wasm-assets --all-targets -- -D clippy::correctness -D clippy::perf -D clippy::suspicious
