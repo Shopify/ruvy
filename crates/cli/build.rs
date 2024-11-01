@@ -13,7 +13,9 @@ fn main() -> Result<()> {
         let engine_path = Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../../target/wasm32-wasip1/release/core.wasm");
         println!("cargo:rerun-if-changed={}", engine_path.to_str().unwrap());
-        fs::copy(&engine_path, &destination)?;
+        wasm_opt::OptimizationOptions::new_opt_level_3() // Aggressively optimize for speed.
+            .shrink_level(wasm_opt::ShrinkLevel::Level0) // Don't optimize for size at the cost of performance.
+            .run(&engine_path, &destination)?;
     }
     Ok(())
 }
