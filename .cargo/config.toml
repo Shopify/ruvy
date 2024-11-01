@@ -1,2 +1,5 @@
+# Disable reference-types since Wizer (as of version 7.0.0) does not support
+# reference-types.
 [target.wasm32-wasip1]
 runner = "wasmtime"
+rustflags = ["-C", "target-feature=-reference-types"]
