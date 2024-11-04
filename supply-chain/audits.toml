@@ -49,7 +49,7 @@ end = "2024-12-01"
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-10-05"
-end = "2024-09-21"
+end = "2025-11-04"
 
 [[trusted.async-trait]]
 criteria = "safe-to-deploy"
@@ -115,7 +115,7 @@ end = "2024-12-01"
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2023-03-28"
-end = "2024-10-03"
+end = "2025-11-04"
 
 [[trusted.clap_derive]]
 criteria = "safe-to-deploy"
