@@ -99,6 +99,13 @@ user-id = 6825
 user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
+[[publisher.cap-primitives]]
+version = "3.2.0"
+when = "2024-07-08"
+user-id = 6825
+user-login = "sunfishcode"
+user-name = "Dan Gohman"
+
 [[publisher.cap-rand]]
 version = "3.0.0"
 when = "2024-01-11"
@@ -109,6 +116,13 @@ user-name = "Dan Gohman"
 [[publisher.cap-std]]
 version = "3.0.0"
 when = "2024-01-11"
+user-id = 6825
+user-login = "sunfishcode"
+user-name = "Dan Gohman"
+
+[[publisher.cap-std]]
+version = "3.2.0"
+when = "2024-07-08"
 user-id = 6825
 user-login = "sunfishcode"
 user-name = "Dan Gohman"
@@ -1343,6 +1357,16 @@ who = "Pat Hickey <phickey@fastly.com>"
 criteria = "safe-to-deploy"
 version = "0.1.6"
 notes = "Contains no unsafe code, no IO, no build.rs."
+
+[[audits.bytecode-alliance.audits.cap-primitives]]
+who = "Dan Gohman <dev@sunfishcode.online>"
+criteria = "safe-to-deploy"
+delta = "3.2.0 -> 3.3.0"
+
+[[audits.bytecode-alliance.audits.cap-std]]
+who = "Dan Gohman <dev@sunfishcode.online>"
+criteria = "safe-to-deploy"
+delta = "3.2.0 -> 3.3.0"
 
 [[audits.bytecode-alliance.audits.cfg-if]]
 who = "Alex Crichton <alex@alexcrichton.com>"
