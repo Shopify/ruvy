@@ -1,2 +1,8 @@
+# Cargo doesn't read directives in individual crates when invoking build
+# commands from the workspace root, hence adding it at the workspace root.
+# https://doc.rust-lang.org/cargo/reference/config.html.
+# Disable reference-types since Wizer (as of version 7.0.0) does not support
+# reference-types. Must be combined with "thin" or "fat" LTO.
 [target.wasm32-wasip1]
+rustflags = ["-C", "target-feature=-reference-types"]
 runner = "wasmtime"

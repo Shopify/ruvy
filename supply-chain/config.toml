@@ -386,18 +386,6 @@ criteria = "safe-to-deploy"
 version = "0.11.0+wasi-snapshot-preview1"
 criteria = "safe-to-deploy"
 
-[[exemptions.wasm-opt]]
-version = "0.116.1"
-criteria = "safe-to-deploy"
-
-[[exemptions.wasm-opt-cxx-sys]]
-version = "0.116.0"
-criteria = "safe-to-deploy"
-
-[[exemptions.wasm-opt-sys]]
-version = "0.116.0"
-criteria = "safe-to-deploy"
-
 [[exemptions.wasmtime-component-macro]]
 version = "23.0.3"
 criteria = "safe-to-deploy"

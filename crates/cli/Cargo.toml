@@ -22,7 +22,6 @@ ruby-wasm-assets = { path = "../ruby-wasm-assets" }
 
 [build-dependencies]
 anyhow = { workspace = true }
-wasm-opt = "0.116.1"
 
 [[bench]]
 name = "benchmark"

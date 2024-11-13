@@ -93,13 +93,6 @@ user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
 [[publisher.cap-primitives]]
-version = "3.0.0"
-when = "2024-01-11"
-user-id = 6825
-user-login = "sunfishcode"
-user-name = "Dan Gohman"
-
-[[publisher.cap-primitives]]
 version = "3.2.0"
 when = "2024-07-08"
 user-id = 6825
@@ -107,13 +100,6 @@ user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
 [[publisher.cap-rand]]
-version = "3.0.0"
-when = "2024-01-11"
-user-id = 6825
-user-login = "sunfishcode"
-user-name = "Dan Gohman"
-
-[[publisher.cap-std]]
 version = "3.0.0"
 when = "2024-01-11"
 user-id = 6825
@@ -248,34 +234,6 @@ version = "0.110.3"
 when = "2024-10-09"
 user-id = 73222
 user-login = "wasmtime-publish"
-
-[[publisher.cxx]]
-version = "1.0.129"
-when = "2024-10-15"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
-
-[[publisher.cxx-build]]
-version = "1.0.129"
-when = "2024-10-15"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
-
-[[publisher.cxxbridge-flags]]
-version = "1.0.129"
-when = "2024-10-15"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
-
-[[publisher.cxxbridge-macro]]
-version = "1.0.129"
-when = "2024-10-15"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
 
 [[publisher.encoding_rs]]
 version = "0.8.33"
@@ -501,13 +459,6 @@ user-id = 6825
 user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
-[[publisher.rustversion]]
-version = "1.0.18"
-when = "2024-10-14"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
-
 [[publisher.ryu]]
 version = "1.0.15"
 when = "2023-07-15"
@@ -521,13 +472,6 @@ when = "2023-07-17"
 user-id = 2915
 user-login = "Amanieu"
 user-name = "Amanieu d'Antras"
-
-[[publisher.scratch]]
-version = "1.0.7"
-when = "2023-07-15"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
 
 [[publisher.semver]]
 version = "1.0.21"
@@ -563,13 +507,6 @@ when = "2023-12-19"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
-
-[[publisher.syn]]
-version = "1.0.109"
-when = "2023-02-24"
-user-id = 3618
-user-login = "dtolnay"
-user-name = "David Tolnay"
 
 [[publisher.syn]]
 version = "2.0.77"
@@ -1380,12 +1317,6 @@ criteria = "safe-to-deploy"
 version = "0.2.3"
 notes = "No `unsafe` code in the crate and no usage of `std`"
 
-[[audits.bytecode-alliance.audits.codespan-reporting]]
-who = "Jamey Sharp <jsharp@fastly.com>"
-criteria = "safe-to-deploy"
-version = "0.11.1"
-notes = "This library uses `forbid(unsafe_code)` and has no filesystem or network I/O."
-
 [[audits.bytecode-alliance.audits.cpp_demangle]]
 who = "Alex Crichton <alex@alexcrichton.com>"
 criteria = "safe-to-deploy"
@@ -1733,18 +1664,6 @@ criteria = "safe-to-deploy"
 delta = "0.3.0 -> 0.4.0"
 notes = "No unsafe usage or ambient capabilities"
 
-[[audits.embark-studios.audits.strum]]
-who = "Johan Andersson <opensource@embark-studios.com>"
-criteria = "safe-to-deploy"
-version = "0.24.1"
-notes = "Tiny layer on top of the proc macro crate, found no unsafe or system usage"
-
-[[audits.embark-studios.audits.strum_macros]]
-who = "Johan Andersson <opensource@embark-studios.com>"
-criteria = "safe-to-deploy"
-version = "0.24.3"
-notes = "Proc macro. No unsafe or added ambient capabilities"
-
 [[audits.embark-studios.audits.utf8parse]]
 who = "Johan Andersson <opensource@embark-studios.com>"
 criteria = "safe-to-deploy"
@@ -1777,16 +1696,6 @@ aggregated-from = "https://chromium.googlesource.com/chromiumos/third_party/rust
 who = "ChromeOS"
 criteria = "safe-to-run"
 version = "0.10.5"
-aggregated-from = "https://chromium.googlesource.com/chromiumos/third_party/rust_crates/+/main/cargo-vet/audits.toml?format=TEXT"
-
-[[audits.google.audits.link-cplusplus]]
-who = "George Burgess IV <gbiv@google.com>"
-criteria = "safe-to-deploy"
-version = "1.0.9"
-notes = """
-This crate exists simply to link with libcxx or libstdcxx. No assertions
-are made about the safety of either of those libraries. :)
-"""
 aggregated-from = "https://chromium.googlesource.com/chromiumos/third_party/rust_crates/+/main/cargo-vet/audits.toml?format=TEXT"
 
 [[audits.google.audits.num-traits]]
