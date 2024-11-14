@@ -10,3 +10,8 @@ resolver = "2"
 
 [workspace.dependencies]
 anyhow = "1.0"
+
+[profile.release]
+# Either "thin" or "fat" LTO is required to remove overlong call_indirect table
+# indexes which aren't compatible with Wizer.
+lto = true
