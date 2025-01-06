@@ -39,7 +39,7 @@ version = "0.21.4"
 criteria = "safe-to-deploy"
 
 [[exemptions.bindgen]]
-version = "0.70.1"
+version = "0.71.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.bitflags]]
@@ -59,7 +59,7 @@ version = "1.5.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.cc]]
-version = "1.2.2"
+version = "1.2.6"
 criteria = "safe-to-deploy"
 
 [[exemptions.ciborium]]
@@ -302,6 +302,10 @@ criteria = "safe-to-deploy"
 version = "0.1.23"
 criteria = "safe-to-deploy"
 
+[[exemptions.rustc-hash]]
+version = "2.1.0"
+criteria = "safe-to-deploy"
+
 [[exemptions.schannel]]
 version = "0.1.22"
 criteria = "safe-to-deploy"
@@ -320,10 +324,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.shellexpand]]
 version = "2.1.2"
-criteria = "safe-to-deploy"
-
-[[exemptions.shlex]]
-version = "1.3.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.slice-group-by]]
