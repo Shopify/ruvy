@@ -59,7 +59,7 @@ version = "1.5.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.cc]]
-version = "1.2.6"
+version = "1.2.11"
 criteria = "safe-to-deploy"
 
 [[exemptions.ciborium]]
@@ -196,6 +196,10 @@ criteria = "safe-to-deploy"
 
 [[exemptions.itertools]]
 version = "0.10.5"
+criteria = "safe-to-deploy"
+
+[[exemptions.libc]]
+version = "0.2.169"
 criteria = "safe-to-deploy"
 
 [[exemptions.libloading]]
