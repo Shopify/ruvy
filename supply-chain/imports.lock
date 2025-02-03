@@ -128,22 +128,22 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.23"
-when = "2024-12-05"
+version = "4.5.27"
+when = "2025-01-20"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.23"
-when = "2024-12-05"
+version = "4.5.27"
+when = "2025-01-20"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_derive]]
-version = "4.5.18"
-when = "2024-09-20"
+version = "4.5.24"
+when = "2025-01-07"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -368,13 +368,6 @@ user-id = 539
 user-login = "cuviper"
 user-name = "Josh Stone"
 
-[[publisher.libc]]
-version = "0.2.154"
-when = "2024-04-29"
-user-id = 51017
-user-login = "JohnTitor"
-user-name = "Yuki Okushi"
-
 [[publisher.libm]]
 version = "0.2.8"
 when = "2023-10-06"
@@ -551,8 +544,8 @@ user-login = "dtolnay"
 user-name = "David Tolnay"
 
 [[publisher.tokio]]
-version = "1.42.0"
-when = "2024-12-03"
+version = "1.43.0"
+when = "2025-01-08"
 user-id = 6741
 user-login = "Darksonn"
 user-name = "Alice Ryhl"
