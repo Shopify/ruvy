@@ -10,12 +10,12 @@ use std::{
 
 use anyhow::{bail, Result};
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use wasi_common::{
-    pipe::{ReadPipe, WritePipe},
-    sync::WasiCtxBuilder,
-    WasiCtx,
-};
 use wasmtime::{Engine, Linker, Module, Store};
+use wasmtime_wasi::{
+    pipe::{MemoryInputPipe, MemoryOutputPipe},
+    preview1::WasiP1Ctx,
+    WasiCtxBuilder,
+};
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let engine = Engine::default();
@@ -101,15 +101,18 @@ impl WasmCase {
         })
     }
 
-    fn setup_for_run(&self, engine: &Engine) -> Result<(Linker<WasiCtx>, Module, Store<WasiCtx>)> {
+    fn setup_for_run(
+        &self,
+        engine: &Engine,
+    ) -> Result<(Linker<WasiP1Ctx>, Module, Store<WasiP1Ctx>)> {
         let mut linker = Linker::new(engine);
         let wasi = WasiCtxBuilder::new()
-            .stdin(Box::new(ReadPipe::from(&self.input[..])))
-            .stdout(Box::new(WritePipe::new_in_memory()))
-            .stderr(Box::new(WritePipe::new_in_memory()))
-            .args(&self.wasi_args)?
-            .build();
-        wasi_common::sync::add_to_linker(&mut linker, |s| s).unwrap();
+            .stdin(MemoryInputPipe::new(self.input[..].to_vec()))
+            .stdout(MemoryOutputPipe::new(usize::MAX))
+            .stderr(MemoryOutputPipe::new(usize::MAX))
+            .args(&self.wasi_args)
+            .build_p1();
+        wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx| cx)?;
         let store = Store::new(engine, wasi);
         let module = Module::new(engine, &self.wasm)?;
         Ok((linker, module, store))

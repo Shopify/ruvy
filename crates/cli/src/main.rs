@@ -1,15 +1,13 @@
 use anyhow::Result;
 use clap::Parser;
 use std::{fs, path::PathBuf, process, rc::Rc, sync::OnceLock};
-use wasi_common::{
-    pipe::ReadPipe,
-    sync::{self, Dir, WasiCtxBuilder},
-    WasiCtx,
-};
 use wasmtime::Linker;
-use wizer::Wizer;
+use wasmtime_wasi::{
+    pipe::MemoryInputPipe, preview1::WasiP1Ctx, DirPerms, FilePerms, WasiCtxBuilder,
+};
+use wizer::{StoreData, Wizer};
 
-static mut WASI: OnceLock<WasiCtx> = OnceLock::new();
+static mut WASI: OnceLock<WasiP1Ctx> = OnceLock::new();
 
 #[derive(Debug, Parser)]
 #[clap(name = "ruvy_cli", about = "Compile ruby code into a Wasm module.")]
@@ -47,16 +45,18 @@ fn main() -> Result<()> {
 fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> {
     let mut wasi_builder = WasiCtxBuilder::new();
     wasi_builder
-        .stdin(Box::new(ReadPipe::from(ruby_code.as_bytes())))
+        .stdin(MemoryInputPipe::new(ruby_code.as_bytes().to_vec()))
         .inherit_stdout()
         .inherit_stderr();
 
     if let Some(preload_path) = preload_path {
         wasi_builder
-            .env("RUVY_PRELOAD_PATH", &preload_path.to_string_lossy())?
+            .env("RUVY_PRELOAD_PATH", &preload_path.to_string_lossy())
             .preopened_dir(
-                Dir::open_ambient_dir(&preload_path, sync::ambient_authority())?,
                 &preload_path,
+                preload_path.to_string_lossy(),
+                DirPerms::READ,
+                FilePerms::READ,
             )?;
     }
 
@@ -64,7 +64,7 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
     // So we move the WasiCtx into a mutable static OnceLock instead.
     // Setting the value in the OnceLock and getting the reference back from it should be safe given
     // we're never executing this code concurrently or more than once.
-    if unsafe { WASI.set(wasi_builder.build()) }.is_err() {
+    if unsafe { WASI.set(wasi_builder.build_p1()) }.is_err() {
         panic!("Failed to set WASI static variable");
     };
 
@@ -73,8 +73,11 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
         .wasm_bulk_memory(true)
         .make_linker(Some(Rc::new(|engine| {
             let mut linker = Linker::new(engine);
-            wasi_common::sync::add_to_linker(&mut linker, |_ctx| {
-                unsafe { WASI.get_mut() }.unwrap()
+            wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx: &mut StoreData| {
+                if cx.wasi_ctx.is_none() {
+                    cx.wasi_ctx = Some(unsafe { WASI.take() }.unwrap());
+                }
+                cx.wasi_ctx.as_mut().unwrap()
             })?;
             Ok(linker)
         })))?;
