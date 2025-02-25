@@ -1,12 +1,12 @@
-use std::{env, io::Cursor, path::Path, process::Command, str};
+use std::{env, path::Path, process::Command, str};
 
 use anyhow::{bail, Result};
-use wasi_common::{
-    pipe::{ReadPipe, WritePipe},
-    sync::WasiCtxBuilder,
-    WasiCtx,
-};
 use wasmtime::{Engine, Linker, Module, Store};
+use wasmtime_wasi::{
+    pipe::{MemoryInputPipe, MemoryOutputPipe},
+    preview1::WasiP1Ctx,
+    WasiCtxBuilder,
+};
 
 #[test]
 pub fn test_hello_world() -> Result<()> {
@@ -34,18 +34,18 @@ pub fn test_preludes() -> Result<()> {
 }
 
 struct Context {
-    wasi: WasiCtx,
-    out_stream: WritePipe<Cursor<Vec<u8>>>,
+    wasi: WasiP1Ctx,
+    out_stream: MemoryOutputPipe,
 }
 
 impl Context {
     fn new(input: &[u8]) -> Context {
-        let out_stream = WritePipe::new_in_memory();
+        let out_stream = MemoryOutputPipe::new(usize::MAX);
         Context {
             wasi: WasiCtxBuilder::new()
-                .stdin(Box::new(ReadPipe::from(input)))
-                .stdout(Box::new(out_stream.clone()))
-                .build(),
+                .stdin(MemoryInputPipe::new(input.to_vec()))
+                .stdout(out_stream.clone())
+                .build_p1(),
             out_stream,
         }
     }
@@ -74,7 +74,7 @@ fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<
 fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
     let engine = Engine::default();
     let mut linker = Linker::new(&engine);
-    wasi_common::sync::add_to_linker(&mut linker, |s: &mut Context| &mut s.wasi)?;
+    wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx: &mut Context| &mut cx.wasi)?;
     let mut store = Store::new(&engine, Context::new(input.as_bytes()));
 
     let module = Module::from_file(&engine, wasm_path)?;
@@ -85,8 +85,8 @@ fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
 
     let context = store.into_data();
     drop(context.wasi);
-    let output = context.out_stream.try_into_inner().unwrap().into_inner();
-    let output = String::from_utf8(output)?;
+    let output = context.out_stream.contents();
+    let output = String::from_utf8(output.to_vec())?;
 
     Ok(output)
 }
