@@ -44,8 +44,8 @@ user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.anyhow]]
-version = "1.0.95"
-when = "2024-12-22"
+version = "1.0.96"
+when = "2025-02-20"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
@@ -128,22 +128,22 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.27"
-when = "2025-01-20"
+version = "4.5.31"
+when = "2025-02-24"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.27"
-when = "2025-01-20"
+version = "4.5.31"
+when = "2025-02-24"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_derive]]
-version = "4.5.24"
-when = "2025-01-07"
+version = "4.5.28"
+when = "2025-02-03"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -606,12 +606,6 @@ user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
-[[publisher.wasi-common]]
-version = "23.0.2"
-when = "2024-08-12"
-user-id = 73222
-user-login = "wasmtime-publish"
-
 [[publisher.wasm-bindgen]]
 version = "0.2.87"
 when = "2023-06-12"
@@ -1053,14 +1047,6 @@ user-id = 3726 # Chris Fallin (cfallin)
 start = "2021-12-03"
 end = "2025-07-30"
 notes = "We (Bytecode Alliance) are the primary authors of regalloc2 and co-develop it with Cranelift/Wasmtime, with the same code-review, testing/fuzzing, and security standards."
-
-[[audits.bytecode-alliance.wildcard-audits.wasi-common]]
-who = "Bobby Holley <bobbyholley@gmail.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2021-10-29"
-end = "2025-07-30"
-notes = "The Bytecode Alliance is the author of this crate."
 
 [[audits.bytecode-alliance.wildcard-audits.wasm-encoder]]
 who = "Alex Crichton <alex@alexcrichton.com>"
@@ -1841,7 +1827,7 @@ who = "Manish Goregaokar <manishsmail@gmail.com>"
 criteria = "safe-to-deploy"
 user-id = 1139 # Manish Goregaokar (Manishearth)
 start = "2019-11-06"
-end = "2024-05-03"
+end = "2026-02-01"
 notes = "All code written or reviewed by Manish"
 aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
@@ -1850,7 +1836,7 @@ who = "Manish Goregaokar <manishsmail@gmail.com>"
 criteria = "safe-to-deploy"
 user-id = 1139 # Manish Goregaokar (Manishearth)
 start = "2019-12-05"
-end = "2024-05-03"
+end = "2026-02-01"
 notes = "All code written or reviewed by Manish"
 aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
