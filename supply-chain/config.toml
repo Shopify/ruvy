@@ -26,8 +26,16 @@ url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 version = "0.19.0"
 criteria = "safe-to-deploy"
 
+[[exemptions.addr2line]]
+version = "0.24.2"
+criteria = "safe-to-deploy"
+
 [[exemptions.ahash]]
 version = "0.8.7"
+criteria = "safe-to-deploy"
+
+[[exemptions.allocator-api2]]
+version = "0.2.21"
 criteria = "safe-to-deploy"
 
 [[exemptions.backtrace]]
@@ -146,6 +154,10 @@ criteria = "safe-to-deploy"
 version = "4.0.0"
 criteria = "safe-to-deploy"
 
+[[exemptions.foldhash]]
+version = "0.1.4"
+criteria = "safe-to-deploy"
+
 [[exemptions.futures]]
 version = "0.3.30"
 criteria = "safe-to-deploy"
@@ -184,6 +196,10 @@ criteria = "safe-to-deploy"
 
 [[exemptions.gimli]]
 version = "0.27.3"
+criteria = "safe-to-deploy"
+
+[[exemptions.gimli]]
+version = "0.31.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.hermit-abi]]
@@ -235,7 +251,7 @@ version = "0.32.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.object]]
-version = "0.36.4"
+version = "0.36.7"
 criteria = "safe-to-deploy"
 
 [[exemptions.once_cell]]
@@ -330,10 +346,6 @@ criteria = "safe-to-deploy"
 version = "2.1.2"
 criteria = "safe-to-deploy"
 
-[[exemptions.slice-group-by]]
-version = "0.3.1"
-criteria = "safe-to-deploy"
-
 [[exemptions.smallvec]]
 version = "1.11.0"
 criteria = "safe-to-deploy"
@@ -378,6 +390,10 @@ criteria = "safe-to-deploy"
 version = "0.1.31"
 criteria = "safe-to-deploy"
 
+[[exemptions.trait-variant]]
+version = "0.1.2"
+criteria = "safe-to-deploy"
+
 [[exemptions.typenum]]
 version = "1.16.0"
 criteria = "safe-to-deploy"
@@ -388,22 +404,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.wasi]]
 version = "0.11.0+wasi-snapshot-preview1"
-criteria = "safe-to-deploy"
-
-[[exemptions.wasmtime-component-macro]]
-version = "23.0.3"
-criteria = "safe-to-deploy"
-
-[[exemptions.wasmtime-environ]]
-version = "23.0.3"
-criteria = "safe-to-deploy"
-
-[[exemptions.wasmtime-fiber]]
-version = "23.0.3"
-criteria = "safe-to-deploy"
-
-[[exemptions.wasmtime-jit-debug]]
-version = "23.0.3"
 criteria = "safe-to-deploy"
 
 [[exemptions.web-sys]]

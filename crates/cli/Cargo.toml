@@ -10,10 +10,10 @@ path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4.5.31", features = ["derive"] }
-wizer = "7.0.0"
+wizer = "8.0.0"
 anyhow = { workspace = true }
-wasmtime = "23"
-wasmtime-wasi = "23"
+wasmtime = "29"
+wasmtime-wasi = "29"
 
 [dev-dependencies]
 criterion = "0.5.1"
