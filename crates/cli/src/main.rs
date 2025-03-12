@@ -1,13 +1,18 @@
 use anyhow::Result;
 use clap::Parser;
-use std::{fs, path::PathBuf, process, rc::Rc, sync::OnceLock};
-use wasmtime::Linker;
-use wasmtime_wasi::{
-    pipe::MemoryInputPipe, preview1::WasiP1Ctx, DirPerms, FilePerms, WasiCtxBuilder,
+use std::{
+    fs,
+    path::{Path, PathBuf},
+    process,
+    rc::Rc,
+    sync::OnceLock,
 };
+use wasmtime::Linker;
+use wasmtime_wasi::{pipe::MemoryInputPipe, DirPerms, FilePerms, WasiCtxBuilder};
 use wizer::{StoreData, Wizer};
 
-static mut WASI: OnceLock<WasiP1Ctx> = OnceLock::new();
+static INPUT: OnceLock<MemoryInputPipe> = OnceLock::new();
+static PRELOAD_PATH: OnceLock<Option<PathBuf>> = OnceLock::new();
 
 #[derive(Debug, Parser)]
 #[clap(name = "ruvy_cli", about = "Compile ruby code into a Wasm module.")]
@@ -43,30 +48,24 @@ fn main() -> Result<()> {
 }
 
 fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> {
-    let mut wasi_builder = WasiCtxBuilder::new();
-    wasi_builder
-        .stdin(MemoryInputPipe::new(ruby_code.as_bytes().to_vec()))
-        .inherit_stdout()
-        .inherit_stderr();
-
-    if let Some(preload_path) = preload_path {
-        wasi_builder
-            .env("RUVY_PRELOAD_PATH", &preload_path.to_string_lossy())
-            .preopened_dir(
-                &preload_path,
-                preload_path.to_string_lossy(),
-                DirPerms::READ,
-                FilePerms::READ,
-            )?;
+    // We lose the ability to return an error when performing this operation
+    // inside `add_to_linker_sync` so we perform the same operation here so
+    // can return an error if it fails.
+    if let Some(preload_path) = &preload_path {
+        let mut wasi_builder = WasiCtxBuilder::new();
+        add_preload_path_to_wasi_ctx(&mut wasi_builder, preload_path)?;
     }
 
-    // We can't move the WasiCtx into `make_linker` since WasiCtx doesn't implement the `Copy` trait.
-    // So we move the WasiCtx into a mutable static OnceLock instead.
-    // Setting the value in the OnceLock and getting the reference back from it should be safe given
-    // we're never executing this code concurrently or more than once.
-    if unsafe { WASI.set(wasi_builder.build_p1()) }.is_err() {
-        panic!("Failed to set WASI static variable");
-    };
+    // We can't move the ruby code or preload path into the `make_linker`
+    // since they don't implement copy so put them in a static `OnceLock`
+    // instead. This assumes this code is only only called once during the
+    // process's lifetime.
+    INPUT
+        .set(MemoryInputPipe::new(ruby_code.as_bytes().to_vec()))
+        .expect("Input OnceLock should not be set at this point");
+    PRELOAD_PATH
+        .set(preload_path)
+        .expect("Preload path OnceLock should not be set at this point");
 
     let mut wizer = Wizer::new();
     wizer
@@ -75,7 +74,17 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
             let mut linker = Linker::new(engine);
             wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx: &mut StoreData| {
                 if cx.wasi_ctx.is_none() {
-                    cx.wasi_ctx = Some(unsafe { WASI.take() }.unwrap());
+                    let mut wasi_builder = WasiCtxBuilder::new();
+                    wasi_builder
+                        .stdin(INPUT.get().unwrap().clone())
+                        .inherit_stdout()
+                        .inherit_stderr();
+                    if let Some(preload_path) = PRELOAD_PATH.get().unwrap() {
+                        wasi_builder.env("RUVY_PRELOAD_PATH", preload_path.to_string_lossy());
+                        add_preload_path_to_wasi_ctx(&mut wasi_builder, preload_path)
+                            .expect("Should have failed earlier when tested earlier");
+                    }
+                    cx.wasi_ctx = Some(wasi_builder.build_p1());
                 }
                 cx.wasi_ctx.as_mut().unwrap()
             })?;
@@ -83,4 +92,18 @@ fn setup_wizer(ruby_code: &str, preload_path: Option<PathBuf>) -> Result<Wizer> 
         })))?;
 
     Ok(wizer)
+}
+
+fn add_preload_path_to_wasi_ctx(
+    wasi_builder: &mut WasiCtxBuilder,
+    preload_path: &Path,
+) -> Result<()> {
+    wasi_builder
+        .preopened_dir(
+            preload_path,
+            preload_path.to_string_lossy(),
+            DirPerms::READ,
+            FilePerms::READ,
+        )
+        .map(|_| ())
 }
