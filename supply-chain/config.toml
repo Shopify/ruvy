@@ -222,6 +222,10 @@ criteria = "safe-to-deploy"
 version = "0.7.4"
 criteria = "safe-to-deploy"
 
+[[exemptions.litemap]]
+version = "0.7.5"
+criteria = "safe-to-deploy"
+
 [[exemptions.log]]
 version = "0.4.21"
 criteria = "safe-to-deploy"
@@ -346,10 +350,6 @@ criteria = "safe-to-deploy"
 version = "2.1.2"
 criteria = "safe-to-deploy"
 
-[[exemptions.smallvec]]
-version = "1.11.0"
-criteria = "safe-to-deploy"
-
 [[exemptions.socket2]]
 version = "0.5.5"
 criteria = "safe-to-deploy"
@@ -364,10 +364,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.tempfile]]
 version = "3.8.0"
-criteria = "safe-to-deploy"
-
-[[exemptions.tinyvec_macros]]
-version = "0.1.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.tower]]
@@ -428,6 +424,14 @@ criteria = "safe-to-deploy"
 
 [[exemptions.witx]]
 version = "0.9.1"
+criteria = "safe-to-deploy"
+
+[[exemptions.zerofrom]]
+version = "0.1.6"
+criteria = "safe-to-deploy"
+
+[[exemptions.zerofrom-derive]]
+version = "0.1.6"
 criteria = "safe-to-deploy"
 
 [[exemptions.zstd]]
