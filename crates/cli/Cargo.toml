@@ -13,7 +13,7 @@ clap = { version = "4.5.31", features = ["derive"] }
 wizer = "8.0.0"
 anyhow = { workspace = true }
 wasmtime = "29"
-wasmtime-wasi = "29"
+wasmtime-wasi = "31"
 
 [dev-dependencies]
 criterion = "0.5.1"
