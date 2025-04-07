@@ -62,12 +62,8 @@ criteria = "safe-to-deploy"
 version = "0.10.4"
 criteria = "safe-to-deploy"
 
-[[exemptions.bytes]]
-version = "1.5.0"
-criteria = "safe-to-deploy"
-
 [[exemptions.cc]]
-version = "1.2.16"
+version = "1.2.17"
 criteria = "safe-to-deploy"
 
 [[exemptions.ciborium]]
@@ -214,10 +210,6 @@ criteria = "safe-to-deploy"
 version = "0.10.5"
 criteria = "safe-to-deploy"
 
-[[exemptions.libc]]
-version = "0.2.169"
-criteria = "safe-to-deploy"
-
 [[exemptions.libloading]]
 version = "0.7.4"
 criteria = "safe-to-deploy"
@@ -272,14 +264,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.openssl-sys]]
 version = "0.9.107"
-criteria = "safe-to-deploy"
-
-[[exemptions.pin-project]]
-version = "1.1.3"
-criteria = "safe-to-deploy"
-
-[[exemptions.pin-project-internal]]
-version = "1.1.3"
 criteria = "safe-to-deploy"
 
 [[exemptions.pkg-config]]
@@ -351,7 +335,7 @@ version = "2.1.2"
 criteria = "safe-to-deploy"
 
 [[exemptions.socket2]]
-version = "0.5.5"
+version = "0.5.9"
 criteria = "safe-to-deploy"
 
 [[exemptions.stable_deref_trait]]
@@ -364,14 +348,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.tempfile]]
 version = "3.8.0"
-criteria = "safe-to-deploy"
-
-[[exemptions.tower]]
-version = "0.4.13"
-criteria = "safe-to-deploy"
-
-[[exemptions.tower-layer]]
-version = "0.3.2"
 criteria = "safe-to-deploy"
 
 [[exemptions.tower-service]]
