@@ -267,11 +267,11 @@ version = "11.1.3"
 criteria = "safe-to-run"
 
 [[exemptions.openssl]]
-version = "0.10.70"
+version = "0.10.72"
 criteria = "safe-to-deploy"
 
 [[exemptions.openssl-sys]]
-version = "0.9.105"
+version = "0.9.107"
 criteria = "safe-to-deploy"
 
 [[exemptions.pin-project]]
