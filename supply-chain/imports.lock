@@ -571,6 +571,13 @@ user-id = 6741
 user-login = "Darksonn"
 user-name = "Alice Ryhl"
 
+[[publisher.tokio]]
+version = "1.44.2"
+when = "2025-04-05"
+user-id = 10
+user-login = "carllerche"
+user-name = "Carl Lerche"
+
 [[publisher.toml]]
 version = "0.8.12"
 when = "2024-03-18"
