@@ -44,8 +44,8 @@ user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.anyhow]]
-version = "1.0.97"
-when = "2025-03-03"
+version = "1.0.98"
+when = "2025-04-14"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
@@ -128,15 +128,15 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.34"
-when = "2025-03-27"
+version = "4.5.37"
+when = "2025-04-18"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.34"
-when = "2025-03-27"
+version = "4.5.37"
+when = "2025-04-18"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -563,13 +563,6 @@ when = "2023-09-02"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
-
-[[publisher.tokio]]
-version = "1.44.1"
-when = "2025-03-13"
-user-id = 6741
-user-login = "Darksonn"
-user-name = "Alice Ryhl"
 
 [[publisher.tokio]]
 version = "1.44.2"

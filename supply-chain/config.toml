@@ -63,7 +63,7 @@ version = "0.10.4"
 criteria = "safe-to-deploy"
 
 [[exemptions.cc]]
-version = "1.2.17"
+version = "1.2.20"
 criteria = "safe-to-deploy"
 
 [[exemptions.ciborium]]
