@@ -30,10 +30,6 @@ criteria = "safe-to-deploy"
 version = "0.24.2"
 criteria = "safe-to-deploy"
 
-[[exemptions.ahash]]
-version = "0.8.7"
-criteria = "safe-to-deploy"
-
 [[exemptions.allocator-api2]]
 version = "0.2.21"
 criteria = "safe-to-deploy"
@@ -219,7 +215,7 @@ version = "0.7.5"
 criteria = "safe-to-deploy"
 
 [[exemptions.log]]
-version = "0.4.21"
+version = "0.4.27"
 criteria = "safe-to-deploy"
 
 [[exemptions.maybe-owned]]
