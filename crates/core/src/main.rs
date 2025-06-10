@@ -18,7 +18,10 @@ pub extern "C" fn load_user_code() {
     runtime::init_ruby();
 
     if let Ok(preload_path) = env::var("RUVY_PRELOAD_PATH") {
-        runtime::preload_files(preload_path);
+        if let Err(e) = runtime::preload_files(preload_path) {
+            eprintln!("Failed to preload files: {}", e);
+            std::process::exit(1);
+        }
     }
 
     let contents = io::read_to_string(io::stdin()).unwrap();
