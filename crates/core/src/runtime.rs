@@ -1,8 +1,39 @@
 use std::fs;
 
 use anyhow::{anyhow, bail, Result};
-use ruvy_wasm_sys::{rb_eval_string_protect, ruby_init, ruby_init_loadpath, VALUE};
-use std::{ffi::CString, os::raw::c_char};
+use ruvy_wasm_sys::{
+    rb_errinfo, rb_eval_string_protect, rb_obj_as_string, rb_set_errinfo, rb_string_value_ptr,
+    ruby_init, ruby_init_loadpath, RUBY_Qnil, VALUE,
+};
+use std::{
+    ffi::{CStr, CString},
+    io::{self, Write},
+    os::raw::c_char,
+};
+
+fn extract_ruby_error() -> String {
+    unsafe {
+        let error_obj = rb_errinfo();
+        if error_obj == RUBY_Qnil {
+            return "Unknown Ruby error".to_string();
+        }
+
+        let error_string = rb_obj_as_string(error_obj);
+        let mut error_val = error_string;
+        let error_ptr = rb_string_value_ptr(&mut error_val);
+        if error_ptr.is_null() {
+            return "Failed to extract error message".to_string();
+        }
+
+        let error_cstr = CStr::from_ptr(error_ptr);
+        let error_msg = error_cstr.to_string_lossy().into_owned();
+
+        // Clear the error info to prevent it from affecting subsequent operations
+        rb_set_errinfo(RUBY_Qnil);
+
+        error_msg
+    }
+}
 
 pub fn init_ruby() {
     unsafe {
@@ -20,20 +51,43 @@ pub fn eval(code: &str) -> Result<VALUE> {
     if state == 0 {
         Ok(result)
     } else {
-        Err(anyhow!("Error evaluating Ruby code. State: {}", state))
+        let error_msg = extract_ruby_error();
+        let _ = writeln!(io::stderr(), "Ruby Error: {}", error_msg);
+        Err(anyhow!(
+            "Ruby evaluation failed with state {}: {}",
+            state,
+            error_msg
+        ))
     }
 }
 
-pub fn preload_files(path: String) {
-    let entries = fs::read_dir(path).unwrap();
+pub fn preload_files(path: String) -> Result<()> {
+    let entries = fs::read_dir(&path)
+        .map_err(|e| anyhow!("Failed to read preload directory '{}': {}", path, e))?;
 
-    entries
-        .map(|r| r.map(|d| d.path()))
-        .filter(|r| r.is_ok() && r.as_deref().unwrap().is_file())
-        .for_each(|e| {
-            let prelude_contents = fs::read_to_string(e.unwrap()).unwrap();
-            eval(&prelude_contents).unwrap();
-        });
+    for entry in entries {
+        let entry = entry.map_err(|e| anyhow!("Failed to read directory entry: {}", e))?;
+        let path = entry.path();
+
+        if path.is_file() {
+            let prelude_contents = fs::read_to_string(&path)
+                .map_err(|e| anyhow!("Failed to read file '{}': {}", path.display(), e))?;
+
+            if let Err(e) = eval(&prelude_contents) {
+                let _ = writeln!(
+                    io::stderr(),
+                    "Error in preload file '{}': {}",
+                    path.display(),
+                    e
+                );
+                return Err(e.context(format!(
+                    "Failed to evaluate preload file: {}",
+                    path.display()
+                )));
+            }
+        }
+    }
+    Ok(())
 }
 
 pub fn cleanup_ruby() -> Result<()> {
