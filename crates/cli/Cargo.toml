@@ -18,6 +18,7 @@ wasmtime-wasi = "31"
 [dev-dependencies]
 criterion = "0.6.0"
 ruby-wasm-assets = { path = "../ruby-wasm-assets" }
+tempfile = "3.0"
 
 [build-dependencies]
 anyhow = { workspace = true }

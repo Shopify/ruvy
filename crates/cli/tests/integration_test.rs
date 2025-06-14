@@ -90,3 +90,59 @@ fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
 
     Ok(output)
 }
+
+#[test]
+pub fn test_preload_error_handling() -> Result<()> {
+    use std::fs;
+    use std::io::Write;
+    use std::process::Command;
+    use tempfile::TempDir;
+
+    let temp_dir = TempDir::new()?;
+    let invalid_file = temp_dir.path().join("invalid.rb");
+    let mut file = fs::File::create(&invalid_file)?;
+    writeln!(file, "raise 'intentional preload error'")?;
+
+    let wasm_path = wasm_path("preload_error");
+
+    let output = Command::new(env!("CARGO_BIN_EXE_ruvy"))
+        .args([
+            format!("-o{}", wasm_path),
+            format!("--preload={}", temp_dir.path().to_string_lossy()),
+            "../../ruby_examples/hello_world.rb".to_string(),
+        ])
+        .output()?;
+
+    let stderr_str = String::from_utf8_lossy(&output.stderr);
+
+    // Check that we get a wizer initialization error or process failure
+    assert!(
+        !output.status.success() || stderr_str.contains("wizer.initialize"),
+        "Expected ruvy to fail with preload error. Status: {:?}, Stderr: {}",
+        output.status,
+        stderr_str
+    );
+    Ok(())
+}
+
+#[test]
+pub fn test_ruby_runtime_error_in_wasm_execution() -> Result<()> {
+    use std::io::Write;
+    use tempfile::NamedTempFile;
+
+    let mut temp_file = NamedTempFile::new()?;
+    writeln!(temp_file, "raise 'This is a runtime error'")?;
+    let temp_path = temp_file.path();
+
+    let wasm_path = wasm_path("runtime_error");
+    // The compilation should succeed - the error happens at runtime
+    run_ruvy(&wasm_path, &temp_path.to_string_lossy(), None)?;
+
+    // The error should be caught when we try to run the WASM
+    let result = run_wasm(&wasm_path, "");
+    assert!(
+        result.is_err(),
+        "Expected WASM execution to fail with Ruby runtime error"
+    );
+    Ok(())
+}
