@@ -2,8 +2,8 @@ use std::fs;
 
 use anyhow::{anyhow, bail, Result};
 use ruvy_wasm_sys::{
-    rb_errinfo, rb_eval_string_protect, rb_obj_as_string, rb_set_errinfo, rb_string_value_ptr,
-    ruby_init, ruby_init_loadpath, RUBY_Qnil, VALUE,
+    rb_errinfo, rb_eval_string_protect, rb_obj_as_string, rb_string_value_ptr, ruby_init,
+    ruby_init_loadpath, RUBY_Qnil, VALUE,
 };
 use std::{
     ffi::{CStr, CString},
@@ -27,9 +27,6 @@ fn extract_ruby_error() -> Option<String> {
 
         let error_cstr = CStr::from_ptr(error_ptr);
         let error_msg = error_cstr.to_string_lossy().into_owned();
-
-        // Clear the error info to prevent it from affecting subsequent operations
-        rb_set_errinfo(RUBY_Qnil);
 
         Some(error_msg)
     }
