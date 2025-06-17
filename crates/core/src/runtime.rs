@@ -70,14 +70,8 @@ pub fn preload_files(path: String) -> Result<()> {
                 .map_err(|e| anyhow!("Failed to read file '{}': {}", path.display(), e))?;
 
             if let Err(e) = eval(&prelude_contents) {
-                let _ = writeln!(
-                    io::stderr(),
-                    "Error in preload file '{}': {}",
-                    path.display(),
-                    e
-                );
                 return Err(e.context(format!(
-                    "Failed to evaluate preload file: {}",
+                    "Failed to evaluate preload file '{}'",
                     path.display()
                 )));
             }
