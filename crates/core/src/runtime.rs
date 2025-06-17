@@ -11,18 +11,18 @@ use std::{
     os::raw::c_char,
 };
 
-fn extract_ruby_error() -> String {
+fn extract_ruby_error() -> Option<String> {
     unsafe {
         let error_obj = rb_errinfo();
         if error_obj == RUBY_Qnil {
-            return "Unknown Ruby error".to_string();
+            return None;
         }
 
         let error_string = rb_obj_as_string(error_obj);
         let mut error_val = error_string;
         let error_ptr = rb_string_value_ptr(&mut error_val);
         if error_ptr.is_null() {
-            return "Failed to extract error message".to_string();
+            return None;
         }
 
         let error_cstr = CStr::from_ptr(error_ptr);
@@ -31,7 +31,7 @@ fn extract_ruby_error() -> String {
         // Clear the error info to prevent it from affecting subsequent operations
         rb_set_errinfo(RUBY_Qnil);
 
-        error_msg
+        Some(error_msg)
     }
 }
 
