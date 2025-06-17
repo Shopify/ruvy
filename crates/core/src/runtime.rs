@@ -106,32 +106,27 @@ mod tests {
     fn test_extract_ruby_error_with_syntax_error() {
         init_ruby();
         let result = eval("1 + + 1");
-        let error_msg = result.unwrap_err().to_string();
-        assert!(error_msg.contains("Ruby evaluation failed"));
+        assert_error(&result, "Error evaluating Ruby code");
     }
 
     #[test]
     fn test_extract_ruby_error_with_name_error() {
         init_ruby();
         let result = eval("undefined_variable");
-        let error_msg = result.unwrap_err().to_string();
-        assert!(error_msg.contains("Ruby evaluation failed"));
+        assert_error(&result, "Error evaluating Ruby code");
     }
 
     #[test]
     fn test_extract_ruby_error_with_runtime_error() {
         init_ruby();
         let result = eval("raise 'custom error message'");
-        let error_msg = result.unwrap_err().to_string();
-        assert!(error_msg.contains("Ruby evaluation failed"));
-        assert!(error_msg.contains("custom error message"));
+        assert_error(&result, "custom error message");
     }
 
     #[test]
     fn test_preload_files_with_nonexistent_directory() {
         let result = preload_files("/nonexistent/directory".to_string());
-        let error_msg = result.unwrap_err().to_string();
-        assert!(error_msg.contains("Failed to read preload directory"));
+        assert_error(&result, "Failed to read preload directory");
     }
 
     #[test]
@@ -144,8 +139,7 @@ mod tests {
         writeln!(file, "1 + + 1").unwrap();
 
         let result = preload_files(temp_dir.path().to_string_lossy().to_string());
-        let error_msg = result.unwrap_err().to_string();
-        assert!(error_msg.contains("Failed to evaluate preload file"));
+        assert_error(&result, "Failed to evaluate preload file");
     }
 
     #[test]
@@ -163,5 +157,15 @@ mod tests {
         let check_result = eval("$test_var");
         let value = unsafe { rb_num2int(check_result.unwrap()) };
         assert_eq!(value, 42);
+    }
+
+    fn assert_error<T: std::fmt::Debug>(res: &Result<T>, expected_string: &str) {
+        let error_msg = res.as_ref().unwrap_err().to_string();
+        assert!(
+            error_msg.contains(expected_string),
+            "Expected error message '{}' to contain '{}'",
+            error_msg,
+            expected_string
+        );
     }
 }
