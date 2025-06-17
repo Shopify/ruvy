@@ -62,9 +62,7 @@ pub fn preload_files(path: String) -> Result<()> {
         .map_err(|e| anyhow!("Failed to read preload directory '{}': {}", path, e))?;
 
     for entry in entries {
-        let entry = entry.map_err(|e| anyhow!("Failed to read directory entry: {}", e))?;
-        let path = entry.path();
-
+        let path = entry?.path();
         if path.is_file() {
             let prelude_contents = fs::read_to_string(&path)
                 .map_err(|e| anyhow!("Failed to read file '{}': {}", path.display(), e))?;
