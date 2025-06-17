@@ -1,4 +1,9 @@
-use std::{env, path::Path, process::Command, str};
+use std::{
+    env,
+    path::Path,
+    process::{Command, Output},
+    str,
+};
 
 use anyhow::{bail, Result};
 use std::fs;
@@ -59,16 +64,21 @@ fn wasm_path(test_name: &str) -> String {
     format!("{}/{test_name}.wasm", env!("CARGO_TARGET_TMPDIR"))
 }
 
-fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<()> {
+fn exec_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<Output> {
     let mut args = vec![format!("-o{wasm_path}")];
     if let Some(preload) = preload {
         args.push(format!("--preload={preload}"));
     }
     args.push(input_path.to_string());
 
-    let status = Command::new(env!("CARGO_BIN_EXE_ruvy"))
+    Ok(Command::new(env!("CARGO_BIN_EXE_ruvy"))
         .args(args)
-        .status()?;
+        .output()?)
+}
+
+fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<()> {
+    let output = exec_ruvy(wasm_path, input_path, preload)?;
+    let status = output.status;
     if !status.success() {
         bail!("Failed to execute ruvy");
     }
@@ -103,15 +113,10 @@ pub fn test_preload_error_handling() -> Result<()> {
     writeln!(file, "raise 'intentional preload error'")?;
 
     let wasm_path = wasm_path("preload_error");
+    let input_path = "../../ruby_examples/hello_world.rb";
+    let preload = temp_dir.path().to_string_lossy();
 
-    let output = Command::new(env!("CARGO_BIN_EXE_ruvy"))
-        .args([
-            format!("-o{}", wasm_path),
-            format!("--preload={}", temp_dir.path().to_string_lossy()),
-            "../../ruby_examples/hello_world.rb".to_string(),
-        ])
-        .output()?;
-
+    let output = exec_ruvy(&wasm_path, input_path, Some(&preload))?;
     let stderr_str = String::from_utf8_lossy(&output.stderr);
 
     assert!(
