@@ -49,11 +49,10 @@ pub fn eval(code: &str) -> Result<VALUE> {
         Ok(result)
     } else {
         let error_msg = extract_ruby_error();
-        let _ = writeln!(io::stderr(), "Ruby Error: {}", error_msg);
         Err(anyhow!(
-            "Ruby evaluation failed with state {}: {}",
+            "Error evaluating Ruby code. State: {}, message: {}",
             state,
-            error_msg
+            error_msg.as_deref().unwrap_or("None")
         ))
     }
 }

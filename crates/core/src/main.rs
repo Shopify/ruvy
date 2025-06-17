@@ -7,7 +7,9 @@ static USER_CODE: OnceLock<String> = OnceLock::new();
 
 fn main() {
     let code = USER_CODE.get().unwrap();
-    runtime::eval(code).unwrap();
+    if let Err(e) = runtime::eval(code) {
+        eprintln!("{}", e);
+    }
     cleanup_ruby().unwrap();
 }
 
