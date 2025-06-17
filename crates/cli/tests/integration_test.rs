@@ -114,9 +114,8 @@ pub fn test_preload_error_handling() -> Result<()> {
 
     let stderr_str = String::from_utf8_lossy(&output.stderr);
 
-    // Check that we get a wizer initialization error or process failure
     assert!(
-        !output.status.success() || stderr_str.contains("wizer.initialize"),
+        !output.status.success(),
         "Expected ruvy to fail with preload error. Status: {:?}, Stderr: {}",
         output.status,
         stderr_str
