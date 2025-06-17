@@ -1,6 +1,10 @@
 use std::{env, path::Path, process::Command, str};
 
 use anyhow::{bail, Result};
+use std::fs;
+use std::io::Write;
+use tempfile::NamedTempFile;
+use tempfile::TempDir;
 use wasmtime::{Engine, Linker, Module, Store};
 use wasmtime_wasi::{
     pipe::{MemoryInputPipe, MemoryOutputPipe},
@@ -93,11 +97,6 @@ fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
 
 #[test]
 pub fn test_preload_error_handling() -> Result<()> {
-    use std::fs;
-    use std::io::Write;
-    use std::process::Command;
-    use tempfile::TempDir;
-
     let temp_dir = TempDir::new()?;
     let invalid_file = temp_dir.path().join("invalid.rb");
     let mut file = fs::File::create(&invalid_file)?;
@@ -127,9 +126,6 @@ pub fn test_preload_error_handling() -> Result<()> {
 
 #[test]
 pub fn test_ruby_runtime_error_in_wasm_execution() -> Result<()> {
-    use std::io::Write;
-    use tempfile::NamedTempFile;
-
     let mut temp_file = NamedTempFile::new()?;
     writeln!(temp_file, "raise 'This is a runtime error'")?;
     let temp_path = temp_file.path();

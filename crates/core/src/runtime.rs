@@ -7,7 +7,6 @@ use ruvy_wasm_sys::{
 };
 use std::{
     ffi::{CStr, CString},
-    io::{self, Write},
     os::raw::c_char,
 };
 
@@ -92,6 +91,9 @@ pub fn cleanup_ruby() -> Result<()> {
 mod tests {
     use super::*;
     use ruvy_wasm_sys::rb_num2int;
+    use std::fs;
+    use std::io::Write;
+    use tempfile::TempDir;
 
     #[test]
     fn test_int() {
@@ -134,10 +136,6 @@ mod tests {
 
     #[test]
     fn test_preload_files_with_invalid_ruby_file() {
-        use std::fs;
-        use std::io::Write;
-        use tempfile::TempDir;
-
         init_ruby();
 
         let temp_dir = TempDir::new().unwrap();
@@ -152,10 +150,6 @@ mod tests {
 
     #[test]
     fn test_preload_files_with_valid_ruby_file() {
-        use std::fs;
-        use std::io::Write;
-        use tempfile::TempDir;
-
         init_ruby();
 
         let temp_dir = TempDir::new().unwrap();
