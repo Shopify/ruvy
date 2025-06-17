@@ -104,7 +104,6 @@ mod tests {
     fn test_extract_ruby_error_with_syntax_error() {
         init_ruby();
         let result = eval("1 + + 1");
-        assert!(result.is_err());
         let error_msg = result.unwrap_err().to_string();
         assert!(error_msg.contains("Ruby evaluation failed"));
     }
@@ -113,7 +112,6 @@ mod tests {
     fn test_extract_ruby_error_with_name_error() {
         init_ruby();
         let result = eval("undefined_variable");
-        assert!(result.is_err());
         let error_msg = result.unwrap_err().to_string();
         assert!(error_msg.contains("Ruby evaluation failed"));
     }
@@ -122,7 +120,6 @@ mod tests {
     fn test_extract_ruby_error_with_runtime_error() {
         init_ruby();
         let result = eval("raise 'custom error message'");
-        assert!(result.is_err());
         let error_msg = result.unwrap_err().to_string();
         assert!(error_msg.contains("Ruby evaluation failed"));
         assert!(error_msg.contains("custom error message"));
@@ -131,7 +128,6 @@ mod tests {
     #[test]
     fn test_preload_files_with_nonexistent_directory() {
         let result = preload_files("/nonexistent/directory".to_string());
-        assert!(result.is_err());
         let error_msg = result.unwrap_err().to_string();
         assert!(error_msg.contains("Failed to read preload directory"));
     }
@@ -150,7 +146,6 @@ mod tests {
         writeln!(file, "1 + + 1").unwrap();
 
         let result = preload_files(temp_dir.path().to_string_lossy().to_string());
-        assert!(result.is_err());
         let error_msg = result.unwrap_err().to_string();
         assert!(error_msg.contains("Failed to evaluate preload file"));
     }
@@ -172,7 +167,6 @@ mod tests {
         assert!(result.is_ok());
 
         let check_result = eval("$test_var");
-        assert!(check_result.is_ok());
         let value = unsafe { rb_num2int(check_result.unwrap()) };
         assert_eq!(value, 42);
     }
