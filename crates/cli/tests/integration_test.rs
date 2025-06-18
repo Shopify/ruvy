@@ -131,7 +131,13 @@ pub fn test_preload_error_handling() -> Result<()> {
 
     assert!(
         !output.status.success(),
-        "Expected ruvy to fail with preload error. Status: {:?}, Stderr: {}",
+        "Expected preload status to be nonzero. Status: {:?}, Stderr: {}",
+        output.status,
+        stderr_str
+    );
+    assert!(
+        stderr_str.contains("intentional preload error"),
+        "Expected preload stderr to contain Ruby exception. Status: {:?}, Stderr: {}",
         output.status,
         stderr_str
     );
@@ -145,14 +151,13 @@ pub fn test_ruby_runtime_error_in_wasm_execution() -> Result<()> {
     let temp_path = temp_file.path();
 
     let wasm_path = wasm_path("runtime_error");
-    // The compilation should succeed - the error happens at runtime
     run_ruvy(&wasm_path, &temp_path.to_string_lossy(), None)?;
 
-    // The error should be caught when we try to run the WASM
-    let result = run_wasm(&wasm_path, "");
+    let output = run_wasm(&wasm_path, "")?;
     assert!(
-        result.is_err(),
-        "Expected WASM execution to fail with Ruby runtime error"
+        output.stderr.contains("This is a runtime error"),
+        "Expected runtime stderr to contain Ruby exception. Stderr: {}",
+        output.stderr
     );
     Ok(())
 }
