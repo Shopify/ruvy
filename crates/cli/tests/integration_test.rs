@@ -22,7 +22,7 @@ pub fn test_hello_world() -> Result<()> {
     let wasm_path = wasm_path("hello_world");
     run_ruvy(&wasm_path, "../../ruby_examples/hello_world.rb", None)?;
     let output = run_wasm(&wasm_path, "")?;
-    assert_eq!("Hello world\n", output);
+    assert_eq!("Hello world\n", output.stdout);
     Ok(())
 }
 
@@ -37,7 +37,7 @@ pub fn test_preludes() -> Result<()> {
     let output = run_wasm(&wasm_path, "this is my input")?;
     assert_eq!(
         "{:discount_input=>\"this is my input\", :value=>100.0}\n",
-        output
+        output.stdout
     );
     Ok(())
 }
@@ -45,17 +45,21 @@ pub fn test_preludes() -> Result<()> {
 struct Context {
     wasi: WasiP1Ctx,
     out_stream: MemoryOutputPipe,
+    err_stream: MemoryOutputPipe,
 }
 
 impl Context {
     fn new(input: &[u8]) -> Context {
         let out_stream = MemoryOutputPipe::new(usize::MAX);
+        let err_stream = MemoryOutputPipe::new(usize::MAX);
         Context {
             wasi: WasiCtxBuilder::new()
                 .stdin(MemoryInputPipe::new(input.to_vec()))
                 .stdout(out_stream.clone())
+                .stderr(err_stream.clone())
                 .build_p1(),
             out_stream,
+            err_stream,
         }
     }
 }
@@ -85,7 +89,13 @@ fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<
     Ok(())
 }
 
-fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
+#[derive(Debug)]
+struct WasmStream {
+    stdout: String,
+    stderr: String,
+}
+
+fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<WasmStream> {
     let engine = Engine::default();
     let mut linker = Linker::new(&engine);
     wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx: &mut Context| &mut cx.wasi)?;
@@ -99,10 +109,10 @@ fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
 
     let context = store.into_data();
     drop(context.wasi);
-    let output = context.out_stream.contents();
-    let output = String::from_utf8(output.to_vec())?;
+    let stdout = String::from_utf8(context.out_stream.contents().to_vec())?;
+    let stderr = String::from_utf8(context.err_stream.contents().to_vec())?;
 
-    Ok(output)
+    Ok(WasmStream { stdout, stderr })
 }
 
 #[test]
