@@ -162,9 +162,9 @@ checksum = "9ba43ea6f343b788c8764558649e08df62f86c6ef251fdaeb1ffd010a9ae50a2"
 
 [[package]]
 name = "bindgen"
-version = "0.71.1"
+version = "0.72.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f58bf3d7db68cfbac37cfc485a8d711e87e064c3d0fe0435b92f7a407f9d6b3"
+checksum = "4f72209734318d0b619a5e0f5129918b848c416e122a3c4ce054e03cb87b726f"
 dependencies = [
  "bitflags 2.5.0",
  "cexpr",
@@ -308,9 +308,9 @@ checksum = "37b2a672a2cb129a2e41c10b1224bb368f9f37a2b16b612598138befd7b37eb5"
 
 [[package]]
 name = "cc"
-version = "1.2.25"
+version = "1.2.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d0fc897dc1e865cc67c0e05a836d9d3f1df3cbe442aa4a9473b18e12624a4951"
+checksum = "d487aa071b5f64da6f19a3e848e3578944b726ee5a4854b82172f02aa876bfdc"
 dependencies = [
  "jobserver",
  "libc",
@@ -372,9 +372,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.39"
+version = "4.5.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fd60e63e9be68e5fb56422e397cf9baddded06dae1d2e523401542383bc72a9f"
+checksum = "40b6887a1d8685cebccf115538db5c0efe625ccac9696ad45c409d96566e910f"
 dependencies = [
  "clap_builder",
  "clap_derive",
@@ -382,9 +382,9 @@ dependencies = [
 
 [[package]]
 name = "clap_builder"
-version = "4.5.39"
+version = "4.5.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "89cc6392a1f72bbeb820d71f32108f61fdaf18bc526e1d23954168a67759ef51"
+checksum = "e0c66c08ce9f0c698cbce5c0279d0bb6ac936d8674174fe48f736533b964f59e"
 dependencies = [
  "anstream",
  "anstyle",
@@ -394,9 +394,9 @@ dependencies = [
 
 [[package]]
 name = "clap_derive"
-version = "4.5.32"
+version = "4.5.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09176aae279615badda0765c0c0b3f6ed53f4709118af73cf4655d85d1530cd7"
+checksum = "d2c7947ae4cc3d851207c1adb5b5e260ff0cca11446b1d6d1423788e442257ce"
 dependencies = [
  "heck",
  "proc-macro2",
@@ -1104,9 +1104,9 @@ dependencies = [
 
 [[package]]
 name = "hyper-util"
-version = "0.1.13"
+version = "0.1.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b1c293b6b3d21eca78250dc7dbebd6b9210ec5530e038cbfe0661b5c47ab06e8"
+checksum = "dc2fdfdbff08affe55bb779f33b053aa1fe5dd5b54c257343c17edfa55711bdb"
 dependencies = [
  "bytes",
  "futures-channel",
