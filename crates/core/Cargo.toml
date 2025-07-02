@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies]
 ruvy-wasm-sys = { path = "../wasm-sys" }
 anyhow = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3.0"

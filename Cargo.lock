@@ -418,6 +418,7 @@ dependencies = [
  "clap",
  "criterion",
  "ruby-wasm-assets",
+ "tempfile",
  "wasmtime",
  "wasmtime-wasi",
  "wizer",
@@ -441,6 +442,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "ruvy-wasm-sys",
+ "tempfile",
 ]
 
 [[package]]

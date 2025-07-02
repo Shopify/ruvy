@@ -5,3 +5,5 @@
 #![allow(clippy::all)]
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+
+pub const RUBY_Qnil: VALUE = ruby_special_consts_RUBY_Qnil as VALUE;
