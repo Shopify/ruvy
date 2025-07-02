@@ -120,6 +120,12 @@ user-id = 6825
 user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
+[[publisher.cc]]
+version = "1.2.27"
+when = "2025-06-13"
+user-id = 55123
+user-login = "rust-lang-owner"
+
 [[publisher.cexpr]]
 version = "0.6.0"
 when = "2021-10-11"
@@ -128,22 +134,22 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.39"
-when = "2025-05-27"
+version = "4.5.40"
+when = "2025-06-09"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.39"
-when = "2025-05-27"
+version = "4.5.40"
+when = "2025-06-09"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_derive]]
-version = "4.5.32"
-when = "2025-03-10"
+version = "4.5.40"
+when = "2025-06-09"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -312,8 +318,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper-util]]
-version = "0.1.13"
-when = "2025-05-27"
+version = "0.1.14"
+when = "2025-06-04"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -1127,42 +1133,6 @@ start = "2021-12-03"
 end = "2025-07-30"
 notes = "We (Bytecode Alliance) are the primary authors of regalloc2 and co-develop it with Cranelift/Wasmtime, with the same code-review, testing/fuzzing, and security standards."
 
-[[audits.bytecode-alliance.wildcard-audits.wasm-encoder]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
-
-[[audits.bytecode-alliance.wildcard-audits.wasmparser]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
-
-[[audits.bytecode-alliance.wildcard-audits.wasmprinter]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
-
 [[audits.bytecode-alliance.wildcard-audits.wasmtime]]
 who = "Bobby Holley <bobbyholley@gmail.com>"
 criteria = "safe-to-deploy"
@@ -1251,18 +1221,6 @@ start = "2025-01-20"
 end = "2026-01-21"
 notes = "The Bytecode Alliance is the author of this crate."
 
-[[audits.bytecode-alliance.wildcard-audits.wasmtime-slab]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
-
 [[audits.bytecode-alliance.wildcard-audits.wasmtime-wasi]]
 who = "Bobby Holley <bobbyholley@gmail.com>"
 criteria = "safe-to-deploy"
@@ -1295,30 +1253,6 @@ start = "2023-01-20"
 end = "2025-07-30"
 notes = "The Bytecode Alliance is the author of this crate."
 
-[[audits.bytecode-alliance.wildcard-audits.wast]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
-
-[[audits.bytecode-alliance.wildcard-audits.wat]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
-
 [[audits.bytecode-alliance.wildcard-audits.wiggle]]
 who = "Bobby Holley <bobbyholley@gmail.com>"
 criteria = "safe-to-deploy"
@@ -1350,18 +1284,6 @@ user-id = 73222 # wasmtime-publish
 start = "2022-11-21"
 end = "2025-07-30"
 notes = "The Bytecode Alliance is the author of this crate."
-
-[[audits.bytecode-alliance.wildcard-audits.wit-parser]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-user-id = 73222 # wasmtime-publish
-start = "2023-01-01"
-end = "2025-05-08"
-notes = """
-The Bytecode Alliance uses the `wasmtime-publish` crates.io account to automate
-publication of this crate from CI. This repository requires all PRs are reviewed
-by a Bytecode Alliance maintainer and it owned by the Bytecode Alliance itself.
-"""
 
 [[audits.bytecode-alliance.audits.addr2line]]
 who = "Alex Crichton <alex@alexcrichton.com>"

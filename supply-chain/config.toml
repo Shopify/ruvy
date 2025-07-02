@@ -43,7 +43,7 @@ version = "0.21.4"
 criteria = "safe-to-deploy"
 
 [[exemptions.bindgen]]
-version = "0.71.1"
+version = "0.72.0"
 criteria = "safe-to-deploy"
 
 [[exemptions.bitflags]]
@@ -56,10 +56,6 @@ criteria = "safe-to-deploy"
 
 [[exemptions.block-buffer]]
 version = "0.10.4"
-criteria = "safe-to-deploy"
-
-[[exemptions.cc]]
-version = "1.2.25"
 criteria = "safe-to-deploy"
 
 [[exemptions.ciborium]]
