@@ -9,14 +9,14 @@ name = "ruvy"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4.5.40", features = ["derive"] }
+clap = { version = "4.5.42", features = ["derive"] }
 wizer = "9.0.0"
 anyhow = { workspace = true }
 wasmtime = "31"
 wasmtime-wasi = "31"
 
 [dev-dependencies]
-criterion = "0.6.0"
+criterion = "0.7.0"
 ruby-wasm-assets = { path = "../ruby-wasm-assets" }
 
 [build-dependencies]
