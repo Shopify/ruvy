@@ -1,8 +1,35 @@
 use std::fs;
 
 use anyhow::{anyhow, bail, Result};
-use ruvy_wasm_sys::{rb_eval_string_protect, ruby_init, ruby_init_loadpath, VALUE};
-use std::{ffi::CString, os::raw::c_char};
+use ruvy_wasm_sys::{
+    rb_errinfo, rb_eval_string_protect, rb_obj_as_string, rb_string_value_ptr, ruby_init,
+    ruby_init_loadpath, RUBY_Qnil, VALUE,
+};
+use std::{
+    ffi::{CStr, CString},
+    os::raw::c_char,
+};
+
+fn extract_ruby_error() -> Option<String> {
+    unsafe {
+        let error_obj = rb_errinfo();
+        if error_obj == RUBY_Qnil {
+            return None;
+        }
+
+        let error_string = rb_obj_as_string(error_obj);
+        let mut error_val = error_string;
+        let error_ptr = rb_string_value_ptr(&mut error_val);
+        if error_ptr.is_null() {
+            return None;
+        }
+
+        let error_cstr = CStr::from_ptr(error_ptr);
+        let error_msg = error_cstr.to_string_lossy().into_owned();
+
+        Some(error_msg)
+    }
+}
 
 pub fn init_ruby() {
     unsafe {
@@ -20,20 +47,34 @@ pub fn eval(code: &str) -> Result<VALUE> {
     if state == 0 {
         Ok(result)
     } else {
-        Err(anyhow!("Error evaluating Ruby code. State: {}", state))
+        let error_msg = extract_ruby_error();
+        Err(anyhow!(
+            "Error evaluating Ruby code. State: {}, message: {}",
+            state,
+            error_msg.as_deref().unwrap_or("None")
+        ))
     }
 }
 
-pub fn preload_files(path: String) {
-    let entries = fs::read_dir(path).unwrap();
+pub fn preload_files(path: String) -> Result<()> {
+    let entries = fs::read_dir(&path)
+        .map_err(|e| anyhow!("Failed to read preload directory '{}': {}", path, e))?;
 
-    entries
-        .map(|r| r.map(|d| d.path()))
-        .filter(|r| r.is_ok() && r.as_deref().unwrap().is_file())
-        .for_each(|e| {
-            let prelude_contents = fs::read_to_string(e.unwrap()).unwrap();
-            eval(&prelude_contents).unwrap();
-        });
+    for entry in entries {
+        let path = entry?.path();
+        if path.is_file() {
+            let prelude_contents = fs::read_to_string(&path)
+                .map_err(|e| anyhow!("Failed to read file '{}': {}", path.display(), e))?;
+
+            if let Err(e) = eval(&prelude_contents) {
+                return Err(e.context(format!(
+                    "Failed to evaluate preload file '{}'",
+                    path.display()
+                )));
+            }
+        }
+    }
+    Ok(())
 }
 
 pub fn cleanup_ruby() -> Result<()> {
@@ -50,11 +91,81 @@ pub fn cleanup_ruby() -> Result<()> {
 mod tests {
     use super::*;
     use ruvy_wasm_sys::rb_num2int;
+    use std::fs;
+    use std::io::Write;
+    use tempfile::TempDir;
 
     #[test]
     fn test_int() {
         init_ruby();
         let result = unsafe { rb_num2int(eval("1 + 1").unwrap()) };
         assert_eq!(result, 2);
+    }
+
+    #[test]
+    fn test_extract_ruby_error_with_syntax_error() {
+        init_ruby();
+        let result = eval("1 + + 1");
+        assert_error(&result, "Error evaluating Ruby code");
+    }
+
+    #[test]
+    fn test_extract_ruby_error_with_name_error() {
+        init_ruby();
+        let result = eval("undefined_variable");
+        assert_error(&result, "Error evaluating Ruby code");
+    }
+
+    #[test]
+    fn test_extract_ruby_error_with_runtime_error() {
+        init_ruby();
+        let result = eval("raise 'custom error message'");
+        assert_error(&result, "custom error message");
+    }
+
+    #[test]
+    fn test_preload_files_with_nonexistent_directory() {
+        let result = preload_files("/nonexistent/directory".to_string());
+        assert_error(&result, "Failed to read preload directory");
+    }
+
+    #[test]
+    fn test_preload_files_with_invalid_ruby_file() {
+        init_ruby();
+
+        let temp_dir = TempDir::new().unwrap();
+        let invalid_file = temp_dir.path().join("invalid.rb");
+        let mut file = fs::File::create(&invalid_file).unwrap();
+        writeln!(file, "1 + + 1").unwrap();
+
+        let result = preload_files(temp_dir.path().to_string_lossy().to_string());
+        assert_error(&result, "Failed to evaluate preload file");
+    }
+
+    #[test]
+    fn test_preload_files_with_valid_ruby_file() {
+        init_ruby();
+
+        let temp_dir = TempDir::new().unwrap();
+        let valid_file = temp_dir.path().join("valid.rb");
+        let mut file = fs::File::create(&valid_file).unwrap();
+        writeln!(file, "$test_var = 42").unwrap();
+
+        let result = preload_files(temp_dir.path().to_string_lossy().to_string());
+        assert!(result.is_ok());
+
+        let check_result = eval("$test_var");
+        let value = unsafe { rb_num2int(check_result.unwrap()) };
+        assert_eq!(value, 42);
+    }
+
+    fn assert_error<T: std::fmt::Debug>(res: &Result<T>, expected_string: &str) {
+        let error_msg = res.as_ref().unwrap_err().to_string();
+        assert!(
+            error_msg.contains(expected_string),
+            "Expected error message '{}' to contain '{}'",
+            error_msg,
+            expected_string
+        );
     }
 }
