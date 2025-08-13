@@ -539,6 +539,13 @@ user-id = 6741
 user-login = "Darksonn"
 user-name = "Alice Ryhl"
 
+[[publisher.slab]]
+version = "0.4.11"
+when = "2025-08-08"
+user-id = 6741
+user-login = "Darksonn"
+user-name = "Alice Ryhl"
+
 [[publisher.smallvec]]
 version = "1.14.0"
 when = "2025-02-15"
