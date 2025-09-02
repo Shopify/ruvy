@@ -12,7 +12,7 @@ use anyhow::{bail, Result};
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use wasmtime::{Engine, Linker, Module, Store};
 use wasmtime_wasi::{
-    pipe::{MemoryInputPipe, MemoryOutputPipe},
+    p2::pipe::{MemoryInputPipe, MemoryOutputPipe},
     preview1::WasiP1Ctx,
     WasiCtxBuilder,
 };

@@ -8,7 +8,7 @@ use std::{
     sync::OnceLock,
 };
 use wasmtime::Linker;
-use wasmtime_wasi::{pipe::MemoryInputPipe, DirPerms, FilePerms, WasiCtxBuilder};
+use wasmtime_wasi::{p2::pipe::MemoryInputPipe, DirPerms, FilePerms, WasiCtxBuilder};
 use wizer::{StoreData, Wizer};
 
 static INPUT: OnceLock<MemoryInputPipe> = OnceLock::new();
