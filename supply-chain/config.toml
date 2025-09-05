@@ -30,8 +30,16 @@ criteria = "safe-to-deploy"
 version = "0.2.21"
 criteria = "safe-to-deploy"
 
+[[exemptions.atomic-waker]]
+version = "1.1.2"
+criteria = "safe-to-deploy"
+
 [[exemptions.backtrace]]
 version = "0.3.69"
+criteria = "safe-to-deploy"
+
+[[exemptions.bindgen]]
+version = "0.72.1"
 criteria = "safe-to-deploy"
 
 [[exemptions.bitflags]]
@@ -131,10 +139,6 @@ version = "0.3.30"
 criteria = "safe-to-deploy"
 
 [[exemptions.futures-channel]]
-version = "0.3.30"
-criteria = "safe-to-deploy"
-
-[[exemptions.futures-core]]
 version = "0.3.30"
 criteria = "safe-to-deploy"
 

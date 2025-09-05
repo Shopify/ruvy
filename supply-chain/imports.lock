@@ -44,8 +44,8 @@ user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.anyhow]]
-version = "1.0.98"
-when = "2025-04-14"
+version = "1.0.99"
+when = "2025-08-11"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
@@ -121,8 +121,8 @@ user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
 [[publisher.cc]]
-version = "1.2.30"
-when = "2025-07-18"
+version = "1.2.34"
+when = "2025-08-22"
 user-id = 55123
 user-login = "rust-lang-owner"
 
@@ -134,22 +134,22 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.42"
-when = "2025-07-30"
+version = "4.5.46"
+when = "2025-08-26"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.42"
-when = "2025-07-30"
+version = "4.5.46"
+when = "2025-08-26"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_derive]]
-version = "4.5.41"
-when = "2025-07-09"
+version = "4.5.45"
+when = "2025-08-12"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -310,8 +310,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper]]
-version = "1.6.0"
-when = "2025-01-28"
+version = "1.7.0"
+when = "2025-08-18"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -615,8 +615,8 @@ user-login = "dtolnay"
 user-name = "David Tolnay"
 
 [[publisher.tokio]]
-version = "1.47.0"
-when = "2025-07-26"
+version = "1.47.1"
+when = "2025-08-01"
 user-id = 6741
 user-login = "Darksonn"
 user-name = "Alice Ryhl"
@@ -1560,6 +1560,17 @@ who = "Pat Hickey <phickey@fastly.com>"
 criteria = "safe-to-deploy"
 version = "0.1.1"
 
+[[audits.bytecode-alliance.audits.futures-core]]
+who = "Pat Hickey <phickey@fastly.com>"
+criteria = "safe-to-deploy"
+version = "0.3.27"
+notes = "Unsafe used to implement a concurrency primitive AtomicWaker. Well-commented and not obviously incorrect. Like my other audits of these concurrency primitives inside the futures family, I couldn't certify that it is correct without formal methods, but that is out of scope for this vetting."
+
+[[audits.bytecode-alliance.audits.futures-core]]
+who = "Pat Hickey <pat@moreproductive.org>"
+criteria = "safe-to-deploy"
+delta = "0.3.28 -> 0.3.31"
+
 [[audits.bytecode-alliance.audits.fxprof-processed-profile]]
 who = "Jamey Sharp <jsharp@fastly.com>"
 criteria = "safe-to-deploy"
@@ -2114,62 +2125,6 @@ version = "1.1.0"
 notes = "All code written or reviewed by Josh Stone."
 aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
-[[audits.mozilla.audits.bindgen]]
-who = "Emilio Cobos Álvarez <emilio@crisal.io>"
-criteria = "safe-to-deploy"
-version = "0.59.2"
-notes = "I'm the primary author and maintainer of the crate."
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Emilio Cobos Álvarez <emilio@crisal.io>"
-criteria = "safe-to-deploy"
-delta = "0.59.2 -> 0.63.0"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Mike Hommey <mh+mozilla@glandium.org>"
-criteria = "safe-to-deploy"
-delta = "0.63.0 -> 0.64.0"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Mike Hommey <mh+mozilla@glandium.org>"
-criteria = "safe-to-deploy"
-delta = "0.64.0 -> 0.66.1"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Mike Hommey <mh+mozilla@glandium.org>"
-criteria = "safe-to-deploy"
-delta = "0.66.1 -> 0.68.1"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Andreas Pehrson <apehrson@mozilla.com>"
-criteria = "safe-to-deploy"
-delta = "0.68.1 -> 0.69.1"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Mike Hommey <mh+mozilla@glandium.org>"
-criteria = "safe-to-deploy"
-delta = "0.69.1 -> 0.69.2"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Emilio Cobos Álvarez <emilio@crisal.io>"
-criteria = "safe-to-deploy"
-delta = "0.69.2 -> 0.69.4"
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
-[[audits.mozilla.audits.bindgen]]
-who = "Emilio Cobos Álvarez <emilio@crisal.io>"
-criteria = "safe-to-deploy"
-delta = "0.69.4 -> 0.72.0"
-notes = "I'm the primary maintainer of this crate."
-aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
-
 [[audits.mozilla.audits.crypto-common]]
 who = "Mike Hommey <mh+mozilla@glandium.org>"
 criteria = "safe-to-deploy"
@@ -2223,6 +2178,12 @@ aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-ch
 who = "Valentin Gosu <valentin.gosu@gmail.com>"
 criteria = "safe-to-deploy"
 delta = "1.2.0 -> 1.2.1"
+aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
+
+[[audits.mozilla.audits.futures-core]]
+who = "Mike Hommey <mh+mozilla@glandium.org>"
+criteria = "safe-to-deploy"
+delta = "0.3.27 -> 0.3.28"
 aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
 [[audits.mozilla.audits.fxhash]]
