@@ -44,8 +44,8 @@ user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.anyhow]]
-version = "1.0.99"
-when = "2025-08-11"
+version = "1.0.100"
+when = "2025-09-19"
 user-id = 3618
 user-login = "dtolnay"
 user-name = "David Tolnay"
@@ -120,12 +120,6 @@ user-id = 6825
 user-login = "sunfishcode"
 user-name = "Dan Gohman"
 
-[[publisher.cc]]
-version = "1.2.34"
-when = "2025-08-22"
-user-id = 55123
-user-login = "rust-lang-owner"
-
 [[publisher.cexpr]]
 version = "0.6.0"
 when = "2021-10-11"
@@ -134,22 +128,22 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.46"
-when = "2025-08-26"
+version = "4.5.48"
+when = "2025-09-19"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.46"
-when = "2025-08-26"
+version = "4.5.48"
+when = "2025-09-19"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_derive]]
-version = "4.5.45"
-when = "2025-08-12"
+version = "4.5.47"
+when = "2025-09-02"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -324,8 +318,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper-util]]
-version = "0.1.16"
-when = "2025-07-22"
+version = "0.1.17"
+when = "2025-09-15"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -1434,6 +1428,15 @@ criteria = "safe-to-deploy"
 version = "1.0.2"
 notes = "This is a small crate which forbids unsafe code and is a straightforward implementation of the adler hashing algorithm."
 
+[[audits.bytecode-alliance.audits.allocator-api2]]
+who = "Chris Fallin <chris@cfallin.org>"
+criteria = "safe-to-deploy"
+delta = "0.2.18 -> 0.2.20"
+notes = """
+The changes appear to be reasonable updates from Rust's stdlib imported into
+`allocator-api2`'s copy of this code.
+"""
+
 [[audits.bytecode-alliance.audits.ambient-authority]]
 who = "Dan Gohman <dev@sunfishcode.online>"
 criteria = "safe-to-deploy"
@@ -2097,6 +2100,18 @@ user-id = 4484 # Henri Sivonen (hsivonen)
 start = "2022-04-19"
 end = "2024-06-16"
 notes = "Maintained by Henri Sivonen who works at Mozilla."
+aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
+
+[[audits.mozilla.audits.allocator-api2]]
+who = "Nicolas Silva <nical@fastmail.com>"
+criteria = "safe-to-deploy"
+version = "0.2.18"
+aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
+
+[[audits.mozilla.audits.allocator-api2]]
+who = "Mike Hommey <mh+mozilla@glandium.org>"
+criteria = "safe-to-deploy"
+delta = "0.2.20 -> 0.2.21"
 aggregated-from = "https://hg.mozilla.org/mozilla-central/raw-file/tip/supply-chain/audits.toml"
 
 [[audits.mozilla.audits.android_system_properties]]
