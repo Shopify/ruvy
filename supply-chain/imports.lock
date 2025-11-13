@@ -175,9 +175,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-assembler-x64]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-assembler-x64-meta]]
 version = "0.123.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.cranelift-assembler-x64-meta]]
+version = "0.123.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -187,9 +199,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-bforest]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-bitset]]
 version = "0.123.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.cranelift-bitset]]
+version = "0.123.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -199,9 +223,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-codegen]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-codegen-meta]]
 version = "0.123.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.cranelift-codegen-meta]]
+version = "0.123.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -211,9 +247,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-codegen-shared]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-control]]
 version = "0.123.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.cranelift-control]]
+version = "0.123.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -223,9 +271,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-entity]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-frontend]]
 version = "0.123.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.cranelift-frontend]]
+version = "0.123.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -235,15 +295,33 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-isle]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-native]]
 version = "0.123.2"
 when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.cranelift-native]]
+version = "0.123.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.cranelift-srcgen]]
 version = "0.123.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.cranelift-srcgen]]
+version = "0.123.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -427,9 +505,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.pulley-interpreter]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.pulley-macros]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.pulley-macros]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -705,9 +795,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-environ]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-environ]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -717,9 +819,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-asm-macros]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-cache]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-cache]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -729,9 +843,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-component-macro]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-component-util]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-component-util]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -741,9 +867,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-cranelift]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-fiber]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-fiber]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -753,9 +891,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-jit-debug]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-jit-icache-coherence]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-jit-icache-coherence]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -765,9 +915,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-math]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-slab]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-slab]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -777,9 +939,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-unwinder]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-versioned-export-macros]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-versioned-export-macros]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -789,9 +963,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-internal-winch]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-internal-wit-bindgen]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-internal-wit-bindgen]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -801,9 +987,21 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wasmtime-wasi]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wasmtime-wasi-io]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wasmtime-wasi-io]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -813,15 +1011,33 @@ when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wiggle]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wiggle-generate]]
 version = "36.0.2"
 when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
+[[publisher.wiggle-generate]]
+version = "36.0.3"
+when = "2025-11-11"
+user-id = 73222
+user-login = "wasmtime-publish"
+
 [[publisher.wiggle-macro]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.wiggle-macro]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -835,6 +1051,12 @@ user-name = "Andrew Gallant"
 [[publisher.winch-codegen]]
 version = "36.0.2"
 when = "2025-08-26"
+user-id = 73222
+user-login = "wasmtime-publish"
+
+[[publisher.winch-codegen]]
+version = "36.0.3"
+when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
