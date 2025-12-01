@@ -170,20 +170,8 @@ user-login = "jrmuizel"
 user-name = "Jeff Muizelaar"
 
 [[publisher.cranelift-assembler-x64]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-assembler-x64]]
 version = "0.123.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-assembler-x64-meta]]
-version = "0.123.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -194,20 +182,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.cranelift-bforest]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-bforest]]
 version = "0.123.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-bitset]]
-version = "0.123.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -218,20 +194,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.cranelift-codegen]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-codegen]]
 version = "0.123.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-codegen-meta]]
-version = "0.123.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -242,20 +206,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.cranelift-codegen-shared]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-codegen-shared]]
 version = "0.123.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-control]]
-version = "0.123.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -266,20 +218,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.cranelift-entity]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-entity]]
 version = "0.123.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-frontend]]
-version = "0.123.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -290,32 +230,14 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.cranelift-isle]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-isle]]
 version = "0.123.3"
 when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.cranelift-native]]
-version = "0.123.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-native]]
 version = "0.123.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.cranelift-srcgen]]
-version = "0.123.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -500,20 +422,8 @@ user-login = "dtolnay"
 user-name = "David Tolnay"
 
 [[publisher.pulley-interpreter]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.pulley-interpreter]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.pulley-macros]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -790,20 +700,8 @@ user-login = "alexcrichton"
 user-name = "Alex Crichton"
 
 [[publisher.wasmtime]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-environ]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -814,20 +712,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-asm-macros]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-asm-macros]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-cache]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -838,20 +724,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-component-macro]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-component-macro]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-component-util]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -862,20 +736,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-cranelift]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-cranelift]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-fiber]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -886,20 +748,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-jit-debug]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-jit-debug]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-jit-icache-coherence]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -910,20 +760,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-math]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-math]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-slab]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -934,20 +772,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-unwinder]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-unwinder]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-versioned-export-macros]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -958,20 +784,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-internal-winch]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-winch]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-internal-wit-bindgen]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -982,20 +796,8 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wasmtime-wasi]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-wasi]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wasmtime-wasi-io]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -1006,32 +808,14 @@ user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wiggle]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wiggle]]
 version = "36.0.3"
 when = "2025-11-11"
 user-id = 73222
 user-login = "wasmtime-publish"
 
 [[publisher.wiggle-generate]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wiggle-generate]]
 version = "36.0.3"
 when = "2025-11-11"
-user-id = 73222
-user-login = "wasmtime-publish"
-
-[[publisher.wiggle-macro]]
-version = "36.0.2"
-when = "2025-08-26"
 user-id = 73222
 user-login = "wasmtime-publish"
 
@@ -1047,12 +831,6 @@ when = "2020-04-20"
 user-id = 189
 user-login = "BurntSushi"
 user-name = "Andrew Gallant"
-
-[[publisher.winch-codegen]]
-version = "36.0.2"
-when = "2025-08-26"
-user-id = 73222
-user-login = "wasmtime-publish"
 
 [[publisher.winch-codegen]]
 version = "36.0.3"
@@ -1717,39 +1495,6 @@ criteria = "safe-to-deploy"
 delta = "0.3.5 -> 0.4.3"
 notes = "No substantive changes to `unsafe` code and otherwise all looks good."
 
-[[audits.bytecode-alliance.audits.criterion]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-run"
-delta = "0.3.5 -> 0.3.6"
-notes = """
-There were no major changes to code in this update, mostly just stylistic and
-updating some version dependency requirements.
-"""
-
-[[audits.bytecode-alliance.audits.criterion]]
-who = "Pat Hickey <phickey@fastly.com>"
-criteria = "safe-to-deploy"
-delta = "0.3.6 -> 0.4.0"
-notes = """
-criterion v0.3.6..v0.4.0 is mostly re-arranging the crate features and bumping dependencies. all changes
-to code seem to be confined to benchmarks.
-"""
-
-[[audits.bytecode-alliance.audits.criterion-plot]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-run"
-delta = "0.4.4 -> 0.4.5"
-notes = """
-No major changes in this update, it was almost entirely stylistic with what
-appears to be a few clippy fixes here and there.
-"""
-
-[[audits.bytecode-alliance.audits.criterion-plot]]
-who = "Pat Hickey <phickey@fastly.com>"
-criteria = "safe-to-deploy"
-delta = "0.4.5 -> 0.5.0"
-notes = "Just a version bump, only change to code is to remove an allow(deprecated)"
-
 [[audits.bytecode-alliance.audits.crypto-common]]
 who = "Benjamin Bouvier <public@benj.me>"
 criteria = "safe-to-deploy"
@@ -2202,27 +1947,6 @@ delta = "0.21.1 -> 0.21.2"
 who = "David Cook <dcook@divviup.org>"
 criteria = "safe-to-deploy"
 delta = "0.21.2 -> 0.21.3"
-
-[[audits.isrg.audits.criterion]]
-who = "Brandon Pitman <bran@bran.land>"
-criteria = "safe-to-run"
-delta = "0.4.0 -> 0.5.1"
-
-[[audits.isrg.audits.criterion]]
-who = "Tim Geoghegan <timg@divviup.org>"
-criteria = "safe-to-run"
-delta = "0.5.1 -> 0.6.0"
-notes = "No new unsafe code and nothing suspicious in build scripts."
-
-[[audits.isrg.audits.criterion]]
-who = "David Cook <dcook@divviup.org>"
-criteria = "safe-to-run"
-delta = "0.6.0 -> 0.7.0"
-
-[[audits.isrg.audits.criterion-plot]]
-who = "David Cook <dcook@divviup.org>"
-criteria = "safe-to-run"
-delta = "0.5.0 -> 0.6.0"
 
 [[audits.isrg.audits.rand_chacha]]
 who = "David Cook <dcook@divviup.org>"

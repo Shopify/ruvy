@@ -26,6 +26,10 @@ url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 version = "0.19.0"
 criteria = "safe-to-deploy"
 
+[[exemptions.alloca]]
+version = "0.4.0"
+criteria = "safe-to-run"
+
 [[exemptions.bindgen]]
 version = "0.72.1"
 criteria = "safe-to-deploy"
@@ -75,11 +79,11 @@ version = "1.3.2"
 criteria = "safe-to-deploy"
 
 [[exemptions.criterion]]
-version = "0.3.5"
+version = "0.8.0"
 criteria = "safe-to-run"
 
 [[exemptions.criterion-plot]]
-version = "0.4.4"
+version = "0.8.0"
 criteria = "safe-to-run"
 
 [[exemptions.crossbeam-deque]]
@@ -225,6 +229,10 @@ criteria = "safe-to-deploy"
 [[exemptions.openssl-sys]]
 version = "0.9.107"
 criteria = "safe-to-deploy"
+
+[[exemptions.page_size]]
+version = "0.6.0"
+criteria = "safe-to-run"
 
 [[exemptions.pkg-config]]
 version = "0.3.27"
