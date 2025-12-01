@@ -16,7 +16,7 @@ wasmtime = "36"
 wasmtime-wasi = "36"
 
 [dev-dependencies]
-criterion = "0.7.0"
+criterion = "0.8.0"
 ruby-wasm-assets = { path = "../ruby-wasm-assets" }
 
 [build-dependencies]
