@@ -11,7 +11,7 @@ fn main() {
     cleanup_ruby().unwrap();
 }
 
-#[export_name = "wizer.initialize"]
+#[export_name = "wizer-initialize"]
 pub extern "C" fn load_user_code() {
     let _wasm_ctx = WasmCtx::new();
 

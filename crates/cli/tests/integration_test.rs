@@ -3,8 +3,8 @@ use std::{env, path::Path, process::Command, str};
 use anyhow::{bail, Result};
 use wasmtime::{Engine, Linker, Module, Store};
 use wasmtime_wasi::{
+    p1::WasiP1Ctx,
     p2::pipe::{MemoryInputPipe, MemoryOutputPipe},
-    preview1::WasiP1Ctx,
     WasiCtxBuilder,
 };
 
@@ -74,7 +74,7 @@ fn run_ruvy(wasm_path: &str, input_path: &str, preload: Option<&str>) -> Result<
 fn run_wasm(wasm_path: impl AsRef<Path>, input: &str) -> Result<String> {
     let engine = Engine::default();
     let mut linker = Linker::new(&engine);
-    wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx: &mut Context| &mut cx.wasi)?;
+    wasmtime_wasi::p1::add_to_linker_sync(&mut linker, |cx: &mut Context| &mut cx.wasi)?;
     let mut store = Store::new(&engine, Context::new(input.as_bytes()));
 
     let module = Module::from_file(&engine, wasm_path)?;
