@@ -128,15 +128,15 @@ user-login = "emilio"
 user-name = "Emilio Cobos Álvarez"
 
 [[publisher.clap]]
-version = "4.5.51"
-when = "2025-10-29"
+version = "4.5.53"
+when = "2025-11-19"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
 
 [[publisher.clap_builder]]
-version = "4.5.51"
-when = "2025-10-29"
+version = "4.5.53"
+when = "2025-11-19"
 user-id = 6743
 user-login = "epage"
 user-name = "Ed Page"
@@ -310,8 +310,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper]]
-version = "1.7.0"
-when = "2025-08-18"
+version = "1.8.1"
+when = "2025-11-13"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -324,8 +324,8 @@ user-login = "seanmonstar"
 user-name = "Sean McArthur"
 
 [[publisher.hyper-util]]
-version = "0.1.17"
-when = "2025-09-15"
+version = "0.1.18"
+when = "2025-11-13"
 user-id = 359
 user-login = "seanmonstar"
 user-name = "Sean McArthur"
@@ -1714,39 +1714,6 @@ criteria = "safe-to-deploy"
 delta = "0.3.5 -> 0.4.3"
 notes = "No substantive changes to `unsafe` code and otherwise all looks good."
 
-[[audits.bytecode-alliance.audits.criterion]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-run"
-delta = "0.3.5 -> 0.3.6"
-notes = """
-There were no major changes to code in this update, mostly just stylistic and
-updating some version dependency requirements.
-"""
-
-[[audits.bytecode-alliance.audits.criterion]]
-who = "Pat Hickey <phickey@fastly.com>"
-criteria = "safe-to-deploy"
-delta = "0.3.6 -> 0.4.0"
-notes = """
-criterion v0.3.6..v0.4.0 is mostly re-arranging the crate features and bumping dependencies. all changes
-to code seem to be confined to benchmarks.
-"""
-
-[[audits.bytecode-alliance.audits.criterion-plot]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-run"
-delta = "0.4.4 -> 0.4.5"
-notes = """
-No major changes in this update, it was almost entirely stylistic with what
-appears to be a few clippy fixes here and there.
-"""
-
-[[audits.bytecode-alliance.audits.criterion-plot]]
-who = "Pat Hickey <phickey@fastly.com>"
-criteria = "safe-to-deploy"
-delta = "0.4.5 -> 0.5.0"
-notes = "Just a version bump, only change to code is to remove an allow(deprecated)"
-
 [[audits.bytecode-alliance.audits.crypto-common]]
 who = "Benjamin Bouvier <public@benj.me>"
 criteria = "safe-to-deploy"
@@ -1798,12 +1765,6 @@ who = "Alex Crichton <alex@alexcrichton.com>"
 criteria = "safe-to-deploy"
 delta = "2.1.1 -> 2.3.0"
 notes = "Minor refactoring, nothing new."
-
-[[audits.bytecode-alliance.audits.find-msvc-tools]]
-who = "Alex Crichton <alex@alexcrichton.com>"
-criteria = "safe-to-deploy"
-delta = "0.1.0 -> 0.1.4"
-notes = "Nothing out of the ordinary for a crate finding MSVC tooling."
 
 [[audits.bytecode-alliance.audits.fixedbitset]]
 who = "Nick Fitzgerald <fitzgen@gmail.com>"
@@ -2562,27 +2523,6 @@ delta = "0.21.1 -> 0.21.2"
 who = "David Cook <dcook@divviup.org>"
 criteria = "safe-to-deploy"
 delta = "0.21.2 -> 0.21.3"
-
-[[audits.isrg.audits.criterion]]
-who = "Brandon Pitman <bran@bran.land>"
-criteria = "safe-to-run"
-delta = "0.4.0 -> 0.5.1"
-
-[[audits.isrg.audits.criterion]]
-who = "Tim Geoghegan <timg@divviup.org>"
-criteria = "safe-to-run"
-delta = "0.5.1 -> 0.6.0"
-notes = "No new unsafe code and nothing suspicious in build scripts."
-
-[[audits.isrg.audits.criterion]]
-who = "David Cook <dcook@divviup.org>"
-criteria = "safe-to-run"
-delta = "0.6.0 -> 0.7.0"
-
-[[audits.isrg.audits.criterion-plot]]
-who = "David Cook <dcook@divviup.org>"
-criteria = "safe-to-run"
-delta = "0.5.0 -> 0.6.0"
 
 [[audits.isrg.audits.once_cell]]
 who = "Brandon Pitman <bran@bran.land>"
