@@ -12,8 +12,8 @@ use anyhow::{bail, Result};
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use wasmtime::{Engine, Linker, Module, Store};
 use wasmtime_wasi::{
+    p1::WasiP1Ctx,
     p2::pipe::{MemoryInputPipe, MemoryOutputPipe},
-    preview1::WasiP1Ctx,
     WasiCtxBuilder,
 };
 
@@ -112,7 +112,7 @@ impl WasmCase {
             .stderr(MemoryOutputPipe::new(usize::MAX))
             .args(&self.wasi_args)
             .build_p1();
-        wasmtime_wasi::preview1::add_to_linker_sync(&mut linker, |cx| cx)?;
+        wasmtime_wasi::p1::add_to_linker_sync(&mut linker, |cx| cx)?;
         let store = Store::new(engine, wasi);
         let module = Module::new(engine, &self.wasm)?;
         Ok((linker, module, store))

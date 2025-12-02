@@ -55,7 +55,7 @@ end = "2025-11-04"
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-07-23"
-end = "2024-09-21"
+end = "2026-12-01"
 
 [[trusted.byteorder]]
 criteria = "safe-to-deploy"
@@ -187,13 +187,19 @@ end = "2025-01-03"
 criteria = "safe-to-deploy"
 user-id = 6825 # Dan Gohman (sunfishcode)
 start = "2020-09-15"
-end = "2024-09-21"
+end = "2026-12-01"
 
 [[trusted.hashbrown]]
 criteria = "safe-to-deploy"
 user-id = 2915 # Amanieu d'Antras (Amanieu)
 start = "2019-04-02"
 end = "2025-01-02"
+
+[[trusted.hashbrown]]
+criteria = "safe-to-deploy"
+user-id = 55123 # rust-lang-owner
+start = "2025-04-30"
+end = "2026-12-01"
 
 [[trusted.http]]
 criteria = "safe-to-deploy"
@@ -235,7 +241,7 @@ end = "2026-04-07"
 criteria = "safe-to-deploy"
 user-id = 539 # Josh Stone (cuviper)
 start = "2020-01-15"
-end = "2025-01-02"
+end = "2026-12-01"
 
 [[trusted.io-extras]]
 criteria = "safe-to-deploy"
@@ -297,6 +303,12 @@ user-id = 2915 # Amanieu d'Antras (Amanieu)
 start = "2022-02-06"
 end = "2025-09-16"
 
+[[trusted.libm]]
+criteria = "safe-to-deploy"
+user-id = 55123 # rust-lang-owner
+start = "2024-10-26"
+end = "2026-12-01"
+
 [[trusted.linux-raw-sys]]
 criteria = "safe-to-deploy"
 user-id = 6825 # Dan Gohman (sunfishcode)
@@ -331,13 +343,13 @@ end = "2024-10-27"
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-04-23"
-end = "2025-03-01"
+end = "2026-12-01"
 
 [[trusted.quote]]
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-04-09"
-end = "2024-09-21"
+end = "2026-12-01"
 
 [[trusted.regex]]
 criteria = "safe-to-deploy"
@@ -391,13 +403,19 @@ end = "2025-11-01"
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2021-05-25"
-end = "2025-01-02"
+end = "2026-12-01"
 
 [[trusted.serde]]
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-03-01"
 end = "2026-03-03"
+
+[[trusted.serde_core]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2025-09-13"
+end = "2026-12-01"
 
 [[trusted.serde_derive]]
 criteria = "safe-to-deploy"
@@ -416,6 +434,12 @@ criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2023-01-20"
 end = "2025-05-01"
+
+[[trusted.serde_yaml]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2019-05-02"
+end = "2026-12-01"
 
 [[trusted.slab]]
 criteria = "safe-to-deploy"
@@ -445,7 +469,7 @@ end = "2026-03-03"
 criteria = "safe-to-deploy"
 user-id = 6825 # Dan Gohman (sunfishcode)
 start = "2020-10-27"
-end = "2024-09-21"
+end = "2026-12-01"
 
 [[trusted.target-lexicon]]
 criteria = "safe-to-deploy"
@@ -483,23 +507,41 @@ user-id = 10
 start = "2019-03-02"
 end = "2025-06-03"
 
+[[trusted.tokio-macros]]
+criteria = "safe-to-deploy"
+user-id = 6741 # Alice Ryhl (Darksonn)
+start = "2020-10-26"
+end = "2026-12-01"
+
 [[trusted.toml]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2022-12-14"
-end = "2025-05-01"
+end = "2026-12-01"
 
 [[trusted.toml_datetime]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2022-10-21"
-end = "2025-05-01"
+end = "2026-12-01"
 
 [[trusted.toml_edit]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2021-09-13"
 end = "2025-05-01"
+
+[[trusted.toml_parser]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2025-07-08"
+end = "2026-12-01"
+
+[[trusted.toml_writer]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2025-07-08"
+end = "2026-12-01"
 
 [[trusted.unicase]]
 criteria = "safe-to-deploy"
@@ -512,6 +554,12 @@ criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2021-10-02"
 end = "2024-09-21"
+
+[[trusted.unsafe-libyaml]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2022-07-03"
+end = "2026-12-01"
 
 [[trusted.walkdir]]
 criteria = "safe-to-deploy"
@@ -679,7 +727,7 @@ end = "2026-09-05"
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2023-02-22"
-end = "2025-05-01"
+end = "2026-12-01"
 
 [[trusted.wit-parser]]
 criteria = "safe-to-deploy"
