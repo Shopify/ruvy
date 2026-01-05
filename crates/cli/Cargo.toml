@@ -14,7 +14,7 @@ anyhow = { workspace = true }
 tokio = { version = "1", features = ["macros"] }
 wasmtime = "39"
 wasmtime-wasi = "39"
-wasmtime-wizer = { version = "39", features = ["wasmtime"] }
+wasmtime-wizer = { version = "40", features = ["wasmtime"] }
 
 [dev-dependencies]
 criterion = "0.8.1"
