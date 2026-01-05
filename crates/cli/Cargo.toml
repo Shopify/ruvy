@@ -13,7 +13,7 @@ clap = { version = "4.5.53", features = ["derive"] }
 anyhow = { workspace = true }
 tokio = { version = "1", features = ["macros"] }
 wasmtime = "39"
-wasmtime-wasi = "39"
+wasmtime-wasi = "40"
 wasmtime-wizer = { version = "39", features = ["wasmtime"] }
 
 [dev-dependencies]
