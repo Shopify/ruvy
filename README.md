@@ -1,5 +1,7 @@
 # Ruvy: A Ruby to WebAssembly toolchain
 
+**This project is no longer maintained**
+
 ## About this repo
 
 Ruvy aims to initialize the ruby VM using wizer and execute ruby code passed into the wasm.
